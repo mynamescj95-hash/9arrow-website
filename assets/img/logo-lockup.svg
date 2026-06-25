@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 240" width="760" height="240" role="img" aria-label="Nine Arrow Land Service">
+  <defs>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Alfa+Slab+One&amp;family=Zilla+Slab:wght@600;700&amp;display=swap');
+      .nine{font-family:'Zilla Slab',Georgia,serif;font-weight:700;}
+      .arrow{font-family:'Alfa Slab One',Georgia,serif;}
+      .land{font-family:'Zilla Slab',Georgia,serif;font-weight:600;}
+    </style>
+  </defs>
+  <g transform="translate(8,12)">
+    <g fill="none" stroke="#F2EEE1" stroke-width="9"><circle cx="108" cy="108" r="80"/></g>
+    <g fill="#F2EEE1">
+      <path d="M107 56 a31 31 0 1 0 0.1 0 z M107 71 a16 16 0 1 1 -0.1 0 z" fill-rule="evenodd"/>
+      <path d="M135 86 l-18 -3 l8 -7 z"/>
+      <rect x="116" y="96" width="12" height="50"/>
+      <path d="M116 110 l-18 -8 l12 17 z"/>
+      <path d="M122 168 l-20 -25 l20 10 l20 -10 z"/>
+    </g>
+  </g>
+  <text x="214" y="104" class="nine" font-size="62" fill="#F2EEE1" letter-spacing="2">NINE</text>
+  <text x="214" y="170" class="arrow" font-size="64" fill="#F2EEE1" letter-spacing="1">ARROW</text>
+  <text x="216" y="206" class="land" font-size="22" fill="#978D40" letter-spacing="13">LAND SERVICE</text>
+</svg>

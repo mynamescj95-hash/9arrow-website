@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240" width="240" height="240" role="img" aria-label="9 Arrow Land Service mark">
+  <g fill="none" stroke="#F2EEE1" stroke-width="9">
+    <circle cx="120" cy="120" r="88"/>
+  </g>
+  <g fill="#F2EEE1">
+    <!-- 9 bowl -->
+    <path d="M119 60 a34 34 0 1 0 0.1 0 z M119 76 a18 18 0 1 1 -0.1 0 z" fill-rule="evenodd"/>
+    <!-- small arrowhead inside the bowl -->
+    <path d="M150 92 l-20 -3 l9 -8 z"/>
+    <!-- shaft down from bowl -->
+    <rect x="129" y="104" width="13" height="56"/>
+    <!-- fletching -->
+    <path d="M129 120 l-20 -9 l13 19 z"/>
+    <path d="M142 120 l20 -9 l-13 19 z" opacity=".0"/>
+    <!-- broadhead at bottom -->
+    <path d="M135.5 184 l-22 -28 l22 11 l22 -11 z"/>
+  </g>
+</svg>
