@@ -702,7 +702,7 @@ body::after{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;
 /* v34: smoother, scrollable mobile nav */
 @media(max-width:1140px){
   .nav-toggle{display:block}
-  .nav-links{position:fixed;inset:74px 0 0 0;display:flex!important;flex-direction:column;gap:0;align-items:stretch;
+  .nav-links{position:fixed;top:74px;left:0;right:0;height:calc(100vh - 74px);height:calc(100dvh - 74px);display:flex!important;flex-direction:column;gap:0;align-items:stretch;
     background:var(--char-2);padding:6px 0 56px;overflow-y:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch;
     opacity:0;visibility:hidden;transform:translateY(-8px);pointer-events:none;
     transition:opacity .26s var(--ease),transform .26s var(--ease),visibility .26s}
