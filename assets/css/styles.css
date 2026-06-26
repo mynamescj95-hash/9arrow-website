@@ -697,3 +697,18 @@ body::after{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;
 /* v33: make "Who We Serve" audience chips clickable links */
 .serve .chip{text-decoration:none;color:var(--sand);transition:color .2s var(--ease),border-color .2s var(--ease),transform .2s var(--ease)}
 .serve .chip:hover{border-color:var(--gold);color:var(--gold);transform:translateY(-2px)}
+
+
+/* v34: smoother, scrollable mobile nav */
+@media(max-width:1140px){
+  .nav-toggle{display:block}
+  .nav-links{position:fixed;inset:74px 0 0 0;display:flex!important;flex-direction:column;gap:0;align-items:stretch;
+    background:var(--char-2);padding:6px 0 56px;overflow-y:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch;
+    opacity:0;visibility:hidden;transform:translateY(-8px);pointer-events:none;
+    transition:opacity .26s var(--ease),transform .26s var(--ease),visibility .26s}
+  .nav-links.open{opacity:1;visibility:visible;transform:none;pointer-events:auto}
+  .nav-links li{text-align:left;padding:0;border-top:1px solid var(--line)}
+  .nav-links>li>a{display:block;padding:15px 22px}
+  .drop a{padding:11px 22px 11px 40px}
+  .nav-cta{margin:16px 22px 4px;text-align:center}
+}
