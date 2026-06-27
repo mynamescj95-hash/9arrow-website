@@ -712,3 +712,10 @@ body::after{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;
   .drop a{padding:11px 22px 11px 40px}
   .nav-cta{margin:16px 22px 4px;text-align:center}
 }
+
+/* v35: blog download CTA — balanced spacing, no internal gap */
+.dl-cta-wrap{padding:6px 0 84px}
+.dl-cta{align-items:stretch}
+.dl-cover{flex:0 0 168px;display:flex}
+.dl-cover img{width:168px;height:100%;object-fit:cover}
+@media(max-width:680px){.dl-cta{align-items:center}.dl-cover{display:block}.dl-cover img{height:auto}}
