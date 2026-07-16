@@ -608,18 +608,18 @@ html{scroll-padding-top:112px}
 .brand-logo img{height:80px}
 .site-header.scrolled .brand-logo img{height:62px}
 
-/* v29: blog download CTA + search/filter tools */
-.dl-cta-wrap{padding:6px 0 2px}
-.dl-cta{display:flex;gap:28px;align-items:center;background:var(--char-2);border:1px solid var(--border-accent);border-top:3px solid var(--gold);border-radius:8px;padding:26px;box-shadow:var(--shadow-md)}
-.dl-cover{flex:0 0 168px;display:block;line-height:0}
-.dl-cover img{width:168px;height:auto;border-radius:4px;box-shadow:0 10px 26px rgba(0,0,0,.5);transition:transform .3s var(--ease)}
+/* v29: blog download CTA + search/filter tools (v34: balanced spacing + full-height cover) */
+.dl-cta-wrap{padding:6px 0 84px}
+.dl-cta{display:flex;gap:28px;align-items:stretch;background:var(--char-2);border:1px solid var(--border-accent);border-top:3px solid var(--gold);border-radius:8px;padding:26px;box-shadow:var(--shadow-md)}
+.dl-cover{flex:0 0 168px;display:flex;line-height:0}
+.dl-cover img{width:168px;height:100%;object-fit:cover;border-radius:4px;box-shadow:0 10px 26px rgba(0,0,0,.5);transition:transform .3s var(--ease)}
 .dl-cover:hover img{transform:translateY(-5px)}
 .dl-body{flex:1}
 .dl-eyebrow{font-family:var(--head);font-weight:600;text-transform:uppercase;letter-spacing:.18em;font-size:.72rem;color:var(--gold-2)}
 .dl-body h3{font-family:var(--head);font-size:1.4rem;color:var(--bone);margin:.35rem 0 .5rem;text-transform:uppercase;letter-spacing:.01em;line-height:1.1}
 .dl-body p{color:var(--sand);margin:0 0 16px;max-width:54ch}
 .dl-note{display:block;margin-top:11px;color:var(--khaki);font-size:.78rem;letter-spacing:.05em;text-transform:uppercase;font-family:var(--head)}
-@media(max-width:680px){.dl-cta{flex-direction:column;text-align:center;padding:24px}.dl-cover{flex-basis:auto}.dl-body p{margin-left:auto;margin-right:auto}}
+@media(max-width:680px){.dl-cta{flex-direction:column;align-items:center;text-align:center;padding:24px}.dl-cover{flex-basis:auto;display:block}.dl-cover img{height:auto}.dl-body p{margin-left:auto;margin-right:auto}}
 .blog-tools{display:flex;flex-wrap:wrap;gap:16px 22px;align-items:center;justify-content:space-between;margin-bottom:10px}
 .blog-search{flex:1 1 300px;max-width:440px}
 .blog-search input{width:100%;background:var(--char-3);border:1px solid var(--line);border-radius:4px;color:var(--bone);font-family:var(--body);font-size:.96rem;padding:13px 15px}
@@ -697,3 +697,17 @@ body::after{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;
 /* v33: make "Who We Serve" audience chips clickable links */
 .serve .chip{text-decoration:none;color:var(--sand);transition:color .2s var(--ease),border-color .2s var(--ease),transform .2s var(--ease)}
 .serve .chip:hover{border-color:var(--gold);color:var(--gold);transform:translateY(-2px)}
+
+/* v34: smoother, scrollable mobile nav (from mobile-nav-fix branch) */
+@media(max-width:1140px){
+  .nav-toggle{display:block}
+  .nav-links{position:fixed;top:74px;left:0;right:0;height:calc(100vh - 74px);height:calc(100dvh - 74px);display:flex!important;flex-direction:column;gap:0;align-items:stretch;
+    background:var(--char-2);padding:6px 0 56px;overflow-y:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch;
+    opacity:0;visibility:hidden;transform:translateY(-8px);pointer-events:none;
+    transition:opacity .26s var(--ease),transform .26s var(--ease),visibility .26s}
+  .nav-links.open{opacity:1;visibility:visible;transform:none;pointer-events:auto}
+  .nav-links li{text-align:left;padding:0;border-top:1px solid var(--line)}
+  .nav-links>li>a{display:block;padding:15px 22px}
+  .drop a{padding:11px 22px 11px 40px}
+  .nav-cta{margin:16px 22px 4px;text-align:center}
+}
