@@ -1,0 +1,109 @@
+{
+  "slug": "land-clearing-comal-county",
+  "type": "city",
+  "nav_label": "Comal County",
+  "title_tag": "Land Clearing in Comal County, TX | 9 Arrow Land Service",
+  "meta_description": "Land clearing in Comal County, TX from a crew based in Spring Branch. Brush piles mulched during burn bans, survey lines, pads and roads. Get an estimate.",
+  "h1": "Comal County land clearing from a crew based in the county",
+  "primary_keyword": "land clearing comal county",
+  "secondary_keywords": [
+    "comal county brush clearing",
+    "land clearing near new braunfels and bulverde",
+    "comal county lot clearing",
+    "brush pile mulching comal county"
+  ],
+  "lede": "9 Arrow Land Service does land clearing across Comal County, TX from our base in Spring Branch. From US 281 acreage to Canyon Lake slopes to New Braunfels prairie, we grind it in place with no burn piles.",
+  "answer": {
+    "q": "What should landowners know about land clearing in Comal County?",
+    "a": "Land clearing in Comal County depends on which side of the Balcones Escarpment the tract sits, whether a burn ban is in effect, and whether the land lies over the Edwards Aquifer zones. 9 Arrow Land Service, based in Spring Branch, mulches vegetation in place, so a burn ban does not leave you with piles you cannot burn."
+  },
+  "highlights": [
+    "Based in Spring Branch, Comal County",
+    "Mulching instead of burning during burn bans",
+    "Old dozer piles ground on site",
+    "Mowing scheduled by season after clearing"
+  ],
+  "sections": [
+    {
+      "h2": "One county, three kinds of ground",
+      "paras": [
+        "Comal County covers about 555 square miles, and the Balcones Escarpment splits it. The northwestern three-quarters is Hill Country, with live oak, mesquite and Ashe juniper on limestone. The eastern quarter around New Braunfels is gently rolling Blackland Prairie with loam over clay subsoils.",
+        "The Guadalupe River cuts through the middle, with Canyon Lake behind the dam, and Cibolo Creek marks the southwest edge. Land clearing in Comal County falls into three broad areas."
+      ],
+      "bullets": [
+        "The US 281 corridor around Bulverde and our home base, covered under [land clearing in Spring Branch](land-clearing-spring-branch-tx), with acreage home sites and cedar-choked pasture",
+        "The hills around Canyon Lake and the Guadalupe, with steep, rocky lots and a federal shoreline boundary",
+        "New Braunfels and the prairie side, with builders, developers and deeper soils, covered under [land clearing in New Braunfels](land-clearing-new-braunfels-tx)"
+      ]
+    },
+    {
+      "h2": "Comal County burn bans and brush piles",
+      "paras": [
+        "Comal County commissioners put outdoor burn bans in place for unincorporated areas when fire danger rises. During a ban, a brush pile that cannot be burned just sits on the property.",
+        "[Brush clearing](brush-removal) with a forestry mulcher takes the burning out of the equation. We grind existing piles where they sit, including old bulldozer piles as large as a house, and mulch standing brush in place. No burn piles. No hauling. No mess."
+      ],
+      "photo": "mulcher-head"
+    },
+    {
+      "h2": "Land clearing in Comal County over the Edwards Aquifer",
+      "paras": [
+        "Comal County is one of the counties covered by the TCEQ Edwards Aquifer Protection Program. The aquifer's karst, with its fractures, caves and sinkholes, lets surface runoff reach the water directly. Before building on the recharge, transition or contributing zones, a plan has to be reviewed and approved by TCEQ.",
+        "For a development or commercial tract in Comal County, that approval runs through your engineer. We clear to the approved plan and your surveyor's lines, using GPS [survey line clearing](precision-line-survey-clearing) where the job calls for it, and coordinate with engineers, general contractors and site supervisors."
+      ]
+    },
+    {
+      "h2": "Starting a Comal County clearing job",
+      "paras": [
+        "Every Comal County job starts with a discovery call. A site visit then covers density, tree size and species, topography, access, maneuverability and soil conditions, and the estimate comes by the day or by the acre.",
+        "After the clearing, [grounds maintenance](grounds-maintenance) keeps the ground from closing back in, with rural and ranch property scheduled by season and conditions and recurring agreements available for homes.",
+        "Travis Roberson, who runs a land stewardship business, wrote in a five-star Google review, \"Talented operators that listen and communicate well. They are a vital part of my land stewardship business!\""
+      ]
+    }
+  ],
+  "faqs": [
+    {
+      "q": "Which parts of Comal County does 9 Arrow cover?",
+      "a": "9 Arrow Land Service covers Comal County from its home base in Spring Branch, including Bulverde along US 281, the hills around Canyon Lake and the Guadalupe River, and New Braunfels on the eastern side. Each area gets the machine that fits it, from compact track loaders to large articulated mulchers."
+    },
+    {
+      "q": "Can you clear Comal County land that has no road in?",
+      "a": "Yes. When a Comal County tract has no access, 9 Arrow can establish it, starting with clearing and brush removal and moving through rough grading, road base, drainage and culverts. Creek crossings and site shaping are part of our site work, and surface rock can be crushed on site into road base."
+    },
+    {
+      "q": "Is 9 Arrow a Comal County company?",
+      "a": "Yes. 9 Arrow Land Service is a family-owned company based in Spring Branch, in western Comal County, founded by John and Camille Wheelock. The company serves Central Texas and the Texas Hill Country and goes to the customer's land, so every estimate starts with a look at your property."
+    }
+  ],
+  "related_services": [
+    "brush-removal",
+    "precision-line-survey-clearing",
+    "grounds-maintenance",
+    "roads-and-access-preparation"
+  ],
+  "related_areas": [
+    "land-clearing-spring-branch-tx",
+    "land-clearing-new-braunfels-tx",
+    "land-clearing-bulverde-tx",
+    "land-clearing-canyon-lake-tx",
+    "forestry-mulching-texas-hill-country"
+  ],
+  "related_posts": [
+    "blog-best-time-to-clear-land-texas",
+    "blog-land-clearing-cost-texas"
+  ],
+  "hero_photo": "mulcher-sunrays",
+  "hero_alt": "Forestry mulcher in dusty haze with sun through the trees during land clearing",
+  "cta_service": "Forestry mulching / land clearing",
+  "city": {
+    "name": "Comal County",
+    "county": "Comal County",
+    "lat": 29.81,
+    "lng": -98.28,
+    "nearby": [
+      "land-clearing-spring-branch-tx",
+      "land-clearing-bulverde-tx",
+      "land-clearing-canyon-lake-tx",
+      "land-clearing-new-braunfels-tx"
+    ]
+  }
+}

@@ -1,0 +1,82 @@
+{
+  "slug": "service-areas",
+  "type": "hub",
+  "nav_label": "Service areas",
+  "title_tag": "Service Areas in Central Texas & Hill Country | 9 Arrow",
+  "meta_description": "9 Arrow Land Service areas across Central Texas and the Texas Hill Country, based in Spring Branch. Find your town or call (210) 247-8410.",
+  "h1": "Our service areas in Central Texas and the Texas Hill Country",
+  "primary_keyword": "service areas central texas hill country",
+  "secondary_keywords": ["land clearing service area", "forestry mulching near me", "Comal County land clearing", "Hill Country land service"],
+  "lede": "9 Arrow Land Service works across our service areas in Central Texas and the Texas Hill Country from a home base in Spring Branch. Find your town below, or call and tell us where your land is.",
+  "answer": {
+    "q": "Where does 9 Arrow Land Service work?",
+    "a": "9 Arrow Land Service works across Central Texas and the Texas Hill Country from its home base in Spring Branch, TX. We are a service-area business, so our crews and machines come to your land. Towns with their own pages include Spring Branch, Bulverde, Canyon Lake, New Braunfels, Boerne and San Antonio."
+  },
+  "highlights": [
+    "Home base in Spring Branch, TX",
+    "Service-area business that comes to you",
+    "Central Texas and the Texas Hill Country",
+    "One call to check your property"
+  ],
+  "sections": [
+    {
+      "h2": "Spring Branch is home base",
+      "paras": [
+        "9 Arrow is a family-owned business founded by John and Camille Wheelock and based in Spring Branch, along US 281 in western Comal County. From Spring Branch, US 281, State Highway 46 and I-10 connect to the towns and counties listed below."
+      ]
+    },
+    {
+      "h2": "Comal County service areas",
+      "paras": [
+        "Comal County is home ground. Spring Branch, Bulverde, Canyon Lake and New Braunfels all sit in the county, and [land clearing in Comal County](land-clearing-comal-county) covers the county as a whole."
+      ],
+      "bullets": [
+        "[Land clearing in Spring Branch](land-clearing-spring-branch-tx), [forestry mulching in Spring Branch](forestry-mulching-spring-branch-tx) and [cedar removal in Spring Branch](cedar-removal-spring-branch-tx)",
+        "[Land clearing in Bulverde](land-clearing-bulverde-tx) and [forestry mulching in Bulverde](forestry-mulching-bulverde-tx)",
+        "[Land clearing in Canyon Lake](land-clearing-canyon-lake-tx) and [forestry mulching in Canyon Lake](forestry-mulching-canyon-lake-tx)",
+        "[Land clearing in New Braunfels](land-clearing-new-braunfels-tx) and [forestry mulching in New Braunfels](forestry-mulching-new-braunfels-tx)"
+      ]
+    },
+    {
+      "h2": "Kendall, Bexar, Blanco, Hays and Kerr counties",
+      "paras": [
+        "Beyond Comal County, our service areas reach into the neighboring Hill Country counties and the San Antonio area."
+      ],
+      "bullets": [
+        "Kendall County, with [land clearing in Boerne](land-clearing-boerne-tx) and [cedar removal in Boerne](cedar-removal-boerne-tx)",
+        "Bexar County, with [land clearing in San Antonio](land-clearing-san-antonio-tx) and [forestry mulching in San Antonio](forestry-mulching-san-antonio-tx)",
+        "Blanco County, with [land clearing in Blanco](land-clearing-blanco-tx)",
+        "Hays County, with [land clearing in Wimberley](land-clearing-wimberley-tx)",
+        "Kerr County, with [land clearing in Kerrville](land-clearing-kerrville-tx)",
+        "The wider region, with [forestry mulching in the Texas Hill Country](forestry-mulching-texas-hill-country)"
+      ]
+    },
+    {
+      "h2": "How to tell if your property is in our service area",
+      "paras": [
+        "The simplest way to find out whether your land is in range is to call (210) 247-8410 or email john@9arrow.com. Tell us where the property is, roughly how big it is, and what you want done.",
+        "If your town is missing from this page, ask anyway. The list above covers the towns with their own pages, and our work reaches across Central Texas and the Texas Hill Country."
+      ]
+    }
+  ],
+  "faqs": [
+    {
+      "q": "Does 9 Arrow work outside the towns listed on this page?",
+      "a": "Yes, 9 Arrow works outside the towns listed on this page. The service areas here are the towns with their own pages, and our work covers Central Texas and the Texas Hill Country more broadly. Call (210) 247-8410 with your property's location and we will tell you whether we can take the job."
+    },
+    {
+      "q": "What services does 9 Arrow offer across its service areas?",
+      "a": "9 Arrow offers forestry mulching and land clearing, survey line clearing, right-of-way clearing, roads and access preparation, rock crushing, site work and light utility installation, and grounds maintenance across its service areas. The [land clearing and forestry mulching services](services) page lists each one, and a single call covers any mix of them."
+    },
+    {
+      "q": "How do I get an estimate for land in your service area?",
+      "a": "An estimate for land in our service area starts with a call to (210) 247-8410 or an email to john@9arrow.com. We set up a discovery call, a site visit, or both, and look at density, tree size, terrain, access and soil. Estimates come by the day or by the acre."
+    }
+  ],
+  "related_services": ["services", "forestry-mulching-and-land-clearing", "land-clearing", "cedar-removal"],
+  "related_areas": ["land-clearing-spring-branch-tx", "forestry-mulching-bulverde-tx", "forestry-mulching-canyon-lake-tx", "forestry-mulching-new-braunfels-tx", "cedar-removal-boerne-tx", "forestry-mulching-san-antonio-tx"],
+  "related_posts": [],
+  "hero_photo": "fleet",
+  "hero_alt": "Two forestry mulchers and two crew trucks lined up in a field",
+  "cta_service": "Not sure yet"
+}

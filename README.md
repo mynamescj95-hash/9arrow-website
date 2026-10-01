@@ -1,82 +1,64 @@
-# 9 Arrow Land Service — Website
+# 9 Arrow Land Service: 9arrow.com
 
-A rugged, fast, static marketing site for **9 Arrow Land Service** (Spring Branch, TX). Built on the 9 Arrow brand guide: deep forest-green canvas, brass-gold accent, heavy slab-serif type, and real job photography. No build step — pure HTML/CSS/JS, ready for GitHub Pages.
+Static site for 9 Arrow Land Service (Spring Branch, TX), hosted on Netlify. No build step on Netlify: the repo root is the site.
 
-## Pages
-- `index.html` — Home (hero, services, before/after, stats, who we serve, reviews, CTA)
-- `services.html` — Six service lines in detail + FAQs
-- `about.html` — Story, the nine core values, gallery
-- `contact.html` — Contact info + estimate request form
+## What's here
+- **57 pages** at the repo root. Every live HubSpot URL keeps its path (Netlify serves `about-us.html` at `/about-us`).
+  - 12 service pages, including a new `/rock-crushing`
+  - 5 "who we serve" pages, 18 city/service-area pages, `/service-areas` hub with a map
+  - `/about-us`, `/our-work`, `/faq`, `/contact`, `/get-an-estimate`, ROW safety manual, legal pages
+  - `/blog` plus 8 guides
+- `assets/img`: every image as WebP at 480 / 960 / 1600 px (responsive `srcset`). Photos of John and Camille and the
+  Our Work gallery are real, and so are the hero photos on the home, service and about pages. Some area pages
+  use generated Hill Country landscapes (documentary-style, unbranded).
+- `assets/og`: a share image for every page.
+- Old files from the previous site (HubSpot-era docs, PDF guides, unused images) were removed; old PDF links redirect to
+  the matching pages in `netlify.toml`.
+- `netlify.toml`, `netlify/functions/submission-created.js`: Netlify Forms to Monday.com.
+- `sitemap.xml`, `robots.txt` (AI search crawlers allowed), `llms.txt`.
+- `site-src/`: the content and generator that produced the pages.
 
-## Preview locally
-Open `index.html` in a browser, or run a local server:
+## Estimate forms → Monday
+Two Netlify forms, one flow:
+- `estimate-start`: email only. It sits in the home page hero and in the pull-out panel that opens from every
+  "Get an estimate" button. After the email, the visitor lands on `/get-an-estimate` with the email already filled in.
+- `estimate-request`: the 4-step form on `/get-an-estimate` (work, land size, location and timing, contact).
+After each verified submission, `submission-created.js` creates an item on the Monday leads board and posts every field
+(including UTMs, gclid, landing page) as an update on that item. Email-only starts come in as "Email lead: ..." items,
+so someone who stops after the email is still a lead. Nothing reaches Monday until the variables below are set.
+
+Set these in Netlify > Site settings > Environment variables, then redeploy:
+
+| Variable | Value |
+|---|---|
+| `MONDAY_API_TOKEN` | Monday personal API token |
+| `MONDAY_BOARD_ID` | Board ID from the board URL |
+| `MONDAY_GROUP_ID` | Optional: group for new leads |
+| `MONDAY_START_GROUP_ID` | Optional: separate group for email-only starts |
+| `MONDAY_COLUMNS` | Optional JSON map of form field to Monday column id and type (example in the function) |
+
+Form fields: `services, acreage, property_location, timeline, client_type, name, phone, email, contact_preference, notes,
+page_variant, landing_page, referrer, utm_source, utm_medium, utm_campaign, utm_term, utm_content, gclid, fbclid`.
+`dataLayer` events for GA4 / Google Ads via GTM: `estimate_drawer_open`, `estimate_start` (email captured) and
+`generate_lead` (full form sent).
+
+## Editing content and adding blog posts
+Content lives in `site-src/content`:
+- `pages/<slug>.json`: one file per page (title tag, meta description, H1, answer block, sections, FAQs, links).
+- `blog/<slug>.md`: Markdown with front matter (copy an existing post as the template).
+
+Rebuild and copy the output to the repo root:
 ```bash
-python3 -m http.server 8000
-# visit http://localhost:8000
+cd site-src
+pip install markdown pyyaml beautifulsoup4
+python3 src/build.py prod        # writes site-src/dist
+cp -r dist/. ..                  # then commit and push; Netlify deploys
 ```
+Images: `src/images.py` regenerates the WebP sizes from 2048px masters in `site-src/gen/` (masters are kept outside
+the repo). `src/og.py` regenerates share images.
 
-## Put it on GitHub + GitHub Pages
-From this folder (Git is already initialized with a first commit):
-```bash
-# 1. Create an EMPTY repo on github.com (no README), e.g. "9arrow-website".
-# 2. Point this repo at it and push:
-git remote add origin https://github.com/<your-username>/9arrow-website.git
-git branch -M main
-git push -u origin main
-```
-Then enable hosting:
-1. On GitHub: **Settings → Pages**.
-2. **Source:** Deploy from a branch. **Branch:** `main`, folder `/ (root)`. Save.
-3. Your site goes live at `https://<your-username>.github.io/9arrow-website/` in ~1 minute.
-
-## Use the real domain (www.9arrow.com)
-GitHub Pages supports custom domains for free (with HTTPS):
-1. In **Settings → Pages → Custom domain**, enter `www.9arrow.com` and save (this creates a `CNAME` file — `CNAME.example` shows the contents).
-2. At your DNS provider, add a **CNAME** record: `www` → `<your-username>.github.io`.
-3. For the apex `9arrow.com`, add the GitHub Pages A/AAAA records (see GitHub's docs) or a redirect to `www`.
-4. Check **Enforce HTTPS** once the certificate is issued.
-
-> Note: 9arrow.com currently points to HubSpot. Only change DNS when you're ready to switch hosting — until then, use the free `github.io` URL to review.
-
-## Before launch — two quick swaps
-1. **Logo:** `assets/img/logo-mark.svg` and `logo-lockup.svg` are clean recreations. Drop in the master 9 Arrow logo files (same names) when ready.
-2. **Estimate form:** the form in `contact.html` posts to a placeholder. Create a free form endpoint at [formspree.io](https://formspree.io), then replace `YOUR_FORM_ID` in the form `action`. (Or wire it to HubSpot.)
-
-## Photos
-Images in `assets/img/` are pulled from the 9 Arrow Google Drive job library and web-optimized. Swap any file (keep the same name) to update a photo. Add real same-angle before/after pairs to replace `ba-before.jpg` / `ba-after.jpg`.
-
----
-© 2026 9 Arrow Land Service. Site managed by TruAim Marketing.
-
----
-
-## v2 update — full service pages, Texas SEO, tougher look, video hero
-
-**Pages now include six dedicated service pages** (each with full copy + Texas SEO + Service schema):
-`forestry-mulching.html`, `survey-line-clearing.html`, `right-of-way-clearing.html`, `roads-access.html`, `grounds-maintenance.html`, `site-work-utility.html`. `services.html` is now a hub linking to all six.
-
-**Texas SEO** on every page: localized titles/descriptions/keywords, a "Proudly Serving Central Texas" area band (Spring Branch, Bulverde, New Braunfels, Canyon Lake, Boerne, San Antonio, San Marcos, Hill Country), `geo.*` meta, and JSON-LD (`LocalBusiness`, `Service`, `FAQPage`).
-
-**Tougher look:** real pro-shoot photography throughout, film grain overlay, a black-and-white "We sharpen our own steel" craftsmanship band, heavier hero scrims.
-
-**Logo:** the header now uses a faithful SVG of the real circular "9-into-arrow" lockup (`assets/img/logo-lockup.svg`, bone for the dark theme). Your master PNGs live in Drive → "Approved by John / Logos for 9 Arrow" — drop one in if you prefer the raster.
-
-### Two drop-in slots
-1. **Hero video** — the homepage hero is wired for video. Add a web-compressed MP4 at `assets/img/hero.mp4` (≈1080p, H.264, 6–10 MB, muted loop) and it plays automatically; until then it shows `hero.jpg`. Your `IMG_1279.MOV` is 93 MB — compress first, e.g.:
-   `ffmpeg -i IMG_1279.MOV -t 12 -an -vf "scale=1920:-2" -c:v libx264 -crf 28 -preset slow -movflags +faststart assets/img/hero.mp4`
-2. **Owners photo** — `assets/img/owners.jpg` on the About page is a placeholder. Replace it with the John & Camille portrait (keep the filename).
-
-## Lead-gen download gate (PDF guides)
-
-The three guide PDFs in `assets/downloads/` are gated behind a Name + Email + Phone form
-(modal pops up when a visitor clicks any "Get the free guide" button or guide cover).
-
-To capture those leads in **HubSpot**:
-1. In HubSpot go to **Marketing > Forms** and create a form with fields: First name, Last name, Email, Phone.
-2. Copy your **Portal ID** and the form's **Form GUID**.
-3. Open `assets/js/main.js`, find the `CONFIG` block in the download-gate section, and set:
-   `HS_PORTAL_ID='1234567'` and `HS_FORM_GUID='xxxxxxxx-xxxx-...'`.
-
-Until those IDs are set, the form still gates the download and delivers the PDF — it just
-doesn't send the lead anywhere yet. (Prefer Formspree/Netlify Forms instead? Swap the
-`fetch()` URL in that same block.)
+## Rules the content follows
+- Every company fact comes from `site-src/brief/FACTS.md` (from 9arrow.com and the client's materials). No prices.
+- Each page opens with a 40 to 60 word answer to its main question (for Google AI Overviews and AI answer engines).
+- The one-paragraph company description in `llms.txt` and on the About page should be reused word for word on Google
+  Business Profile, LinkedIn and directories.

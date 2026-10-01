@@ -1,0 +1,106 @@
+{
+  "slug": "brush-removal",
+  "type": "service",
+  "nav_label": "Brush removal",
+  "title_tag": "Brush clearing in Texas | Underbrush & brush piles | 9 Arrow",
+  "meta_description": "Brush clearing in Texas for underbrush, overgrown lots and old dozer piles. Mulched in place with no burning. Call 9 Arrow at (210) 247-8410.",
+  "h1": "Texas brush clearing for underbrush, overgrown lots and old piles",
+  "primary_keyword": "brush clearing texas",
+  "secondary_keywords": [
+    "brush removal",
+    "underbrush clearing",
+    "brush mulching",
+    "overgrown lot clearing",
+    "brush pile removal"
+  ],
+  "lede": "9 Arrow does brush clearing in Texas, from thick underbrush beneath good trees to overgrown lots and old dozer piles that never got burned. We grind the brush in place and leave a fine finish you can drive over.",
+  "answer": {
+    "q": "What is brush clearing?",
+    "a": "Brush clearing is the removal of underbrush, small trees and woody regrowth that choke a property, usually while the larger trees stay standing. 9 Arrow handles brush clearing in Texas by grinding brush and old brush piles in place with mulching machines, or by mowing when the growth is tall grass and light brush."
+  },
+  "highlights": [
+    "Old dozer piles mulched instead of burned",
+    "Underbrush cleared, keeper trees left standing",
+    "Mowing for tall grass and light brush",
+    "Fine finish that is easy to drive over"
+  ],
+  "sections": [
+    {
+      "h2": "Underbrush clearing beneath the trees you keep",
+      "paras": [
+        "Underbrush clearing opens up a wooded property while the canopy stays. Selective clearing takes out the thick growth under and between trees and leaves the trees you want to keep, so you can walk, see and use the land again.",
+        "Texas A&M Forest Service encourages homeowners to thin brush and other vegetation around homes to create defensible space against wildfire. Clearing underbrush near a house, barn or driveway is a common place to start."
+      ],
+      "photo": "cleared-trail"
+    },
+    {
+      "h2": "Overgrown lot clearing",
+      "paras": [
+        "An overgrown lot hides what the property has to offer. 9 Arrow clears brush and small trees back to the lot lines for owners, developers and commercial real estate clients across Central Texas.",
+        "Properly cleared and maintained land is healthier, more valuable and more enjoyable to own. When the lot is headed for a house, the next step is [land clearing for a building site](site-prep). For a full tract with large trees, see [land clearing in Central Texas](land-clearing).",
+        "\"They cleared our 20 acres in Bulverde where Bulverde Market Day is held and did a great job! A year and a half later the land looks incredible,\" wrote Ashley Cooke in a Google review."
+      ]
+    },
+    {
+      "h2": "Brush pile removal without burning",
+      "paras": [
+        "Old brush piles sit for years on a lot of Texas land, left behind by earlier dozer work. 9 Arrow mulches existing brush piles, including old bulldozer piles as large as a house, and turns them into fine mulch on the ground. The mulch can be stockpiled or hauled off if you need the space open.",
+        "9 Arrow mulches brush piles instead of burning them, which matters because burning is often prohibited during burn bans. Texas counties adopt burn bans when conditions turn dry, and dry seasons are when a lot of owners want their piles gone."
+      ],
+      "photo": "mulcher-brush"
+    },
+    {
+      "h2": "Choosing mowing or mulching for brush clearing in Texas",
+      "paras": [
+        "The right machine for brush clearing in Texas depends on what is growing. Tall grass and light brush can be cut with agricultural mowing equipment. Thicker brush, small trees and woody regrowth call for mulching machines that grind the material where it stands, with no pushing, piling, hauling or burning.",
+        "Compact track machines reach tight spaces, slopes and uneven ground. Large articulated wheel machines bring high horsepower to big, dense acreage. Mulching leaves the soil intact and the root balls in place, so the ground holds together once the brush is gone. The method is covered in depth on our [forestry mulching in Central Texas](forestry-mulching-and-land-clearing) page.",
+        "Once brush is cleared, routine mowing through [grounds maintenance in Central Texas](grounds-maintenance) keeps the property from closing back in."
+      ],
+      "photo": "mowed-field"
+    },
+    {
+      "h2": "How brush removal jobs are priced",
+      "paras": [
+        "Brush removal is priced after a discovery call or a site visit. Density, tree size and species, topography, access, maneuverability and soil conditions all change how long the work takes, and estimates are shown by the day or by the acre.",
+        "Tell us what is growing, where the piles sit and which trees you want to keep, and we will tell you which approach fits the property."
+      ]
+    }
+  ],
+  "faqs": [
+    {
+      "q": "Can you clear brush during a burn ban?",
+      "a": "Yes. Brush clearing by mulching involves no burning, so mulching is a practical way to handle brush and old piles when a county burn ban stops burn piles. 9 Arrow grinds brush and brush piles in place instead of burning them, and the work leaves a fine finish on the ground."
+    },
+    {
+      "q": "What happens to brush after it is mulched?",
+      "a": "Mulched brush stays on the ground as a fine finish of small chips. Fine material is easier to drive over, and grass grows back through it faster. Under a light mulch layer, grass can green up within days after a rain. If you need the ground open, the mulch can be stockpiled or hauled off."
+    },
+    {
+      "q": "Will clearing underbrush hurt my trees?",
+      "a": "Underbrush clearing is done selectively, so the trees you choose to keep stay standing. Oaks need extra care in Central Texas because oak wilt is common and infected trees cannot be restored. Texas A&M Forest Service advises avoiding wounds to oaks from February through June and painting oak wounds year-round."
+    },
+    {
+      "q": "How big a brush pile can you mulch?",
+      "a": "9 Arrow mulches existing brush piles up to old bulldozer piles as large as a house. Pile size and access to the pile change how long the work takes. Brush pile jobs are estimated by the day or by the acre after a discovery call or a site visit, like the rest of our clearing work."
+    }
+  ],
+  "related_services": [
+    "forestry-mulching-and-land-clearing",
+    "land-clearing",
+    "grounds-maintenance"
+  ],
+  "related_areas": [
+    "land-clearing-canyon-lake-tx",
+    "land-clearing-new-braunfels-tx",
+    "land-clearing-bulverde-tx",
+    "land-clearing-spring-branch-tx",
+    "land-clearing-san-antonio-tx"
+  ],
+  "related_posts": [
+    "blog-mulching-vs-traditional-land-clearing",
+    "blog-best-time-to-clear-land-texas"
+  ],
+  "hero_photo": "mulcher-head",
+  "hero_alt": "Close-up of a mulcher head grinding brush during brush clearing",
+  "cta_service": "Forestry mulching / land clearing"
+}

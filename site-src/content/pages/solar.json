@@ -1,0 +1,91 @@
+{
+  "slug": "solar",
+  "type": "audience",
+  "nav_label": "Solar",
+  "title_tag": "Solar Farm Land Clearing in Texas | 9 Arrow",
+  "meta_description": "Solar farm land clearing in Texas. Mass acreage mulching, survey-guided boundaries, access roads, pad sites and conduit trenching from one family crew.",
+  "h1": "Solar farm land clearing and site prep for Texas developers",
+  "primary_keyword": "solar farm land clearing",
+  "secondary_keywords": [
+    "solar farm land clearing texas",
+    "solar site preparation",
+    "solar site clearing",
+    "mass acreage clearing"
+  ],
+  "lede": "9 Arrow Land Service handles solar farm land clearing in Texas, from mass acreage mulching to survey-guided boundaries, access roads, pad sites and conduit trenching. Our family-owned crew is based in Spring Branch and serves solar developers across Central Texas.",
+  "answer": {
+    "q": "What does solar farm land clearing in Texas involve?",
+    "a": "Solar farm land clearing in Texas involves removing brush and trees across large acreage, clearing to project boundaries, building access roads and preparing pad sites before construction. 9 Arrow Land Service handles that work with forestry mulching, GPS-guided survey line clearing, on-site rock crushing for road base, site grading and trenching for electrical conduit."
+  },
+  "highlights": [
+    "Mass acreage clearing with high-horsepower machines",
+    "Clearing guided by surveyor CAD files",
+    "Trenching for electrical conduit",
+    "Grounds upkeep on 1,000+ acre properties"
+  ],
+  "sections": [
+    {
+      "h2": "Solar farm land clearing across large acreage",
+      "paras": [
+        "Solar developers need large tracts cleared without tearing up the ground the project will sit on. 9 Arrow clears mass acreage with [forestry mulching](forestry-mulching-and-land-clearing), grinding brush and trees where they stand with large articulated wheel machines built for high horsepower and high production. Compact track machines handle tight access, slopes and uneven ground. Nothing is pushed, piled, hauled or burned.",
+        "Mulching leaves the soil intact, while dozing disturbs soil and raises erosion risk. Where full root removal is needed, 9 Arrow grubs with bulldozers and excavators and mulches the root balls on site. The mulch can be stockpiled or hauled off if the project calls for it."
+      ],
+      "photo": "mulcher-red-field"
+    },
+    {
+      "h2": "Solar project boundaries cleared from survey data",
+      "paras": [
+        "9 Arrow runs Trimble data collectors and receivers on our mulchers and loads the licensed surveyor's CAD files, so our operators clear to certified survey data with real-time GPS guidance. Our [survey line clearing](precision-line-survey-clearing) handles property lines, future road locations, utility easements and pad sites, and it reduces or eliminates survey-crew pre-staking. 9 Arrow is not a licensed surveyor and does not replace one."
+      ],
+      "photo": "survey-cut"
+    },
+    {
+      "h2": "Access roads, pads and conduit trenching on solar sites",
+      "paras": [
+        "Solar construction brings heavy equipment and truck traffic. 9 Arrow handles [access road building](roads-and-access-preparation) with grading, culverts, drainage and erosion control, and on-site rock crushing turns existing surface rock into compactible road base so the site relies less on imported material.",
+        "9 Arrow [site work and utility installation](site-work-light-utility-installation) crews cut and fine-grade pad sites, handle selective site grading and shaping, and trench for electrical conduit. Our dozers and excavators work in rocky terrain and difficult soil. We do not install electrical wire or make final tie-ins, and we coordinate with your licensed electricians, engineers and general contractor."
+      ],
+      "photo": "site-pad"
+    },
+    {
+      "h2": "Vegetation upkeep on cleared solar land",
+      "paras": [
+        "Cleared Texas land grows back. 9 Arrow [grounds maintenance](grounds-maintenance) crews mow and weed eat properties from small acreage to more than 1,000 acres and keep access corridors open. In the Texas growing season, monthly mowing is ideal, and every 2 to 3 months is the outer limit. One final mow usually carries a property through winter."
+      ],
+      "photo": "mowed-field"
+    }
+  ],
+  "faqs": [
+    {
+      "q": "Can 9 Arrow clear large solar sites?",
+      "a": "Yes. 9 Arrow clears mass acreage with large, high-horsepower articulated wheel mulchers. Each of those machines clears about 1 to 3 acres per 8-hour day with reasonable tree coverage, and up to about 5 acres in lighter conditions. Density, tree size and terrain change the pace on every solar site."
+    },
+    {
+      "q": "Does 9 Arrow install electrical for solar projects?",
+      "a": "No. 9 Arrow trenches for electrical conduit and prepares pad sites. The crew does not install electrical wire or make final electrical tie-ins. 9 Arrow coordinates with the licensed electricians, engineers, general contractors and site supervisors on the solar project so the trenching matches the plans."
+    },
+    {
+      "q": "How is solar site clearing priced?",
+      "a": "9 Arrow prices solar site clearing after a discovery call, a site visit or both. The estimate depends on vegetation density, tree size and species, topography, access, maneuverability and soil conditions. We show the estimate by the day or by the acre, so you can see how the scope drives the number."
+    }
+  ],
+  "related_services": [
+    "forestry-mulching-and-land-clearing",
+    "precision-line-survey-clearing",
+    "site-work-light-utility-installation",
+    "roads-and-access-preparation"
+  ],
+  "related_areas": [
+    "land-clearing-comal-county",
+    "land-clearing-san-antonio-tx",
+    "forestry-mulching-texas-hill-country",
+    "land-clearing-blanco-tx"
+  ],
+  "related_posts": [
+    "blog-mulching-vs-traditional-land-clearing",
+    "blog-forestry-mulching-guide"
+  ],
+  "hero_photo": "mulcher-red-field",
+  "hero_alt": "Red articulated forestry mulcher in a cleared field, the high-production machine 9 Arrow uses for solar farm land clearing",
+  "cta_service": "Forestry mulching / land clearing"
+}

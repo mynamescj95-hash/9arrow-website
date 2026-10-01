@@ -1,0 +1,104 @@
+{
+  "slug": "grounds-maintenance",
+  "type": "service",
+  "nav_label": "Grounds maintenance",
+  "title_tag": "Grounds maintenance in Central Texas | 9 Arrow Land Service",
+  "meta_description": "Grounds maintenance in Central Texas for homes, ranches, commercial sites and pipeline ROW. Mowing, shredding, trimming and cleanup, scheduled by season.",
+  "h1": "Central Texas grounds maintenance for ranches, sites and corridors",
+  "primary_keyword": "grounds maintenance central texas",
+  "secondary_keywords": [
+    "property maintenance",
+    "pasture mowing",
+    "shredding",
+    "pipeline ROW maintenance",
+    "ranch property maintenance"
+  ],
+  "lede": "Grounds maintenance in Central Texas keeps cleared land from sliding back into brush. 9 Arrow handles routine mowing, weed eating, selective tree trimming, cleanup and pipeline right-of-way upkeep on properties from small acreage to more than 1,000 acres.",
+  "answer": {
+    "q": "What does grounds maintenance include?",
+    "a": "Grounds maintenance from 9 Arrow includes routine mowing and weed eating, selective tree trimming with chainsaws, hand labor in tight or sensitive areas, debris and trash cleanup, and light demolition of small structures. For infrastructure clients, grounds maintenance also covers gas pipeline right-of-way maintenance, signage clearing and access-corridor upkeep."
+  },
+  "highlights": [
+    "Small acreage to 1,000+ acres",
+    "Gas pipeline ROW maintenance",
+    "Recurring agreements for residential properties",
+    "Hand labor for tight, sensitive areas"
+  ],
+  "sections": [
+    {
+      "h2": "Grounds maintenance in Central Texas, small acreage to 1,000+ acres",
+      "paras": [
+        "9 Arrow grounds maintenance covers residential, commercial, rural, ranch headquarters and infrastructure properties. Property size runs from small acreage to more than 1,000 acres. The work is the ongoing care that keeps a property usable, safe to work on and good to look at after the heavy clearing is done.",
+        "Cleared land in Central Texas does not stay cleared on its own. Cedar seedlings, mesquite and brush move back into open ground every growing season, and a regular grounds maintenance schedule keeps that regrowth small enough to handle with a mower.",
+        "Routine mowing and weed eating keep grass and light brush in check. For pastures and larger open ground, we mow with agricultural equipment, the tractor work many Texans call shredding. Property beautification rounds out the service for homes, commercial frontage and ranch headquarters.",
+        "9 Arrow is based in Spring Branch and serves Central Texas and the Texas Hill Country. Spring Branch sits in Comal County, and local ground conditions are covered on our [Comal County land clearing](land-clearing-comal-county) page."
+      ]
+    },
+    {
+      "h2": "Mowing schedules that fit Texas growth",
+      "paras": [
+        "Grass and brush grow hard in a Texas growing season. Monthly mowing is ideal during the season. Every 2 to 3 months is the outer limit during peak growth, and waiting longer lets brush and saplings get ahead of the mower. One final mow usually carries a property through winter.",
+        "Residential properties can set up a recurring grounds maintenance agreement. Rural and ranch properties are scheduled by season and conditions, since rain and drought change how fast pasture and brush grow from one year to the next."
+      ],
+      "photo": "mowed-field"
+    },
+    {
+      "h2": "Pipeline right-of-way and infrastructure upkeep",
+      "paras": [
+        "Infrastructure grounds maintenance at 9 Arrow covers gas pipeline right-of-way maintenance, signage clearing and access-corridor upkeep. Corridors need to stay open, signs need to stay visible and access routes need to stay passable for the crews who use them. Regular upkeep keeps a corridor from growing shut between clearings.",
+        "Right-of-way corridors are maintained with tractor and batwing equipment that keeps aggressive regrowth such as mesquite under control. The initial clearing of new easements and wide corridors is covered on our [right-of-way clearing](right-of-way-clearing) page."
+      ]
+    },
+    {
+      "h2": "Tree trimming, cleanup and light demolition",
+      "paras": [
+        "Some grounds maintenance needs a chainsaw and a crew on foot. 9 Arrow does selective tree trimming with chainsaws and uses hand labor in tight or sensitive areas where a machine does not belong. Debris and trash cleanup and light demolition of small structures, such as an old shed or a collapsed outbuilding, help bring a neglected property back into shape.",
+        "When regrowth has already turned back into brush, mowing will not keep up. [Brush clearing](brush-removal) resets the ground first. If cedar is the problem, our post on [clearing cedar so it does not grow back](blog-clear-cedar-without-regrowth) explains the follow-up pass that keeps it gone."
+      ],
+      "photo": "chainsaw"
+    }
+  ],
+  "faqs": [
+    {
+      "q": "How often should a Texas property be mowed?",
+      "a": "A Texas property is best mowed monthly during the growing season. Every 2 to 3 months is the outer limit during peak growth, because grass and brush get ahead quickly after that. One final mow usually carries a property through winter. Rain and drought can shift the schedule from one year to the next."
+    },
+    {
+      "q": "Do you offer recurring grounds maintenance agreements?",
+      "a": "Yes, 9 Arrow offers recurring grounds maintenance agreements for residential properties. Rural and ranch properties are scheduled by season and conditions, because rain, drought and growth rates change what the land needs from one year to the next. Call (210) 247-8410 to talk through a schedule for your property."
+    },
+    {
+      "q": "Do you maintain pipeline rights-of-way?",
+      "a": "Yes, grounds maintenance at 9 Arrow includes gas pipeline right-of-way maintenance, signage clearing and access-corridor upkeep. Right-of-way corridors are maintained with tractor and batwing equipment that keeps aggressive regrowth such as mesquite under control, so the easement stays open and the signs stay visible."
+    },
+    {
+      "q": "What size properties do you maintain?",
+      "a": "9 Arrow maintains properties from small acreage to more than 1,000 acres. Grounds maintenance clients include residential, commercial, rural, ranch headquarters and infrastructure properties. Larger open ground is mowed with agricultural equipment, and tight or sensitive areas get hand labor and selective trimming with chainsaws."
+    },
+    {
+      "q": "Can you clean up debris and remove an old shed?",
+      "a": "Yes, grounds maintenance at 9 Arrow includes debris and trash cleanup and light demolition of small structures, such as an old shed. Selective tree trimming with chainsaws and hand labor in tight areas can be part of the same cleanup, so a neglected property can be brought back into shape."
+    }
+  ],
+  "related_services": [
+    "right-of-way-clearing",
+    "brush-removal",
+    "ranch-pasture-clearing",
+    "cedar-removal"
+  ],
+  "related_areas": [
+    "land-clearing-spring-branch-tx",
+    "land-clearing-bulverde-tx",
+    "land-clearing-new-braunfels-tx",
+    "land-clearing-san-antonio-tx",
+    "land-clearing-comal-county"
+  ],
+  "related_posts": [
+    "blog-clear-cedar-without-regrowth",
+    "blog-cedar-mesquite-ranch",
+    "blog-best-time-to-clear-land-texas"
+  ],
+  "hero_photo": "mowed-pasture",
+  "hero_alt": "Mowed green pasture with a shredder in the foreground, grounds maintenance in Central Texas",
+  "cta_service": "Grounds maintenance"
+}

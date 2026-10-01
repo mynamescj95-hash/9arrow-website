@@ -1,0 +1,46 @@
+# 9 Arrow Land Service on Netlify. No build step: the repo root is the site.
+# Netlify serves about-us.html at /about-us, so every existing URL keeps working.
+[build]
+  publish = "."
+
+[functions]
+  directory = "netlify/functions"
+
+[[headers]]
+  for = "/assets/img/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/assets/og/*"
+  [headers.values]
+    Cache-Control = "public, max-age=604800"
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Permissions-Policy = "camera=(), microphone=(), geolocation=()"
+
+# Old pages from the previous build that no longer exist
+[[redirects]]
+  from = "/about"
+  to = "/about-us"
+  status = 301
+
+# Old downloadable PDF guides (removed); send any outside links to the matching page
+[[redirects]]
+  from = "/assets/downloads/9arrow-land-clearing-cost-guide.pdf"
+  to = "/blog-land-clearing-cost-texas"
+  status = 301
+
+[[redirects]]
+  from = "/assets/downloads/9arrow-hill-country-cedar-removal-guide.pdf"
+  to = "/cedar-removal"
+  status = 301
+
+[[redirects]]
+  from = "/assets/downloads/9arrow-land-clearing-planning-checklist.pdf"
+  to = "/get-an-estimate"
+  status = 301
