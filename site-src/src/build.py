@@ -329,7 +329,7 @@ def doc(slug, title, desc, body, sch, og=None, hero_preload=None, noindex=False)
 <link rel="stylesheet" href="assets/css/site.css">
 {pre}
 {sch}"""
-    over = ' class="over-hero"' if ('class="hero-photo"' in body or 'class="portal' in body) else ""
+    over = ' class="over-hero"' if ('class="hero-photo"' in body or 'class="hero-home' in body) else ""
     page = f"""{SPRITE}
 <a class="skip" href="#main">Skip to content</a>
 {header(slug)}
@@ -854,21 +854,27 @@ def render_home():
     hf = hf[:5] if len(hf) >= 4 else allf[:5]
     ring = f'<circle r="{RING_R:.1f}" fill="none" stroke="#E8EBE7" stroke-width="{RING_W:.1f}"/>'
     hero_form = start_form("hero-start", "index")
-    portal = f"""<section class="portal dark" id="portal" aria-labelledby="h1"><div class="portal-in">
-<div class="pv-bg" aria-hidden="true"><i class="pv-topo"></i><i class="pv-glow"></i></div>
-<div class="pv" id="pv">{img("r-hero", "100vw", eager=True)}</div>
-<div class="pm-wrap" id="pm-wrap" aria-hidden="true"><svg class="pm" id="pm" viewBox="-160 -160 320 320">{ring}<use href="#g9" x="-160" y="-160" width="320" height="320" fill="#E8EBE7"/></svg></div>
+    dial = ('<svg class="em-dial" viewBox="-200 -200 400 400" aria-hidden="true">'
+            '<circle r="190" fill="none" stroke="currentColor" stroke-width="1" opacity=".35"/>'
+            '<circle r="182" fill="none" stroke="currentColor" stroke-width="7" stroke-dasharray="1.6 14.28" opacity=".55"/>'
+            '<circle r="182" fill="none" stroke="currentColor" stroke-width="14" stroke-dasharray="3 282.9" transform="rotate(-90.5)"/>'
+            '<path d="M0 -199 L6 -188 L-6 -188 Z" fill="currentColor"/></svg>')
+    hero = f"""<section class="hero-home dark" id="hero-home" aria-labelledby="h1">
+<div class="hh-bg" aria-hidden="true"><i class="pv-topo"></i><i class="pv-glow"></i></div>
+<div class="em-slot" aria-hidden="true"><div class="em-roll" id="em-roll"><div class="em-intro" id="em-intro">{dial}
+<svg class="em-mark" viewBox="-160 -160 320 320">{ring}<use href="#g9" x="-160" y="-160" width="320" height="320" fill="#E8EBE7"/></svg></div></div></div>
 <div class="hero-copy" id="hero-copy"><div class="wrap"><div class="hc-in">
 <p class="where"><span class="rule" aria-hidden="true"></span>Family-owned in Spring Branch, Texas</p>
 <h1 id="h1" class="display">Central Texas land clearing, done right</h1>
 {hero_form}
 <p class="hero-sub"><b>Forestry mulching, rock crushing and road building.</b> One family crew for the whole job, across Central Texas and the Hill Country.</p>
 </div></div></div>
-<p class="cue" aria-hidden="true">Scroll</p>
-<div class="stage" id="stage"><div class="wrap stage-in"><p class="stage-h display">We don't just clear land. We stage it.</p>
+<a class="cue" href="#stage-band" aria-label="Scroll to learn more">Scroll</a>
+</section>"""
+    band = f"""<section class="band dark" id="stage-band" aria-labelledby="band-h"><div class="band-media" data-par>{img("r-trail", "100vw")}</div>
+<div class="wrap band-in"><h2 class="display band-h" id="band-h">We don't just clear land. We stage it.</h2>
 <p>Overgrown, locked-up acreage turned into open, usable ground that buyers, builders and cattle can use.</p>
-<div class="btn-row"><a class="btn btn-light" href="#services">See what we do</a></div></div></div>
-</div></section>"""
+<div class="btn-row"><a class="btn btn-gold" href="#services">See what we do</a></div></div></section>"""
     intro = f"""<section class="sec intro"><div class="wrap grid-2">
 <div class="copy stack" style="gap:18px"><h2 class="h-lg">Central Texas land, cleared right the first time.</h2>
 <p class="lede">{esc(ENTITY)}</p>
@@ -908,8 +914,8 @@ def render_home():
             + "".join(f'<figure class="review">{STARS}<blockquote><q>{esc(REVIEWS[k][0])}</q></blockquote><figcaption class="by">{esc(REVIEWS[k][1])}</figcaption></figure>' for k in ("ashley", "travis", "zachp", "kenny")))
     reviews = f'<section class="sec alt"><div class="wrap"><div class="sec-head"><h2 class="h-lg">Five stars from the people we clear for.</h2></div><div class="reviews">{revs}</div></div></section>'
     faq = faq_block({"faqs": hf}, slug, "Straight answers", "What landowners and developers ask us most.")
-    body = "\n".join([portal, intro, track, rock, lens(LENS_PAIRS), serve, areas, fam, quiver("What we stand on", "Nine children, nine arrows, nine values. Pick one to see what it means on your land."), reviews, faq.replace('class="sec alt"', 'class="sec"'), estimate_section("index")])
-    return doc("", HOME_TITLE, HOME_DESC, body, schema("", HOME_TITLE, HOME_DESC, [("", "Home")], [faq_schema("", hf)]), og="assets/og/index.jpg", hero_preload=img_src("r-hero", 1600))
+    body = "\n".join([hero, band, intro, track, rock, lens(LENS_PAIRS), serve, areas, fam, quiver("What we stand on", "Nine children, nine arrows, nine values. Pick one to see what it means on your land."), reviews, faq.replace('class="sec alt"', 'class="sec"'), estimate_section("index")])
+    return doc("", HOME_TITLE, HOME_DESC, body, schema("", HOME_TITLE, HOME_DESC, [("", "Home")], [faq_schema("", hf)]), og="assets/og/index.jpg")
 
 # ---------------------------------------------------------------- write everything
 def main():

@@ -136,40 +136,29 @@
 
   /* ---------- copy-to-clipboard for phone numbers on preview hosts ---------- */
 
-  /* ---------- home: fly through the bowl of the 9 ---------- */
-  var portal = $('#portal');
-  if (portal && !reduce) {
-    var pv = $('#pv'), pm = $('#pm'), pmWrap = $('#pm-wrap'), hCopy = $('#hero-copy'), cue = $('.cue', portal), stage = $('#stage'), pbg = $('.pv-bg', portal);
-    var C, B, rin, vh, vw, pimg = $('img', pv);
-    var FOCUS = { x: 0.52, y: 0.4 }; // where the mulcher cab sits in the cover-fitted photo
-    function pmeasure() { vh = innerHeight; vw = innerWidth; var r = pmWrap.getBoundingClientRect(); C = { x: r.left + r.width / 2, y: r.top + r.height / 2 }; B = { x: r.left + r.width * 0.5308, y: r.top + r.height * 0.2886 }; rin = r.width * 134.74 / 320; pframe(); }
-    function pframe() {
-      if (hCopy && hCopy.contains(d.activeElement)) return; // hold still while someone types their email
-      var pr = portal.getBoundingClientRect(), p = c01(-pr.top / Math.max(1, portal.offsetHeight - vh));
-      var k = c01(p / 0.68), sc = 1 + 23 * k * k * k;
-      pm.style.transform = 'scale(' + sc.toFixed(4) + ')';
-      pm.style.opacity = (1 - c01((sc - 5) / 6)).toFixed(3); pmWrap.style.setProperty('--halo', (1 - c01(k * 4)).toFixed(3));
-      var cx = B.x + (C.x - B.x) * sc, cy = B.y + (C.y - B.y) * sc, R = rin * sc;
-      pv.style.clipPath = 'circle(' + R.toFixed(1) + 'px at ' + cx.toFixed(1) + 'px ' + cy.toFixed(1) + 'px)';
-      pv.style.setProperty('--dim', (1 - 0.75 * k).toFixed(3));
-      if (pimg) {
-        // keep the machine framed inside the bowl, then let the photo settle to full frame as we fly through
-        var zf = 1.04 + (vw < 700 ? 0.1 : 0.22) * p, cx0 = vw / 2, cy0 = vh / 2, Tx = vw * FOCUS.x, Ty = vh * FOCUS.y, sc0 = 1.2, tx0 = 0, ty0 = 0;
-        for (var it = 0; it < 3; it++) { tx0 = B.x - cx0 - sc0 * (Tx - cx0); ty0 = B.y - cy0 - sc0 * (Ty - cy0); sc0 = Math.max(zf, 1.02 + 2 * Math.max(Math.abs(tx0) / vw, Math.abs(ty0) / vh)); }
-        var e = 1 - c01(k * 1.15), tx = tx0 * e, ty = ty0 * e, ss = Math.max(zf, 1.02 + 2 * Math.max(Math.abs(tx) / vw, Math.abs(ty) / vh));
-        ss = ss + (sc0 - ss) * e * 0; pimg.style.transform = 'translate(' + tx.toFixed(1) + 'px,' + ty.toFixed(1) + 'px) scale(' + (e > 0 ? Math.max(ss, zf) : zf).toFixed(4) + ')';
-      }
-      if (pbg) pbg.style.setProperty('--zb', (1.08 + 0.1 * p).toFixed(4));
-      var ho = 1 - c01(p / 0.16);
-      hCopy.style.opacity = ho.toFixed(3); hCopy.style.transform = 'translateY(' + (-44 * (1 - ho)).toFixed(1) + 'px)';
-      hCopy.style.visibility = ho < 0.02 ? 'hidden' : 'visible'; if (cue) cue.style.opacity = ho.toFixed(3);
-      var so = c01((p - 0.7) / 0.15); stage.style.opacity = so.toFixed(3); stage.classList.toggle('is-on', so > 0.5);
-      stage.style.transform = 'translateY(' + (26 * (1 - so)).toFixed(1) + 'px)';
+  /* ---------- home: the 9 Arrow emblem rolls in like a wheel, then rolls away as you scroll ---------- */
+  var hh = $('#hero-home');
+  if (hh) {
+    var roll = $('#em-roll'), intro = $('#em-intro');
+    var radius = function () { return Math.max(40, roll.offsetWidth * 0.4); }; // the ring of the mark is 80% of the box
+    if (!reduce && intro.animate) {
+      var D = Math.min(innerWidth * 0.42, 620), A = D / radius() * 180 / Math.PI;
+      intro.animate([{ transform: 'translateX(' + D + 'px) rotate(' + A + 'deg)', opacity: 0 }, { opacity: 1, offset: 0.25 }, { transform: 'translateX(0) rotate(0deg)', opacity: 1 }],
+        { duration: 1700, easing: 'cubic-bezier(.17,.84,.26,1)', fill: 'both' });
+      scrollers.push(function () {
+        var y = Math.max(0, scrollY), h = hh.offsetHeight; if (y > h * 1.3) return;
+        var dx = y * (innerWidth < 900 ? 0.75 : 0.6), ang = dx / radius() * 180 / Math.PI;
+        roll.style.transform = 'translate(' + dx.toFixed(1) + 'px,' + (y * 0.18).toFixed(1) + 'px) rotate(' + ang.toFixed(2) + 'deg)';
+        roll.style.setProperty('--a', ang.toFixed(2) + 'deg');
+      });
     }
-    portal.classList.add('is-live');
-    addEventListener('resize', pmeasure); addEventListener('load', pmeasure); pmeasure();
-    scrollers.push(pframe);
   }
+
+  /* ---------- photo band drifts slower than the page ---------- */
+  var pars = $$('[data-par]');
+  if (pars.length && !reduce) scrollers.push(function () {
+    pars.forEach(function (el) { var r = el.parentNode.getBoundingClientRect(); if (r.bottom < -100 || r.top > innerHeight + 100) return; el.style.transform = 'translate3d(0,' + ((r.top + r.height / 2 - innerHeight / 2) * -0.12).toFixed(1) + 'px,0)'; });
+  });
 
   /* ---------- home: services track scrolls sideways on desktop ---------- */
   var svc = $('#svc-track-sec');
@@ -242,12 +231,13 @@
   });
 
   /* ---------- header: clear over the photo, solid once you scroll past it ---------- */
-  var hdr = $('.hdr'), heroEl = $('.hero-photo') || $('#portal');
+  var hdr = $('.hdr'), heroEl = $('.hero-photo') || $('#hero-home');
   scrollers.push(function () {
     if (!hdr) return;
     var lim = 8;
-    if (heroEl && d.body.classList.contains('over-hero')) lim = heroEl.id === 'portal' ? heroEl.offsetTop + heroEl.offsetHeight - innerHeight - 4 : heroEl.offsetTop + heroEl.offsetHeight - hdr.offsetHeight - 4;
+    if (heroEl && d.body.classList.contains('over-hero')) lim = heroEl.offsetTop + heroEl.offsetHeight - hdr.offsetHeight - 4;
     hdr.classList.toggle('is-scrolled', scrollY > lim);
+    hdr.classList.toggle('is-tinted', scrollY > 8 && scrollY <= lim);
     if (mbar) mbar.classList.toggle('is-top', !!heroEl && d.body.classList.contains('over-hero') && scrollY < innerHeight * 0.55);
   });
 

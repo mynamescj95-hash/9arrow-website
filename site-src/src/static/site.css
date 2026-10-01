@@ -791,3 +791,43 @@ body.over-hero .hdr.is-scrolled{background:rgba(255,255,255,.97);border-bottom-c
   .hero-copy h1{font-size:clamp(2.7rem,13vw,4.4rem)}
 }
 .portal.is-live .pv img{transform-origin:50% 50%;will-change:transform}
+
+/* ===================== home hero v5: rolling emblem on designed green ===================== */
+.hero-home{position:relative;isolation:isolate;overflow:hidden;background:#10260A;min-height:clamp(600px,100svh,980px);display:grid;align-content:center;padding:calc(var(--hdr) + 28px) 0 clamp(64px,9vh,96px)}
+.hh-bg{position:absolute;inset:0;z-index:-1;overflow:hidden;background:linear-gradient(155deg,#1D3D12 0%,#163209 38%,#10260A 70%,#0B1C06 100%)}
+.hh-bg::after{content:"";position:absolute;inset:0;background:radial-gradient(130% 90% at 0% 100%,rgba(5,12,3,.55),transparent 55%),radial-gradient(90% 70% at 100% 0%,rgba(5,12,3,.35),transparent 60%)}
+.hero-home .pv-topo{transform:none}
+.hero-home .pv-glow{left:75%;top:calc(50% + var(--hdr) / 2)}
+.hero-home .hero-copy{position:relative;inset:auto;padding:0;display:block;z-index:2}
+.em-slot{position:absolute;left:75%;top:calc(50% + var(--hdr) / 2);width:min(34vw,470px,62svh);aspect-ratio:1;transform:translate(-50%,-50%);z-index:1;pointer-events:none}
+.em-roll,.em-intro{position:absolute;inset:0;will-change:transform}
+.em-dial{position:absolute;inset:0;width:100%;height:100%;color:var(--brass-2);transform:rotate(calc(var(--a,0deg) * -1.6));overflow:visible}
+.em-mark{position:absolute;left:10%;top:10%;width:80%;height:80%;overflow:visible;filter:drop-shadow(0 18px 36px rgba(0,0,0,.35))}
+.hero-home .cue{position:absolute;left:50%;bottom:clamp(14px,3vh,28px);transform:translateX(-50%);z-index:2;color:rgba(255,255,255,.75);text-decoration:none}
+.hero-home .cue:hover{color:#fff}
+.js .hero-home .hc-in>*{animation:hcIn .9s cubic-bezier(.2,.8,.2,1) both}
+.js .hero-home .hc-in>:nth-child(2){animation-delay:.08s}
+.js .hero-home .hc-in>:nth-child(3){animation-delay:.18s}
+.js .hero-home .hc-in>:nth-child(4){animation-delay:.28s}
+@keyframes hcIn{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion: reduce){.js .hero-home .hc-in>*{animation:none}}
+@media (max-width:900px){
+  .hero-home{--em:min(38vw,150px,20svh);min-height:100svh;padding:calc(var(--hdr) + 12px) 0 36px}
+  .em-slot{position:relative;left:auto;top:auto;transform:none;width:var(--em);justify-self:center;margin-bottom:clamp(18px,3svh,30px)}
+  .hero-home .pv-glow{left:50%;top:30%;width:130vw}
+  .hero-home .cue{display:none}
+  .hh-bg::after{background:linear-gradient(0deg,rgba(5,12,3,.55) 0%,transparent 50%)}
+}
+
+/* full-bleed statement band on a real job photo */
+.band{position:relative;isolation:isolate;overflow:hidden;min-height:clamp(440px,74svh,720px);display:grid;align-items:end;color:#fff;background:var(--night)}
+.band-media{position:absolute;left:0;right:0;top:-12%;bottom:-12%;z-index:-2;will-change:transform}
+.band-media img{width:100%;height:100%;object-fit:cover;object-position:60% 55%}
+.band::before{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(90deg,rgba(10,14,8,.8) 0%,rgba(10,14,8,.5) 42%,rgba(10,14,8,.05) 75%),linear-gradient(0deg,rgba(10,14,8,.55),transparent 45%)}
+.band-in{padding-block:clamp(56px,9vw,110px);display:grid;gap:18px;justify-items:start}
+.band-h{font-size:clamp(2.6rem,6.4vw,5.6rem);color:#fff;max-width:12ch}
+.band-in p{font-size:1.15rem;line-height:1.5;max-width:44ch;color:rgba(255,255,255,.9)}
+@media (max-width:760px){.band::before{background:linear-gradient(0deg,rgba(10,14,8,.88) 0%,rgba(10,14,8,.55) 50%,rgba(10,14,8,.15) 100%)}.band-h{font-size:clamp(2.4rem,12vw,3.6rem)}}
+body.over-hero .hdr.is-tinted{background:rgba(13,30,8,.9);backdrop-filter:saturate(1.1) blur(10px);border-bottom-color:rgba(255,255,255,.08)}
+body.over-hero .hdr.is-tinted::before{display:none}
+.band>.wrap{width:100%}
