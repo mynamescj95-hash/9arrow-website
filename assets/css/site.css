@@ -1047,3 +1047,24 @@ body.over-hero .hdr.is-tinted::before{display:none}
 .founders .f-main,.founders .f-inset{background:#C9C4B6}
 @media (prefers-reduced-motion:reduce){.js .founders .f-main,.js .founders .f-inset{opacity:1;transform:none;transition:none}.js .founders .f-main img{transform:none}}
 .intro{border-bottom:0!important}.svx-sec .svx-panel,.svx-sec .svx-tab:not([aria-selected="true"]){background:#fff}
+
+/* estimate form: reads as a raised, tactile form card */
+.est-card{position:relative;border:0;border-radius:10px;padding:0;overflow:visible;
+  box-shadow:0 1px 0 rgba(255,255,255,.9) inset,0 2px 0 #D9DDD3,0 6px 0 #C9CEC1,0 30px 60px -10px rgba(0,0,0,.45),0 0 0 1px rgba(14,16,13,.08);
+  transform:perspective(1400px) rotateY(-2.5deg) rotateX(1.5deg);transition:transform .5s cubic-bezier(.2,.8,.2,1),box-shadow .5s}
+.est-card:hover,.est-card:focus-within{transform:perspective(1400px) rotateY(0) rotateX(0) translateY(-4px)}
+.est-card::before{content:"Free estimate";position:absolute;top:-14px;left:28px;z-index:2;padding:7px 12px;border-radius:4px;background:var(--brass-2);color:var(--ink);font:700 .76rem/1 var(--f-body);letter-spacing:.08em;text-transform:uppercase;box-shadow:0 6px 14px rgba(0,0,0,.25)}
+.est-card .est-form{padding:clamp(28px,3.2vw,38px) clamp(20px,3vw,34px) clamp(22px,3vw,30px);border-radius:10px;background:linear-gradient(180deg,#fff 0%,#FAFBF8 100%);border-top:5px solid var(--forest)}
+.est-card .tile-in{background:#fff;border-color:#D3D8CC;box-shadow:0 2px 0 #E2E6DC,0 3px 8px rgba(14,16,13,.05);transition:border-color .15s,background .15s,transform .15s,box-shadow .15s}
+.est-card .tile-in svg{width:34px;height:34px;padding:6px;border-radius:8px;background:var(--paper);stroke:var(--forest)}
+.est-card .tile-in{grid-template-columns:34px 1fr 18px}
+.est-card .tile:hover .tile-in{transform:translateY(-2px);border-color:var(--forest);box-shadow:0 4px 0 #D3D8CC,0 10px 18px rgba(14,16,13,.1)}
+.est-card .tile input:checked+.tile-in{transform:translateY(1px);box-shadow:0 1px 0 var(--forest),inset 0 0 0 1px var(--forest)}
+.est-card .tile input:checked+.tile-in svg{background:var(--forest);stroke:var(--brass-2)}
+.est-card .btn-main{box-shadow:0 4px 0 #0B1A05,0 10px 20px rgba(14,16,13,.25);transition:transform .12s,box-shadow .12s}
+.est-card .btn-main:hover{transform:translateY(-1px);box-shadow:0 5px 0 #0B1A05,0 14px 24px rgba(14,16,13,.3)}
+.est-card .btn-main:active{transform:translateY(3px);box-shadow:0 1px 0 #0B1A05,0 4px 8px rgba(14,16,13,.2)}
+.est-card .field input,.est-card .field select,.est-card textarea{background:#fff;box-shadow:inset 0 2px 3px rgba(14,16,13,.06)}
+.est-sec.dark .est-card{box-shadow:0 2px 0 #D9DDD3,0 6px 0 #B8BEAE,0 40px 80px -10px rgba(0,0,0,.7),0 0 0 1px rgba(255,255,255,.1),0 0 90px rgba(205,185,107,.12)}
+@media (max-width:960px){.est-card{transform:none}.est-card:hover,.est-card:focus-within{transform:none}}
+@media (prefers-reduced-motion:reduce){.est-card,.est-card:hover{transform:none;transition:none}}
