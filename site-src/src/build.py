@@ -817,22 +817,29 @@ VALUES = [  # meaning in our words; references as listed on 9arrow.com/about-us
     ("Excellence", "We work for a finish we would put our family name on.", "Colossians 3:23-24"),
     ("Diligence", "Steady, careful work from the first pass to the final cleanup.", ""),
 ]
-ARROW = ('<svg class="q-arrow" viewBox="0 0 40 200" aria-hidden="true"><path class="q-head" d="M20 2 L34 30 L24 26 L16 26 L6 30 Z"/>'
-         '<rect class="q-shaft" x="17.5" y="24" width="5" height="138"/>'
-         '<path class="q-fl" d="M17.5 150 L5 168 L5 192 L17.5 176 Z M22.5 150 L35 168 L35 192 L22.5 176 Z"/></svg>')
+ARROW = ('<svg class="q-arrow" viewBox="0 0 220 28" aria-hidden="true" focusable="false">'
+         '<path class="q-fl" d="M4 2 L34 12.6 L22 12.6 L0 2 Z M4 26 L34 15.4 L22 15.4 L0 26 Z"/>'
+         '<rect class="q-shaft" x="16" y="12.6" width="184" height="2.8"/>'
+         '<path class="q-head" d="M220 14 L193 3 L199 14 L193 25 Z"/></svg>')
 
-def quiver(title="Nine children. Nine values.", lede=None, dark=False):
-    lede = lede or 'The name comes from Psalm 127:4: "As arrows are in the hand of a mighty man; so are children of the youth." Pick an arrow to see what each value means on the job.'
-    tabs = "".join(f'<button class="q-tab" type="button" role="tab" id="qt-{i}" aria-controls="qp-{i}" aria-selected="{"true" if i == 0 else "false"}" tabindex="{0 if i == 0 else -1}">{ARROW}<span>{esc(n)}</span></button>' for i, (n, _, _) in enumerate(VALUES))
+def quiver(title="Nine children. Nine values.", lede=None, dark=False, kicker=None):
+    lede = lede or 'The name comes from Psalm 127:4: "As arrows are in the hand of a mighty man; so are children of the youth." Each value is something you should see on your job.'
+    rows = "".join(f'<li><button class="q-row" type="button" data-i="{i}" aria-pressed="false" aria-controls="q-stage"><span class="q-num">{i + 1:02d}</span>{ARROW}<span class="q-word">{esc(n)}</span></button></li>'
+                   for i, (n, _, _) in enumerate(VALUES))
     def panel(i, n, t, r):
         ref = f'<p class="q-ref">{esc(r)}</p>' if r else ""
-        hid = "" if i == 0 else " hidden"
-        return f'<div class="q-panel" role="tabpanel" id="qp-{i}" aria-labelledby="qt-{i}"{hid}><p class="q-n">Value {i + 1} of 9</p><h3 class="q-name">{esc(n)}</h3><p class="q-line">{esc(t)}</p>{ref}</div>'
-    panels = "".join(panel(i, n, t, r) for i, (n, t, r) in enumerate(VALUES))
+        return f'<div class="q-panel" data-panel="{i}" hidden><p class="q-n">Value {i + 1:02d} of 09</p><h3 class="q-name">{esc(n)}</h3><p class="q-line">{esc(t)}</p>{ref}</div>'
+    intro = ('<div class="q-panel q-intro" data-panel="intro"><p class="q-n">Nine arrows</p><h3 class="q-name">One standard.</h3>'
+             '<p class="q-line">Every value on this list is something you should see on your job, from the first call to the final cleanup.</p>'
+             '<p class="q-hint"><span class="h-hover">Point at an arrow to read it. Click one to keep it open.</span><span class="h-touch">Tap an arrow to read it.</span></p></div>')
+    panels = intro + "".join(panel(i, n, t, r) for i, (n, t, r) in enumerate(VALUES))
     cls = " dark topo" if dark else " alt topo"
-    return f"""<section class="sec quiver-sec{cls}" data-quiver><div class="wrap q-grid">
-<div class="q-copy"><h2 class="h-lg">{esc(title)}</h2><p class="lede mt-s">{esc(lede)}</p><div class="q-panels">{panels}</div></div>
-<div class="q-rack" role="tablist" aria-label="Our nine core values">{tabs}</div></div></section>"""
+    k = f'<p class="kicker">{esc(kicker)}</p>' if kicker else ""
+    return f"""<section class="sec quiver-sec{cls}" data-quiver aria-labelledby="q-h"><div class="wrap">
+<div class="q-head">{k}<h2 class="h-lg" id="q-h">{esc(title)}</h2><p class="lede mt-s">{esc(lede)}</p></div>
+<p class="q-hint-m">Tap an arrow to read it.</p>
+<div class="q-grid"><ul class="q-rack" aria-label="Our nine core values">{rows}</ul>
+<div class="q-stage" id="q-stage" aria-live="polite">{panels}</div></div></div></section>"""
 
 def founders(text_html, cta=True):
     link = f'<p><a class="arrow-link" href="{url("about-us")}">Our story and values</a></p>' if cta else ""
@@ -1085,7 +1092,7 @@ def render_home():
             + "".join(f'<figure class="review">{STARS}<blockquote><q>{esc(REVIEWS[k][0])}</q></blockquote><figcaption class="by">{esc(REVIEWS[k][1])}</figcaption></figure>' for k in ("ashley", "travis", "zachp", "kenny")))
     reviews = f'<section class="sec alt"><div class="wrap"><div class="sec-head"><h2 class="h-lg">Five stars from the people we clear for.</h2></div><div class="reviews">{revs}</div></div></section>'
     faq = faq_block({"faqs": hf}, slug, "Straight answers", "What landowners and developers ask us most.")
-    body = "\n".join([hero, intro, services_explorer(HOME_TRACK), lens(LENS_PAIRS), serve, areas, fam, quiver("What we stand on", "Nine children, nine arrows, nine values. Pick one to see what it means on your land."), reviews, faq.replace('class="sec alt"', 'class="sec"'), estimate_section("index")])
+    body = "\n".join([hero, intro, services_explorer(HOME_TRACK), lens(LENS_PAIRS), serve, areas, fam, quiver("What we stand on.", "Nine children, nine arrows, nine values. They decide how we talk to you about price, how we treat your land and when we call a job finished."), reviews, faq.replace('class="sec alt"', 'class="sec"'), estimate_section("index")])
     return doc("", HOME_TITLE, HOME_DESC, body, schema("", HOME_TITLE, HOME_DESC, [("", "Home")], [faq_schema("", hf)]), og="assets/og/index.jpg")
 
 # ---------------------------------------------------------------- write everything
