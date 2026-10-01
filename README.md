@@ -9,17 +9,21 @@ Static site for 9 Arrow Land Service (Spring Branch, TX), hosted on Netlify. No 
   - `/about-us`, `/our-work`, `/faq`, `/contact`, `/get-an-estimate`, ROW safety manual, legal pages
   - `/blog` plus 8 guides
 - `assets/img`: every image as WebP at 480 / 960 / 1600 px (responsive `srcset`). Photos of John and Camille and the
-  Our Work gallery are real; scene photography on service and area pages is generated, documentary-style, unbranded.
-- `assets/video`: the homepage "fly through the 9" clip (960 and 1600 px versions).
+  Our Work gallery are real, and so are the hero photos on the home, service and about pages. Some area pages
+  use generated Hill Country landscapes (documentary-style, unbranded).
 - `assets/og`: a share image for every page.
 - `netlify.toml`, `netlify/functions/submission-created.js`: Netlify Forms to Monday.com.
 - `sitemap.xml`, `robots.txt` (AI search crawlers allowed), `llms.txt`.
 - `site-src/`: the content and generator that produced the pages.
 
-## Estimate form → Monday
-Every page links to one Netlify form, `estimate-request` (4 steps: work, land size, location and timing, contact).
+## Estimate forms → Monday
+Two Netlify forms, one flow:
+- `estimate-start`: email only. It sits in the home page hero and in the pull-out panel that opens from every
+  "Get an estimate" button. After the email, the visitor lands on `/get-an-estimate` with the email already filled in.
+- `estimate-request`: the 4-step form on `/get-an-estimate` (work, land size, location and timing, contact).
 After each verified submission, `submission-created.js` creates an item on the Monday leads board and posts every field
-(including UTMs, gclid, landing page) as an update on that item.
+(including UTMs, gclid, landing page) as an update on that item. Email-only starts come in as "Email lead: ..." items,
+so someone who stops after the email is still a lead. Nothing reaches Monday until the variables below are set.
 
 Set these in Netlify > Site settings > Environment variables, then redeploy:
 
@@ -28,11 +32,13 @@ Set these in Netlify > Site settings > Environment variables, then redeploy:
 | `MONDAY_API_TOKEN` | Monday personal API token |
 | `MONDAY_BOARD_ID` | Board ID from the board URL |
 | `MONDAY_GROUP_ID` | Optional: group for new leads |
+| `MONDAY_START_GROUP_ID` | Optional: separate group for email-only starts |
 | `MONDAY_COLUMNS` | Optional JSON map of form field to Monday column id and type (example in the function) |
 
 Form fields: `services, acreage, property_location, timeline, client_type, name, phone, email, contact_preference, notes,
 page_variant, landing_page, referrer, utm_source, utm_medium, utm_campaign, utm_term, utm_content, gclid, fbclid`.
-A `generate_lead` event is pushed to `dataLayer` on success for GA4 / Google Ads via GTM.
+`dataLayer` events for GA4 / Google Ads via GTM: `estimate_drawer_open`, `estimate_start` (email captured) and
+`generate_lead` (full form sent).
 
 ## Editing content and adding blog posts
 Content lives in `site-src/content`:

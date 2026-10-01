@@ -13,7 +13,7 @@ OUT = os.path.join(ROOT, "dist" if MODE == "prod" else "preview")
 SITE = "https://www.9arrow.com"
 PHONE, TEL, EMAIL = "(210) 247-8410", "+12102478410", "john@9arrow.com"
 TODAY = "2026-09-30"
-FONTS = "https://fonts.googleapis.com/css2?family=Libre+Franklin:wght@400;500;600;700&family=Zilla+Slab:wght@500;600;700&display=swap"
+FONTS = "https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700;800&family=Libre+Franklin:wght@400;500;600;700&family=Zilla+Slab:wght@500;600;700&display=swap"
 
 PAGES = {}
 for f in glob.glob(os.path.join(ROOT, "content/pages/*.json")):
@@ -50,33 +50,36 @@ def rich(s):
     return LINK.sub(rep, s)
 
 # ---------------------------------------------------------------- images
-PHOTO = {  # content photo keys -> image keys (generated scenes; real photos only where noted)
-    "mulcher-dust": "g00", "mulcher-woods": "g03", "mulcher-sunrays": "g03", "mulcher-head": "g01", "mulcher-brush": "g04",
-    "mulcher-blue": "g29", "mulcher-red-field": "g14", "red-mulcher-truck": "g14", "fleet": "g14", "crew-sharpening": "g22",
-    "chainsaw": "g23", "powerline-corridor": "g08", "survey-cut": "g07", "cleared-lane": "g07", "cleared-trail": "g02",
-    "cleared-hillside": "g06", "cleared-oaks": "g02", "cleared-wimberley": "g27", "cleared-pasture-trees": "g05",
+PHOTO = {  # content photo keys -> image keys. Real 9 Arrow photography first; generated scenes where no real photo fits.
+    "mulcher-dust": "r-hero", "mulcher-woods": "r-haze", "mulcher-sunrays": "r-haze", "mulcher-head": "r-head", "mulcher-brush": "r-yellow-2",
+    "mulcher-blue": "r-blue", "mulcher-red-field": "r-tire", "red-mulcher-truck": "r-red-truck", "fleet": "r-fleet", "crew-sharpening": "r-sharpen",
+    "chainsaw": "g23", "powerline-corridor": "g08", "survey-cut": "r-trail-cat", "cleared-lane": "r-trail", "cleared-trail": "r-trail",
+    "cleared-hillside": "g06", "cleared-oaks": "r-oaks", "cleared-wimberley": "g27", "cleared-pasture-trees": "g05",
     "winter-cleared": "g30", "mowed-pasture": "g12", "mowed-field": "g12", "rock-surface": "g10", "road-finished": "g09",
     "road-grade": "g09", "road-long": "g09", "road-trees": "g09", "trench": "g11", "site-pad": "g06", "demo-cleanup": "g23",
-    "mulch-hand": "g13", "mulch-texture": "g13", "john-machine": "john", "owners": "owners",
+    "mulch-hand": "r-mulch", "mulch-texture": "r-mulch", "john-machine": "r-john-machine", "owners": "r-owners",
     "trail-before": "trail-before", "trail-after": "trail-after",
 }
-FALLBACK = ["g02", "g13", "g05", "g19", "g09", "g22", "g01", "g30", "g12", "g27"]
+FALLBACK = ["r-blue", "r-tire", "r-yellow-3", "r-sharpen", "r-trail", "r-head-tall", "g02", "g05", "g19", "r-fleet", "g13", "r-operator"]
 HERO = {
-    "index": "g00", "forestry-mulching-and-land-clearing": "g01", "land-clearing": "g02", "cedar-removal": "g30",
-    "brush-removal": "g29", "ranch-pasture-clearing": "g14", "site-prep": "g06", "precision-line-survey-clearing": "g07",
+    "index": "r-hero", "forestry-mulching-and-land-clearing": "r-head", "land-clearing": "r-yellow", "cedar-removal": "g03",
+    "brush-removal": "r-yellow-2", "ranch-pasture-clearing": "r-yellow-3", "site-prep": "g06", "precision-line-survey-clearing": "r-trail-cat",
     "right-of-way-clearing": "g08", "roads-and-access-preparation": "g09", "rock-crushing": "g10",
-    "site-work-light-utility-installation": "g11", "grounds-maintenance": "g12", "services": "g00",
+    "site-work-light-utility-installation": "g11", "grounds-maintenance": "g12", "services": "r-fleet",
     "land-developers": "g15", "commercial-real-estate": "g21", "ranchers": "g05", "energy-utilities": "g17", "solar": "g16",
-    "about-us": "owners", "our-work": "w-fleet", "contact": "g19", "get-an-estimate": "g06", "faq": "g13",
-    "electrical-right-of-way-row-safety-manual-texas": "g08", "service-areas": "g28", "blog": "g02",
-    "land-clearing-spring-branch-tx": "g18", "land-clearing-bulverde-tx": "g19", "land-clearing-canyon-lake-tx": "g20",
+    "about-us": "r-owners-gold", "our-work": "r-fleet", "contact": "r-red-truck", "get-an-estimate": "r-trail", "faq": "r-mulch",
+    "electrical-right-of-way-row-safety-manual-texas": "g08", "service-areas": "g28", "blog": "r-trail",
+    "land-clearing-spring-branch-tx": "g18", "land-clearing-bulverde-tx": "r-oaks", "land-clearing-canyon-lake-tx": "g20",
     "land-clearing-new-braunfels-tx": "g15", "land-clearing-boerne-tx": "g27", "land-clearing-blanco-tx": "g26",
     "land-clearing-wimberley-tx": "g24", "land-clearing-kerrville-tx": "g25", "land-clearing-san-antonio-tx": "g21",
-    "land-clearing-comal-county": "g28", "forestry-mulching-spring-branch-tx": "g00", "forestry-mulching-bulverde-tx": "g02",
-    "forestry-mulching-canyon-lake-tx": "g01", "forestry-mulching-new-braunfels-tx": "g14",
-    "forestry-mulching-san-antonio-tx": "g04", "forestry-mulching-texas-hill-country": "g03",
+    "land-clearing-comal-county": "g28", "forestry-mulching-spring-branch-tx": "r-haze", "forestry-mulching-bulverde-tx": "r-blue",
+    "forestry-mulching-canyon-lake-tx": "r-head-tall", "forestry-mulching-new-braunfels-tx": "r-tire",
+    "forestry-mulching-san-antonio-tx": "r-yellow-head", "forestry-mulching-texas-hill-country": "r-trail-cat",
     "cedar-removal-spring-branch-tx": "g03", "cedar-removal-boerne-tx": "g30",
 }
+# focal point for wide crops of tall photos (object-position)
+FOCUS = {"r-owners-gold": "50% 30%", "r-haze": "50% 55%", "r-trail-cat": "50% 60%", "r-head-tall": "50% 45%", "r-yellow-head": "50% 50%",
+         "r-mulch": "50% 60%", "r-owners": "50% 18%", "r-john-machine": "50% 30%", "r-operator": "50% 35%"}
 
 def img(key, sizes="(max-width: 900px) 100vw, 50vw", eager=False, alt=None, cls=""):
     m = IMGS[key]; base = f"assets/img/{key}"
@@ -84,6 +87,7 @@ def img(key, sizes="(max-width: 900px) 100vw, 50vw", eager=False, alt=None, cls=
     mid = m["sizes"][1] if len(m["sizes"]) > 1 else m["sizes"][0]
     load = 'fetchpriority="high"' if eager else 'loading="lazy"'
     c = f' class="{cls}"' if cls else ""
+    if key in FOCUS: c += f' style="object-position:{FOCUS[key]}"'
     return (f'<img src="{base}-{mid}.webp" srcset="{srcset}" sizes="{sizes}" width="{m["w"]}" height="{m["h"]}" '
             f'alt="{esc(m["alt"] if alt is None else alt)}" {load} decoding="async"{c}>')
 
@@ -197,7 +201,8 @@ def header(active=""):
     svc = panel("p-svc", SERVICES, 2, ("services", "All services"))
     aud = panel("p-aud", [(s, n, "") for s, n in AUDIENCES], 1)
     area = panel("p-area", [(s, n, "") for s, n in AREA_PAGES], 2, ("service-areas", "All service areas and map"))
-    lock = '<img src="assets/logo/lockup-dark.svg" alt="9 Arrow Land Service" width="150" height="54">'
+    lock = ('<img class="logo-d" src="assets/logo/lockup-dark.svg" alt="9 Arrow Land Service" width="150" height="54">'
+            '<img class="logo-l" src="assets/logo/lockup-light.svg" alt="" width="150" height="54">')
     return f"""<header class="hdr"><div class="wrap hdr-in">
 <a class="hdr-logo" href="{url('')}" aria-label="9 Arrow Land Service home">{lock}</a>
 <nav class="nav" aria-label="Main">
@@ -207,7 +212,7 @@ def header(active=""):
 <a class="nav-top nav-plain" href="{url('about-us')}">About</a><a class="nav-top nav-plain" href="{url('blog')}">Blog</a>
 </nav>
 <a class="hdr-phone" href="tel:{TEL}">{PHONE}</a>
-<a class="btn btn-main hdr-cta" href="{est_url(active)}">Get an estimate</a>
+<a class="btn btn-main hdr-cta" href="{est_url(active)}" data-drawer>Get an estimate</a>
 <a class="call-btn" href="tel:{TEL}" aria-label="Call 9 Arrow at {PHONE}">{I['phone']}</a>
 <button class="menu-btn" id="menu-btn" type="button" aria-expanded="false" aria-controls="sheet" aria-label="Open menu">{I['menu']}</button>
 </div></header>
@@ -220,7 +225,7 @@ def header(active=""):
 <a class="solo" href="{url('our-work')}">Our work</a><a class="solo" href="{url('about-us')}">About the family</a>
 <a class="solo" href="{url('blog')}">Blog &amp; guides</a><a class="solo" href="{url('faq')}">FAQ</a><a class="solo" href="{url('contact')}">Contact</a>
 </div>
-<div class="sheet-foot"><a class="btn btn-line" href="tel:{TEL}">{I['phone']} Call</a><a class="btn btn-main" href="{est_url(active)}">Get an estimate</a></div>
+<div class="sheet-foot"><a class="btn btn-line" href="tel:{TEL}">{I['phone']} Call</a><a class="btn btn-main" href="{est_url(active)}" data-drawer>Get an estimate</a></div>
 </div>"""
 
 def footer():
@@ -243,8 +248,27 @@ def footer():
 <a href="https://www.linkedin.com/company/9-arrow/" rel="noopener">LinkedIn</a><a href="{url('privacy-policy')}">Privacy</a><a href="{url('terms-and-conditions')}">Terms</a></p></div>
 </div></footer>"""
 
+def drawer(slug=""):
+    n = need_for(slug)
+    hid = "".join(f'<input type="hidden" name="{k}">' for k in ("landing_page", "referrer", "utm_source", "utm_medium", "utm_campaign", "utm_term", "utm_content", "gclid", "fbclid"))
+    return f"""<div class="drawer" id="drawer" role="dialog" aria-modal="true" aria-labelledby="dr-h" inert>
+<div class="drawer-scrim" data-close></div>
+<div class="drawer-panel"><div class="drawer-media">{img("r-hero", "(max-width: 700px) 100vw, 480px", alt="")}<button class="drawer-x" type="button" data-close aria-label="Close">{I['close']}</button></div>
+<div class="drawer-body"><ol class="dr-steps" aria-label="How it works"><li class="on"><i>1</i>Your email</li><li><i>2</i>Your land</li><li><i>3</i>Discovery call</li></ol><h2 id="dr-h">Get an estimate for your land</h2>
+<p>Start with your email. Next, a few quick questions about the property so we can come prepared to the discovery call.</p>
+<form class="start-form" id="start-form" name="estimate-start" method="POST" action="/get-an-estimate" data-netlify="true" netlify-honeypot="bot-field" novalidate>
+<input type="hidden" name="form-name" value="estimate-start"><input type="hidden" name="need" value="{n}">{hid}
+<p class="hp" aria-hidden="true"><label>Leave this empty <input name="bot-field" tabindex="-1" autocomplete="off"></label></p>
+<label class="vh" for="dr-email">Email</label>
+<div class="start-row"><input id="dr-email" name="email" type="email" inputmode="email" autocomplete="email" placeholder="you@email.com" required>
+<button class="btn btn-main" type="submit">Continue</button></div>
+<p class="ferr" role="alert" hidden></p></form>
+<p class="small">Free to ask. Takes about two minutes.</p>
+<ul class="drawer-list"><li>Priced by the acre or by the day</li><li>Family-owned in Spring Branch</li><li>5-star Google reviews</li></ul>
+<p class="small">Rather talk? Call <a href="tel:{TEL}">{PHONE}</a></p></div></div></div>"""
+
 def mbar(slug=""):
-    return f'<div class="mbar"><a class="btn btn-line" href="tel:{TEL}">{I["phone"]} Call</a><a class="btn btn-main" href="{est_url(slug)}">Get an estimate</a></div>'
+    return f'<div class="mbar"><a class="btn btn-line" href="tel:{TEL}">{I["phone"]} Call</a><a class="btn btn-main" href="{est_url(slug)}" data-drawer>Get an estimate</a></div>'
 
 def crumbs(items):
     li = "".join(f'<li><a href="{url(s)}">{esc(n)}</a></li>' if s is not None else f'<li aria-current="page">{esc(n)}</li>' for s, n in items)
@@ -259,7 +283,7 @@ ENTITY = ("9 Arrow Land Service is a family-owned land clearing company based in
 def org():
     return {"@type": "LocalBusiness", "@id": ORG_ID, "name": "9 Arrow Land Service", "alternateName": ["9 Arrow", "Nine Arrow Land Service"],
             "description": ENTITY, "slogan": "It does not get better.", "url": SITE + "/", "telephone": TEL, "email": EMAIL,
-            "logo": SITE + "/assets/logo/lockup-dark.svg", "image": SITE + "/" + img_src("g00", 1600),
+            "logo": SITE + "/assets/logo/lockup-dark.svg", "image": SITE + "/" + img_src("r-hero", 1600),
             "address": {"@type": "PostalAddress", "addressLocality": "Spring Branch", "addressRegion": "TX", "addressCountry": "US"},
             "founder": [{"@type": "Person", "name": "John Wheelock"}, {"@type": "Person", "name": "Camille Wheelock"}],
             "areaServed": [{"@type": "AdministrativeArea", "name": "Central Texas"}, {"@type": "AdministrativeArea", "name": "Texas Hill Country"},
@@ -292,7 +316,7 @@ def doc(slug, title, desc, body, sch, og=None, hero_preload=None, noindex=False)
 <meta name="description" content="{esc(desc)}">
 <link rel="canonical" href="{canon(slug)}">
 <meta name="robots" content="{robots}">
-<meta name="theme-color" content="#0C1906">
+<meta name="theme-color" content="#121411">
 <meta property="og:type" content="website"><meta property="og:site_name" content="9 Arrow Land Service">
 <meta property="og:title" content="{esc(title)}"><meta property="og:description" content="{esc(desc)}">
 <meta property="og:url" content="{canon(slug)}"><meta property="og:image" content="{SITE}/{og}">
@@ -305,6 +329,7 @@ def doc(slug, title, desc, body, sch, og=None, hero_preload=None, noindex=False)
 <link rel="stylesheet" href="assets/css/site.css">
 {pre}
 {sch}"""
+    over = ' class="over-hero"' if ('class="hero-photo"' in body or 'class="portal' in body) else ""
     page = f"""{SPRITE}
 <a class="skip" href="#main">Skip to content</a>
 {header(slug)}
@@ -313,26 +338,25 @@ def doc(slug, title, desc, body, sch, og=None, hero_preload=None, noindex=False)
 </main>
 {footer()}
 {mbar(slug)}
+{drawer(slug) if slug != "get-an-estimate" else ""}
 <script src="assets/js/site.js" defer></script>"""
     if MODE == "preview" and slug in ("", "index"):
         head = head.replace(f"<title>{esc(title)}</title>", "<title>9 Arrow Website</title>", 1)
-        return head + "\n" + page  # the preview host wraps the main page itself
-    return f'<!doctype html>\n<html lang="en">\n<head>\n<meta charset="utf-8">\n<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">\n{head}\n</head>\n<body>\n{page}\n</body>\n</html>\n'
+        return '<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">\n' + head + "\n<script>(function(){function a(){document.body.classList.add('over-hero')}if(document.body)a();else document.addEventListener('DOMContentLoaded',a)})()</script>\n" + page  # the preview host wraps the main page itself
+    return f'<!doctype html>\n<html lang="en">\n<head>\n<meta charset="utf-8">\n<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">\n{head}\n</head>\n<body{over}>\n{page}\n</body>\n</html>\n'
 
 # ---------------------------------------------------------------- shared blocks
 def phero(slug, p, crumb_items, img_key, h1=None, lede=None, cta=True, checks=True):
     hl = "".join(f"<li>{rich(h)}</li>" for h in (p.get("highlights") or [])[:4]) if checks else ""
-    btns = (f'<div class="btn-row"><a class="btn btn-main" href="{est_url(slug)}">Get an estimate</a>'
-            f'<a class="btn btn-line" href="tel:{TEL}">{I["phone"]} {PHONE}</a></div>') if cta else ""
-    return f"""<section class="phero topo"><div class="wrap phero-in">
-<div class="phero-copy">{crumbs(crumb_items)}
+    btns = (f'<div class="btn-row"><a class="btn btn-light" href="{est_url(slug)}" data-drawer>Get an estimate</a>'
+            f'<a class="btn btn-ghost-l" href="tel:{TEL}">{I["phone"]} {PHONE}</a></div>') if cta else ""
+    return f"""<section class="hero-photo" data-zoom><div class="hp-media">{img(img_key, "100vw", eager=True)}</div>
+<div class="wrap hp-in"><div class="hp-copy">{crumbs(crumb_items)}
 <h1>{esc(h1 or p['h1'])}</h1>
 <p class="lede">{rich(lede or p['lede'])}</p>
 {btns}
-{f'<ul class="checks">{hl}</ul>' if hl else ''}
-</div>
-<figure class="ringpic">{img(img_key, "(max-width: 900px) 78vw, 500px", eager=True, alt=p.get('hero_alt') if img_key in ('owners', 'john') else None)}<span class="seal">{glyph()}</span></figure>
-</div></section>"""
+{f'<ul class="hp-checks">{hl}</ul>' if hl else ''}
+</div></div></section>"""
 
 def answer(p):
     a = p.get("answer")
@@ -414,9 +438,9 @@ def post_card(s):
 
 def cta_band(slug="", head="Ready to see what your land can become?", text=None):
     text = text or "Book a discovery call. We'll talk through the property and your goals, walk it with you, and price the work by the acre or by the day."
-    return f"""<section class="dark cta-band"><div class="bg">{img("g19", "100vw", alt="")}</div><div class="wrap cta-in">
+    return f"""<section class="dark cta-band"><div class="bg">{img("r-fleet", "100vw", alt="")}</div><div class="wrap cta-in">
 <div><h2>{esc(head)}</h2><p>{esc(text)}</p></div>
-<div class="cta-side"><a class="btn btn-main" href="{est_url(slug)}">Get an estimate</a><a class="cta-phone" href="tel:{TEL}">{PHONE}</a></div>
+<div class="cta-side"><a class="btn btn-main" href="{est_url(slug)}" data-drawer>Get an estimate</a><a class="cta-phone" href="tel:{TEL}">{PHONE}</a></div>
 </div></section>"""
 
 # ---------------------------------------------------------------- map
@@ -554,7 +578,7 @@ def render_standard(slug):
     extra = [service_node(slug, p)] if p["type"] in ("service", "city") else []
     if p.get("faqs"): extra.append(faq_schema(slug, p["faqs"]))
     sch = schema(slug, p["title_tag"], p["meta_description"], [(s if s is not None else slug, n) for s, n in ci], extra)
-    return doc(slug, p["title_tag"], p["meta_description"], "\n".join(b for b in body if b), sch, hero_preload=img_src(hero_key(slug, p), 960))
+    return doc(slug, p["title_tag"], p["meta_description"], "\n".join(b for b in body if b), sch, hero_preload=img_src(hero_key(slug, p), 1600))
 
 def render_services_hub():
     slug = "services"; p = PAGES[slug]
@@ -567,15 +591,15 @@ def render_services_hub():
                         f'<div class="card-b"><h3>{esc(SVC_NAME[s])}</h3><p>{esc(SVC_BLURB[s])}.</p><span class="arrow-link">Learn more</span></div></a>' for s in slugs)
         g += f'<div><h2 class="h-md" style="margin-bottom:18px">{esc(name)}</h2><div class="cards">{cards}</div></div>'
     aud = "".join(f'<a class="chip-link" href="{url(s)}">{esc(n)}</a>' for s, n in AUDIENCES)
-    used = {"g00"}
+    used = {"r-fleet"}
     blocks = sections(p, used)
     ci = [("", "Home"), (None, "Services")]
-    body = [phero(slug, p, ci, "g00"), answer(p),
+    body = [phero(slug, p, ci, "r-fleet"), answer(p),
             f'<section class="sec"><div class="wrap stack">{g}<div><h2 class="h-md" style="margin-bottom:14px">Who we work for</h2><div class="chips">{aud}</div></div></div></section>',
             f'<section class="sec alt"><div class="wrap stack">{"".join(blocks)}</div></section>' if blocks else "",
             faq_block(p, slug), cta_band(slug)]
     sch = schema(slug, p["title_tag"], p["meta_description"], [("", "Home"), (slug, "Services")], [faq_schema(slug, p["faqs"])] if p.get("faqs") else [])
-    return doc(slug, p["title_tag"], p["meta_description"], "\n".join(b for b in body if b), sch, hero_preload=img_src("g00", 960))
+    return doc(slug, p["title_tag"], p["meta_description"], "\n".join(b for b in body if b), sch, hero_preload=img_src("r-fleet", 1600))
 
 def render_areas_hub():
     slug = "service-areas"; p = PAGES[slug]
@@ -595,31 +619,59 @@ def render_areas_hub():
             f'<section class="sec alt"><div class="wrap stack">{"".join(blocks)}</div></section>' if blocks else "",
             faq_block(p, slug), cta_band(slug, "Not sure if you're in range?", "Call us. We work across Central Texas and the Hill Country, and we'll tell you straight if your property is a fit.")]
     sch = schema(slug, p["title_tag"], p["meta_description"], [("", "Home"), (slug, "Service areas")], [faq_schema(slug, p["faqs"])] if p.get("faqs") else [])
-    return doc(slug, p["title_tag"], p["meta_description"], "\n".join(b for b in body if b), sch, hero_preload=img_src("g28", 960))
+    return doc(slug, p["title_tag"], p["meta_description"], "\n".join(b for b in body if b), sch, hero_preload=img_src("g28", 1600))
 
-VALUES = [("Honor", "Respect for our crew and every client."), ("Stewardship", "Care for the land we're trusted with."),
-          ("Integrity", "Doing what's right when no one is watching."), ("Honesty", "Clear talk from estimate to finish."),
-          ("Trust", "We treat your property like our own."), ("Gratitude", "Thankful for the work and the people."),
-          ("Service", "Your goals come first on every job."), ("Excellence", "A finish we're proud to put our name on."),
-          ("Diligence", "Steady work until the job is right.")]
+VALUES = [  # meaning in our words; references as listed on 9arrow.com/about-us
+    ("Honor", "We treat our crew, our clients and their neighbors with respect on every job.", "Romans 12:10, Luke 6:31"),
+    ("Stewardship", "The land belongs to the Lord. We care for it like it is entrusted to us, because it is.", "Psalm 24:1"),
+    ("Integrity", "We do what is right when no one is watching and when the pressure is on.", "Proverbs 5:21"),
+    ("Honesty", "Clear talk from the first estimate to the finished site. No surprises.", "Proverbs 16:11"),
+    ("Trust", "We earn it by treating every property as if it were our own.", "Proverbs 3:5-6"),
+    ("Gratitude", "We stay humble and thankful for the work, the land and the people we work with.", "James 1:17, Micah 6:8"),
+    ("Service", "Your goals come first. Servant leadership is built into how we run the crew.", "Philippians 2:4"),
+    ("Excellence", "We work for a finish we would put our family name on.", "Colossians 3:23-24"),
+    ("Diligence", "Steady, careful work from the first pass to the final cleanup.", ""),
+]
+ARROW = ('<svg class="q-arrow" viewBox="0 0 40 200" aria-hidden="true"><path class="q-head" d="M20 2 L34 30 L24 26 L16 26 L6 30 Z"/>'
+         '<rect class="q-shaft" x="17.5" y="24" width="5" height="138"/>'
+         '<path class="q-fl" d="M17.5 150 L5 168 L5 192 L17.5 176 Z M22.5 150 L35 168 L35 192 L22.5 176 Z"/></svg>')
+
+def quiver(title="Nine children. Nine values.", lede=None, dark=False):
+    lede = lede or 'The name comes from Psalm 127:4: "As arrows are in the hand of a mighty man; so are children of the youth." Pick an arrow to see what each value means on the job.'
+    tabs = "".join(f'<button class="q-tab" type="button" role="tab" id="qt-{i}" aria-controls="qp-{i}" aria-selected="{"true" if i == 0 else "false"}" tabindex="{0 if i == 0 else -1}">{ARROW}<span>{esc(n)}</span></button>' for i, (n, _, _) in enumerate(VALUES))
+    def panel(i, n, t, r):
+        ref = f'<p class="q-ref">{esc(r)}</p>' if r else ""
+        hid = "" if i == 0 else " hidden"
+        return f'<div class="q-panel" role="tabpanel" id="qp-{i}" aria-labelledby="qt-{i}"{hid}><p class="q-n">Value {i + 1} of 9</p><h3 class="q-name">{esc(n)}</h3><p class="q-line">{esc(t)}</p>{ref}</div>'
+    panels = "".join(panel(i, n, t, r) for i, (n, t, r) in enumerate(VALUES))
+    cls = " dark topo" if dark else " alt topo"
+    return f"""<section class="sec quiver-sec{cls}" data-quiver><div class="wrap q-grid">
+<div class="q-copy"><h2 class="h-lg">{esc(title)}</h2><p class="lede mt-s">{esc(lede)}</p><div class="q-panels">{panels}</div></div>
+<div class="q-rack" role="tablist" aria-label="Our nine core values">{tabs}</div></div></section>"""
+
+def founders(text_html, cta=True):
+    link = f'<p><a class="arrow-link" href="{url("about-us")}">Our story and values</a></p>' if cta else ""
+    return f"""<section class="sec founders"><div class="wrap f-grid">
+<div class="f-pics"><figure class="f-main">{img("r-owners", "(max-width: 900px) 90vw, 440px")}</figure><figure class="f-inset">{img("r-owners-gold", "(max-width: 900px) 50vw, 260px")}</figure></div>
+<div class="copy stack" style="gap:18px">{text_html}{link}</div></div></section>"""
 
 def render_about():
     slug = "about-us"; p = dict(PAGES[slug])
-    p["sections"] = [x for x in p["sections"] if "value" not in x["h2"].lower()]
-    used = {"owners"}
-    blocks = sections(p, used)
-    vals = "".join(f'<li>{emblem("vmk")}<b>{esc(n)}</b><span>{esc(t)}</span></li>' for n, t in VALUES)
+    secs = p["sections"]
+    first = secs[0]
+    rest = [x for x in secs[1:] if "value" not in x["h2"].lower()]
+    p2 = dict(p); p2["sections"] = rest
+    blocks = sections(p2, {"r-owners", "r-owners-gold", "r-fleet"})
+    intro = f'<h2 class="h-lg">{esc(first["h2"])}</h2>' + "".join(f"<p>{rich(x)}</p>" for x in first.get("paras", []))
     revs = "".join(f'<figure class="review">{STARS}<blockquote><q>{esc(q)}</q></blockquote><figcaption class="by">{esc(b)}</figcaption></figure>' for q, b in (REVIEWS["kenny"], REVIEWS["travis"], REVIEWS["zachp"]))
     ci = [("", "Home"), (None, "About")]
-    body = [phero(slug, p, ci, "owners"), answer(p),
-            f'<section class="sec"><div class="wrap stack">{"".join(blocks[:2])}</div></section>',
-            f'<section class="sec alt topo"><div class="wrap"><div class="sec-head"><div><h2 class="h-lg">Nine children. Nine values.</h2><p class="lede">The name comes from Psalm 127:4: "As arrows are in the hand of a mighty man; so are children of the youth." The values are how we run every job.</p></div></div><ul class="values">{vals}</ul></div></section>',
-            f'<section class="sec"><div class="wrap stack">{"".join(blocks[2:])}</div></section>' if blocks[2:] else "",
+    body = [phero(slug, p, ci, "r-fleet"), answer(p), founders(intro, cta=False), quiver(),
+            f'<section class="sec"><div class="wrap stack">{"".join(blocks)}</div></section>' if blocks else "",
             f'<section class="sec alt"><div class="wrap"><h2 class="h-lg" style="margin-bottom:24px">What people say about working with the family</h2><div class="reviews">{revs}</div></div></section>',
             faq_block(p, slug), cta_band(slug)]
     extra = [{"@type": "AboutPage", "@id": canon(slug) + "#about", "url": canon(slug), "mainEntity": {"@id": ORG_ID}}]
     if p.get("faqs"): extra.append(faq_schema(slug, p["faqs"]))
-    return doc(slug, p["title_tag"], p["meta_description"], "\n".join(b for b in body if b), schema(slug, p["title_tag"], p["meta_description"], [("", "Home"), (slug, "About")], extra), hero_preload=img_src("owners", 960))
+    return doc(slug, p["title_tag"], p["meta_description"], "\n".join(b for b in body if b), schema(slug, p["title_tag"], p["meta_description"], [("", "Home"), (slug, "About")], extra), hero_preload=img_src("r-fleet", 1600))
 
 def render_faq():
     slug = "faq"; p = PAGES[slug]
@@ -632,10 +684,10 @@ def render_faq():
         items = "".join(f'<details class="faq-item"><summary><h3 class="faq-q">{esc(f["q"])}</h3></summary><p class="faq-a">{rich(f["a"])}</p></details>' for f in fs)
         groups += f'<h2 class="faq-topic" id="t-{tid}">{esc(t)}</h2><div class="faq-list">{items}</div>'
     ci = [("", "Home"), (None, "FAQ")]
-    body = [phero(slug, p, ci, "g13"), answer(p),
+    body = [phero(slug, p, ci, "r-mulch"), answer(p),
             f'<section class="sec"><div class="wrap faq-grid"><div><div class="sticky-col"><h2 class="h-md">Jump to a topic</h2><div class="chips mt-s">{toc}</div><p class="mt-m">Still have a question? Call <a href="tel:{TEL}">{PHONE}</a>.</p></div></div><div>{groups}</div></div></section>',
             cta_band(slug)]
-    return doc(slug, p["title_tag"], p["meta_description"], "\n".join(body), schema(slug, p["title_tag"], p["meta_description"], [("", "Home"), (slug, "FAQ")], [faq_schema(slug, p["faqs"])]), hero_preload=img_src("g13", 960))
+    return doc(slug, p["title_tag"], p["meta_description"], "\n".join(body), schema(slug, p["title_tag"], p["meta_description"], [("", "Home"), (slug, "FAQ")], [faq_schema(slug, p["faqs"])]), hero_preload=img_src("r-mulch", 1600))
 
 def render_estimate():
     slug = "get-an-estimate"; p = PAGES[slug]
@@ -651,19 +703,19 @@ def render_estimate():
 def render_contact():
     slug = "contact"; p = PAGES[slug]
     ci = [("", "Home"), (None, "Contact")]
-    blocks = sections(p, {"g19"})
+    blocks = sections(p, {"r-red-truck"})
     cards = f"""<div class="contact-cards"><a class="ccard" href="tel:{TEL}">{I['phone']}<span>Call or text</span><b>{PHONE}</b></a>
 <a class="ccard" href="mailto:{EMAIL}">{I['mail']}<span>Email</span><b>{EMAIL}</b></a><div class="ccard">{I['pin']}<span>Based in</span><b>Spring Branch, TX</b></div></div>"""
-    body = [phero(slug, p, ci, "g19", cta=False), f'<div class="wrap answer-wrap">{cards}</div>',
+    body = [phero(slug, p, ci, "r-red-truck", cta=False), f'<div class="wrap answer-wrap">{cards}</div>',
             f'<section class="sec"><div class="wrap stack">{"".join(blocks)}</div></section>' if blocks else "",
             estimate_section(slug, "Or send us the details.", dark=False),
             f'<section class="sec alt"><div class="wrap map-wrap"><div class="map">{map_svg()}</div><div><h2 class="h-lg">Where we work</h2><p class="lede mt-s">Spring Branch is home base. We clear land across Central Texas and the Hill Country.</p><p class="mt-m"><a class="arrow-link" href="{url("service-areas")}">All service areas</a></p></div></div></section>',
             faq_block(p, slug)]
     extra = [{"@type": "ContactPage", "@id": canon(slug) + "#contact", "url": canon(slug), "mainEntity": {"@id": ORG_ID}}]
     if p.get("faqs"): extra.append(faq_schema(slug, p["faqs"]))
-    return doc(slug, p["title_tag"], p["meta_description"], "\n".join(b for b in body if b), schema(slug, p["title_tag"], p["meta_description"], [("", "Home"), (slug, "Contact")], extra), hero_preload=img_src("g19", 960))
+    return doc(slug, p["title_tag"], p["meta_description"], "\n".join(b for b in body if b), schema(slug, p["title_tag"], p["meta_description"], [("", "Home"), (slug, "Contact")], extra), hero_preload=img_src("r-red-truck", 1600))
 
-def lens(pairs, static=False, head="Look through the ring.", text="Scroll to walk the ring across the job. Inside it you see the same ground after we're done.", dark=True):
+def lens(pairs, static=False, head="See what we leave behind.", text="Real 9 Arrow jobs. As you scroll, the ring moves across the ground before we cleared it. Inside the ring is the same spot after we finished. Drag it to look around.", dark=True):
     b0 = pairs[0]
     btns = "".join(f'<button type="button" class="pair-btn" data-pair aria-pressed="{"true" if i == 0 else "false"}" data-before="{img_src(b, 1600)}" data-after="{img_src(a, 1600)}" '
                    f'data-before-alt="{esc(IMGS[b]["alt"])}" data-after-alt="{esc(IMGS[a]["alt"])}" data-cap-b="{esc(cb)}" data-cap-a="{esc(ca)}">{esc(label)}</button>'
@@ -673,7 +725,7 @@ def lens(pairs, static=False, head="Look through the ring.", text="Scroll to wal
 <div class="lens-stage" tabindex="0" role="img" aria-label="Before and after comparison of a real 9 Arrow job. Use arrow keys to move the ring.">
 <img class="lens-before" src="{img_src(b0[1], 1600)}" alt="{esc(IMGS[b0[1]]['alt'])}" loading="lazy">
 <img class="lens-after" src="{img_src(b0[2], 1600)}" alt="{esc(IMGS[b0[2]]['alt'])}" loading="lazy">
-<span class="lens-ring" aria-hidden="true">{glyph('#fff', 'lens-glyph')}</span>
+<span class="lens-ring" aria-hidden="true"></span>
 <span class="lens-tag b">Before</span><span class="lens-tag a">After</span></div>
 <p class="lens-foot"><span class="lens-cap" data-before="{esc(b0[3])}" data-after="{esc(b0[4])}">{esc(b0[3])}</span><span>Real 9 Arrow job photos</span></p>
 </div></div></section>"""
@@ -684,15 +736,15 @@ LENS_PAIRS = [("Brush to trail", "trail-before", "trail-after", "A brushy trail,
 def render_our_work():
     slug = "our-work"; p = PAGES[slug]
     ci = [("", "Home"), (None, "Our work")]
-    gal = ["w-mulcher-dust", "w-fleet", "w-mulcher-head", "w-line", "w-sunrays", "w-red", "w-trail", "w-hillside", "w-oaks", "w-road", "w-trench", "w-mulch", "w-mow", "w-sharpen", "w-row", "john"]
+    gal = ["r-hero", "r-yellow", "r-head", "r-trail-cat", "r-blue", "r-tire", "r-haze", "r-red-truck", "r-yellow-2", "r-trail", "r-mulch", "r-sharpen", "r-john-machine", "r-yellow-head", "r-operator", "r-oaks", "r-bw", "r-utv"]
     tiles = "".join(f'<figure class="g-item">{img(k, "(max-width: 600px) 100vw, (max-width: 1000px) 50vw, 33vw")}<figcaption>{esc(IMGS[k]["alt"])}</figcaption></figure>' for k in gal)
-    blocks = sections(p, set(gal) | {"trail-after", "w-fleet"})
-    body = [phero(slug, p, ci, "w-fleet"), answer(p), lens(LENS_PAIRS, static=True, head="Before and after, through the ring.", text="Move the ring across the photo, or switch jobs. Inside the ring is the same ground after we finished.", dark=False),
+    blocks = sections(p, set(gal) | {"trail-after", "r-fleet"})
+    body = [phero(slug, p, ci, "r-fleet"), answer(p), lens(LENS_PAIRS, static=True, head="Every job, before and after.", text="Move the ring across the photo, or switch jobs. Inside the ring is the same ground after our crew finished.", dark=False),
             f'<section class="sec alt"><div class="wrap"><div class="sec-head"><div><h2 class="h-lg">Photos from our job sites</h2><p class="lede">Every photo on this page is from a real 9 Arrow job in Central Texas.</p></div><a class="arrow-link" href="https://www.instagram.com/9.arrow/" rel="noopener">More on Instagram</a></div><div class="gallery">{tiles}</div></div></section>',
             f'<section class="sec"><div class="wrap stack">{"".join(blocks)}</div></section>' if blocks else "",
             faq_block(p, slug), cta_band(slug)]
     extra = [faq_schema(slug, p["faqs"])] if p.get("faqs") else []
-    return doc(slug, p["title_tag"], p["meta_description"], "\n".join(b for b in body if b), schema(slug, p["title_tag"], p["meta_description"], [("", "Home"), (slug, "Our work")], extra), hero_preload=img_src("w-fleet", 960))
+    return doc(slug, p["title_tag"], p["meta_description"], "\n".join(b for b in body if b), schema(slug, p["title_tag"], p["meta_description"], [("", "Home"), (slug, "Our work")], extra), hero_preload=img_src("r-fleet", 1600))
 
 # ---------------------------------------------------------------- blog
 def md(text):
@@ -781,6 +833,17 @@ HOME_TRACK = ["forestry-mulching-and-land-clearing", "rock-crushing", "land-clea
               "precision-line-survey-clearing", "right-of-way-clearing", "site-work-light-utility-installation", "grounds-maintenance"]
 HOME_FAQ_Q = ["How much does land clearing cost", "How many acres", "Can you crush rock", "What does the land look like", "Are there trees too big", "How long does it take for grass"]
 
+def start_form(fid, slug="", dest=None, cls="hero-start", btn="Get an estimate", placeholder="Enter your email"):
+    """Email-first start of the estimate. Same Netlify form as the header pull-out."""
+    hid = "".join(f'<input type="hidden" name="{k}">' for k in ("landing_page", "referrer", "utm_source", "utm_medium", "utm_campaign", "utm_term", "utm_content", "gclid", "fbclid"))
+    return f"""<form class="start-form {cls}" id="{fid}" name="estimate-start" method="POST" action="{url('get-an-estimate')}" data-netlify="true" netlify-honeypot="bot-field" data-dest="{dest or url('get-an-estimate')}" novalidate>
+<input type="hidden" name="form-name" value="estimate-start"><input type="hidden" name="need" value="{need_for(slug)}">{hid}
+<p class="hp" aria-hidden="true"><label>Leave this empty <input name="bot-field" tabindex="-1" autocomplete="off"></label></p>
+<label class="vh" for="{fid}-email">Email</label>
+<div class="start-bar"><input id="{fid}-email" name="email" type="email" inputmode="email" autocomplete="email" placeholder="{placeholder}" required><button class="btn btn-gold" type="submit">{btn}</button></div>
+<p class="ferr" role="alert" hidden></p>
+<p class="start-note">Takes about two minutes. Next comes a quick discovery call about your land.</p></form>"""
+
 def render_home():
     slug = "index"
     allf = PAGES["faq"]["faqs"]
@@ -790,25 +853,29 @@ def render_home():
         if f and f not in hf: hf.append(f)
     hf = hf[:5] if len(hf) >= 4 else allf[:5]
     ring = f'<circle r="{RING_R:.1f}" fill="none" stroke="#E8EBE7" stroke-width="{RING_W:.1f}"/>'
+    hero_form = start_form("hero-start", "index")
     portal = f"""<section class="portal dark" id="portal" aria-labelledby="h1"><div class="portal-in">
-<div class="pv" id="pv"><video id="hero-video" muted loop playsinline autoplay preload="metadata" poster="{img_src('g00', 1600)}" aria-hidden="true">
-<source src="assets/video/hero-960.mp4" type="video/mp4" media="(max-width: 900px)"><source src="assets/video/hero-1600.mp4" type="video/mp4"></video></div>
+<div class="pv-bg" aria-hidden="true"><i class="pv-topo"></i><i class="pv-glow"></i></div>
+<div class="pv" id="pv">{img("r-hero", "100vw", eager=True)}</div>
 <div class="pm-wrap" id="pm-wrap" aria-hidden="true"><svg class="pm" id="pm" viewBox="-160 -160 320 320">{ring}<use href="#g9" x="-160" y="-160" width="320" height="320" fill="#E8EBE7"/></svg></div>
-<div class="hero-top" id="hero-top"><p class="where">Family-owned in Spring Branch, Texas</p><h1 id="h1">Land clearing, forestry mulching and rock crushing across Central Texas</h1></div>
-<div class="hero-bot" id="hero-bot"><p class="tag">It does not get better.</p>
-<div class="btn-row"><a class="btn btn-main" href="{url('get-an-estimate')}">Get an estimate</a><a class="btn btn-line" href="tel:{TEL}">{I['phone']} {PHONE}</a></div>
-<p class="cue" aria-hidden="true">Scroll through the 9</p></div>
-<div class="stage" id="stage"><div class="wrap stage-in"><p class="stage-h">We don't just clear land. We stage it.</p>
+<div class="hero-copy" id="hero-copy"><div class="wrap"><div class="hc-in">
+<p class="where"><span class="rule" aria-hidden="true"></span>Family-owned in Spring Branch, Texas</p>
+<h1 id="h1" class="display">Central Texas land clearing, done right</h1>
+{hero_form}
+<p class="hero-sub"><b>Forestry mulching, rock crushing and road building.</b> One family crew for the whole job, across Central Texas and the Hill Country.</p>
+</div></div></div>
+<p class="cue" aria-hidden="true">Scroll</p>
+<div class="stage" id="stage"><div class="wrap stage-in"><p class="stage-h display">We don't just clear land. We stage it.</p>
 <p>Overgrown, locked-up acreage turned into open, usable ground that buyers, builders and cattle can use.</p>
-<div class="btn-row"><a class="btn btn-main" href="#services">See what we do</a></div></div></div>
+<div class="btn-row"><a class="btn btn-light" href="#services">See what we do</a></div></div></div>
 </div></section>"""
     intro = f"""<section class="sec intro"><div class="wrap grid-2">
 <div class="copy stack" style="gap:18px"><h2 class="h-lg">Central Texas land, cleared right the first time.</h2>
 <p class="lede">{esc(ENTITY)}</p>
 <p><a class="arrow-link" href="{url('about-us')}">Meet the family behind 9 Arrow</a></p></div>
 <ul class="stats" aria-label="By the numbers">
-<li><b>1&ndash;3</b><span>acres a day on our high-horsepower mulchers, in reasonable density</span></li>
-<li><b>15 min</b><span>for a big tree that takes a smaller machine an hour</span></li>
+<li><b><span data-count="1">1</span>&ndash;<span data-count="3">3</span></b><span>acres a day on our high-horsepower mulchers, in reasonable density</span></li>
+<li><b><span data-count="15">15</span> min</b><span>for a big tree that takes a smaller machine an hour</span></li>
 <li><b>No limit</b><span>on tree size. Bigger trees just take longer.</span></li>
 <li><b>0</b><span>burn piles. Brush and old dozer piles become mulch on site.</span></li></ul>
 </div></section>"""
@@ -834,18 +901,15 @@ def render_home():
 <div><h2 class="h-lg">Based in Spring Branch. Working across the Hill Country.</h2><p class="lede mt-s">We clear land from San Antonio to Kerrville, Blanco to New Braunfels. Pick your area for local details.</p>
 <ul class="area-list mt-m">{"".join(f'<li><a href="{url(s)}">{esc(n)}<span>{esc(PAGES[s].get("city", {}).get("county", ""))}</span></a></li>' for s, n in AREA_PAGES)}</ul>
 <p class="mt-m"><a class="arrow-link" href="{url('service-areas')}">All service areas</a></p></div></div></section>"""
-    fam = f"""<section class="sec"><div class="wrap grid-2 fam">
-<figure class="ringpic">{img("owners", "(max-width: 900px) 78vw, 480px")}<span class="seal">{glyph()}</span></figure>
-<div class="copy stack" style="gap:18px"><p class="kicker">The family behind the name</p><h2 class="h-lg">Nine children. Nine values. One name.</h2>
+    fam = founders(f"""<p class="kicker">The family behind the name</p><h2 class="h-lg">Nine children. Nine values. One name.</h2>
 <blockquote class="psalm">"As arrows are in the hand of a mighty man; so are children of the youth." <cite>Psalm 127:4</cite></blockquote>
-<p>John and Camille Wheelock started 9 Arrow from Texas ranch roots and years of building custom homes. In 2014 a project with a developer and a surveyor put a forestry mulcher in John's hands, and it became the heart of the business. We treat every property like our own, and a job isn't finished until we're proud of it.</p>
-<p><a class="arrow-link" href="{url('about-us')}">Our story and values</a></p></div></div></section>"""
+<p>John and Camille Wheelock started 9 Arrow from Texas ranch roots and years of building custom homes. In 2014 a project with a developer and a surveyor put a forestry mulcher in John's hands, and it became the heart of the business. We treat every property like our own, and a job isn't finished until we're proud of it.</p>""")
     revs = (f'<figure class="review lead">{STARS}<blockquote><q>{esc(REVIEWS["zachc"][0])}</q></blockquote><figcaption class="by">{esc(REVIEWS["zachc"][1])}. Google review</figcaption></figure>'
             + "".join(f'<figure class="review">{STARS}<blockquote><q>{esc(REVIEWS[k][0])}</q></blockquote><figcaption class="by">{esc(REVIEWS[k][1])}</figcaption></figure>' for k in ("ashley", "travis", "zachp", "kenny")))
     reviews = f'<section class="sec alt"><div class="wrap"><div class="sec-head"><h2 class="h-lg">Five stars from the people we clear for.</h2></div><div class="reviews">{revs}</div></div></section>'
     faq = faq_block({"faqs": hf}, slug, "Straight answers", "What landowners and developers ask us most.")
-    body = "\n".join([portal, intro, track, rock, lens(LENS_PAIRS), serve, areas, fam, reviews, faq.replace('class="sec alt"', 'class="sec"'), estimate_section("index")])
-    return doc("", HOME_TITLE, HOME_DESC, body, schema("", HOME_TITLE, HOME_DESC, [("", "Home")], [faq_schema("", hf)]), og="assets/og/index.jpg", hero_preload=img_src("g00", 1600))
+    body = "\n".join([portal, intro, track, rock, lens(LENS_PAIRS), serve, areas, fam, quiver("What we stand on", "Nine children, nine arrows, nine values. Pick one to see what it means on your land."), reviews, faq.replace('class="sec alt"', 'class="sec"'), estimate_section("index")])
+    return doc("", HOME_TITLE, HOME_DESC, body, schema("", HOME_TITLE, HOME_DESC, [("", "Home")], [faq_schema("", hf)]), og="assets/og/index.jpg", hero_preload=img_src("r-hero", 1600))
 
 # ---------------------------------------------------------------- write everything
 def main():
@@ -855,8 +919,6 @@ def main():
     if os.path.exists(os.path.join(ROOT, "build-assets/img")):
         shutil.copytree(os.path.join(ROOT, "build-assets/img"), os.path.join(A, "img"))
     shutil.copytree(os.path.join(ROOT, "build-assets/logo"), os.path.join(A, "logo"))
-    if os.path.exists(os.path.join(ROOT, "build-assets/video")):
-        shutil.copytree(os.path.join(ROOT, "build-assets/video"), os.path.join(A, "video"))
     if os.path.exists(os.path.join(ROOT, "build-assets/og")): shutil.copytree(os.path.join(ROOT, "build-assets/og"), os.path.join(A, "og"))
     os.makedirs(os.path.join(A, "css")); os.makedirs(os.path.join(A, "js"))
     shutil.copy(os.path.join(ROOT, "src/static/site.css"), os.path.join(A, "css/site.css"))
@@ -870,6 +932,11 @@ def main():
     for s in POSTS: pages[s] = render_post(s)
     for s, h in pages.items():
         open(os.path.join(OUT, s + ".html"), "w").write(h)
+    # ship only the image files a page or the stylesheet actually references
+    used = "".join(pages.values()) + open(os.path.join(A, "css/site.css")).read()
+    for sub in ("img", "logo"):
+        for f in os.listdir(os.path.join(A, sub)):
+            if f not in used: os.remove(os.path.join(A, sub, f))
     urls = [s for s in pages if s not in ("thanks", "404")]
     sm = "".join(f"<url><loc>{canon(s if s != 'index' else '')}</loc><lastmod>{TODAY}</lastmod></url>" for s in sorted(urls, key=lambda x: (x != "index", x)))
     open(os.path.join(OUT, "sitemap.xml"), "w").write(f'<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">{sm}</urlset>\n')

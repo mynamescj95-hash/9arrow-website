@@ -1,10 +1,13 @@
 // Netlify runs this automatically after every verified (non-spam) form submission.
-// It creates one item on the 9 Arrow Monday leads board per estimate request.
+// It creates one item on the 9 Arrow Monday leads board per lead. Two forms feed it:
+//   estimate-start    the email captured by the "Get an estimate" pull-out (a lead even if they stop there)
+//   estimate-request  the full 4-step form that follows
 //
 // Netlify environment variables (Site settings > Environment variables):
 //   MONDAY_API_TOKEN   Personal API token from Monday (Profile > Developers > My access tokens)
 //   MONDAY_BOARD_ID    Numeric board ID from the board URL (monday.com/boards/<ID>)
 //   MONDAY_GROUP_ID    Optional. Group to drop new leads into, e.g. "new_group" or "topics"
+//   MONDAY_START_GROUP_ID  Optional. Separate group for email-only starts (defaults to MONDAY_GROUP_ID)
 //   MONDAY_COLUMNS     Optional JSON mapping form fields to Monday columns, e.g.
 //     {"email":{"id":"email","type":"email"},"phone":{"id":"phone","type":"phone"},
 //      "services":{"id":"dropdown","type":"dropdown"},"acreage":{"id":"status","type":"status"},
@@ -20,7 +23,7 @@ const LABELS = {
   name: "Name", phone: "Phone", email: "Email", contact_preference: "Best way to reach",
   services: "Services", acreage: "Acreage", property_location: "Property location",
   client_type: "Client type", timeline: "Timeline", notes: "Notes",
-  page_variant: "Page", landing_page: "Landing page", referrer: "Referrer",
+  need: "Started from", page_variant: "Page", landing_page: "Landing page", referrer: "Referrer",
   utm_source: "utm_source", utm_medium: "utm_medium", utm_campaign: "utm_campaign",
   utm_term: "utm_term", utm_content: "utm_content", gclid: "gclid", fbclid: "fbclid",
 };
@@ -57,7 +60,9 @@ async function monday(query, variables) {
 
 exports.handler = async (event) => {
   const { payload } = JSON.parse(event.body || "{}");
-  if (!payload || payload.form_name !== "estimate-request") return { statusCode: 200, body: "ignored" };
+  const FORMS = ["estimate-request", "estimate-start"];
+  if (!payload || !FORMS.includes(payload.form_name)) return { statusCode: 200, body: "ignored" };
+  const isStart = payload.form_name === "estimate-start";
   if (!process.env.MONDAY_API_TOKEN || !process.env.MONDAY_BOARD_ID) {
     console.error("MONDAY_API_TOKEN or MONDAY_BOARD_ID is not set; lead kept in Netlify Forms only.");
     return { statusCode: 200, body: "monday not configured" };
@@ -71,18 +76,22 @@ exports.handler = async (event) => {
     if (v !== null) columns[col.id] = v;
   }
 
-  const itemName = [d.name, d.property_location].filter(Boolean).join(" · ") || "Website estimate request";
+  const itemName = isStart
+    ? "Email lead: " + (d.email || "unknown")
+    : [d.name, d.property_location].filter(Boolean).join(" · ") || "Website estimate request";
+  const group = (isStart && process.env.MONDAY_START_GROUP_ID) || process.env.MONDAY_GROUP_ID || null;
 
   const created = await monday(
     `mutation ($board: ID!, $group: String, $name: String!, $cols: JSON) {
        create_item(board_id: $board, group_id: $group, item_name: $name, column_values: $cols, create_labels_if_missing: true) { id }
      }`,
-    { board: String(process.env.MONDAY_BOARD_ID), group: process.env.MONDAY_GROUP_ID || null, name: itemName, cols: JSON.stringify(columns) }
+    { board: String(process.env.MONDAY_BOARD_ID), group, name: itemName, cols: JSON.stringify(columns) }
   );
 
   const lines = Object.keys(LABELS)
     .filter((k) => d[k])
     .map((k) => `<b>${LABELS[k]}:</b> ${String(d[k]).replace(/</g, "&lt;")}`);
+  lines.unshift(`<b>Form:</b> ${isStart ? "Estimate pull-out (email only so far)" : "Full estimate request"}`);
   lines.push(`<b>Submitted:</b> ${payload.created_at || new Date().toISOString()}`);
 
   await monday(

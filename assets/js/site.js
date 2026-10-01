@@ -8,6 +8,16 @@
   function $$(s, c) { return [].slice.call((c || d).querySelectorAll(s)); }
   function c01(v) { return v < 0 ? 0 : v > 1 ? 1 : v; }
 
+  /* ---------- every page opens at the top (unless the link points at a section) ---------- */
+  var fromDrawer = false;
+  try { fromDrawer = sessionStorage.getItem('9a_go_form') === '1'; sessionStorage.removeItem('9a_go_form'); } catch (e) {}
+  if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+  function realAnchor() { var h = location.hash.slice(1); return h && h.indexOf('need-') !== 0 && d.getElementById(h); }
+  function toTop() { if (!realAnchor() && !fromDrawer) scrollTo(0, 0); }
+  toTop();
+  d.addEventListener('DOMContentLoaded', toTop);
+  addEventListener('pageshow', function (e) { if (!e.persisted) toTop(); });
+
   /* ---------- desktop dropdowns ---------- */
   var items = $$('.nav-item[data-drop]'), closeT;
   function closeAll(except) { items.forEach(function (it) { if (it !== except) { it.classList.remove('is-open'); var b = $('.nav-top', it); if (b) b.setAttribute('aria-expanded', 'false'); } }); }
@@ -108,7 +118,20 @@
         .then(function (r) { if (!r.ok) throw 0; done(); })
         .catch(function () { btn.disabled = false; btn.textContent = 'Request my estimate'; err(cur, 'That did not send. Check your connection and try again, or call (210) 247-8410.'); });
     });
+    var saved = ''; try { saved = sessionStorage.getItem('9a_email') || ''; } catch (e) {}
+    var fe = $('#f-email', form);
+    if (saved && fe && !fe.value) {
+      fe.value = saved;
+      var hello = d.createElement('p'); hello.className = 'est-hello';
+      hello.appendChild(d.createTextNode('Thanks. We will send your estimate to '));
+      var bEl = d.createElement('b'); bEl.textContent = saved; hello.appendChild(bEl);
+      var ch = d.createElement('button'); ch.type = 'button'; ch.textContent = 'Change';
+      ch.addEventListener('click', function () { show(total - 1, true); fe.focus(); fe.select(); });
+      hello.appendChild(ch);
+      var fw = $('.fwrap', form); if (fw) fw.insertBefore(hello, fw.firstChild);
+    }
     show(0, false);
+    if (fromDrawer) setTimeout(function () { var y = form.getBoundingClientRect().top + scrollY - (($('.hdr') || {}).offsetHeight || 70) - 16; scrollTo(0, Math.max(0, y)); }, 30);
   }
 
   /* ---------- copy-to-clipboard for phone numbers on preview hosts ---------- */
@@ -116,22 +139,30 @@
   /* ---------- home: fly through the bowl of the 9 ---------- */
   var portal = $('#portal');
   if (portal && !reduce) {
-    var pv = $('#pv'), pm = $('#pm'), pmWrap = $('#pm-wrap'), hTop = $('#hero-top'), hBot = $('#hero-bot'), stage = $('#stage'), video = $('#hero-video');
-    var C, B, rin, vh;
-    if (video) { video.muted = true; var pp = video.play(); if (pp && pp.catch) pp.catch(function () {}); }
-    function pmeasure() { vh = innerHeight; var r = pmWrap.getBoundingClientRect(); C = { x: r.left + r.width / 2, y: r.top + r.height / 2 }; B = { x: r.left + r.width * 0.5308, y: r.top + r.height * 0.2886 }; rin = r.width * 134.74 / 320; pframe(); }
+    var pv = $('#pv'), pm = $('#pm'), pmWrap = $('#pm-wrap'), hCopy = $('#hero-copy'), cue = $('.cue', portal), stage = $('#stage'), pbg = $('.pv-bg', portal);
+    var C, B, rin, vh, vw, pimg = $('img', pv);
+    var FOCUS = { x: 0.52, y: 0.4 }; // where the mulcher cab sits in the cover-fitted photo
+    function pmeasure() { vh = innerHeight; vw = innerWidth; var r = pmWrap.getBoundingClientRect(); C = { x: r.left + r.width / 2, y: r.top + r.height / 2 }; B = { x: r.left + r.width * 0.5308, y: r.top + r.height * 0.2886 }; rin = r.width * 134.74 / 320; pframe(); }
     function pframe() {
+      if (hCopy && hCopy.contains(d.activeElement)) return; // hold still while someone types their email
       var pr = portal.getBoundingClientRect(), p = c01(-pr.top / Math.max(1, portal.offsetHeight - vh));
       var k = c01(p / 0.68), sc = 1 + 23 * k * k * k;
       pm.style.transform = 'scale(' + sc.toFixed(4) + ')';
-      pm.style.opacity = (1 - c01((sc - 5) / 6)).toFixed(3);
+      pm.style.opacity = (1 - c01((sc - 5) / 6)).toFixed(3); pmWrap.style.setProperty('--halo', (1 - c01(k * 4)).toFixed(3));
       var cx = B.x + (C.x - B.x) * sc, cy = B.y + (C.y - B.y) * sc, R = rin * sc;
       pv.style.clipPath = 'circle(' + R.toFixed(1) + 'px at ' + cx.toFixed(1) + 'px ' + cy.toFixed(1) + 'px)';
       pv.style.setProperty('--dim', (1 - 0.75 * k).toFixed(3));
-      var ho = 1 - c01(p / 0.14);
-      hTop.style.opacity = ho.toFixed(3); hBot.style.opacity = ho.toFixed(3);
-      hTop.style.transform = 'translateY(' + (-50 * (1 - ho)).toFixed(1) + 'px)'; hBot.style.transform = 'translateY(' + (36 * (1 - ho)).toFixed(1) + 'px)';
-      hBot.style.visibility = ho < 0.02 ? 'hidden' : 'visible';
+      if (pimg) {
+        // keep the machine framed inside the bowl, then let the photo settle to full frame as we fly through
+        var zf = 1.04 + (vw < 700 ? 0.1 : 0.22) * p, cx0 = vw / 2, cy0 = vh / 2, Tx = vw * FOCUS.x, Ty = vh * FOCUS.y, sc0 = 1.2, tx0 = 0, ty0 = 0;
+        for (var it = 0; it < 3; it++) { tx0 = B.x - cx0 - sc0 * (Tx - cx0); ty0 = B.y - cy0 - sc0 * (Ty - cy0); sc0 = Math.max(zf, 1.02 + 2 * Math.max(Math.abs(tx0) / vw, Math.abs(ty0) / vh)); }
+        var e = 1 - c01(k * 1.15), tx = tx0 * e, ty = ty0 * e, ss = Math.max(zf, 1.02 + 2 * Math.max(Math.abs(tx) / vw, Math.abs(ty) / vh));
+        ss = ss + (sc0 - ss) * e * 0; pimg.style.transform = 'translate(' + tx.toFixed(1) + 'px,' + ty.toFixed(1) + 'px) scale(' + (e > 0 ? Math.max(ss, zf) : zf).toFixed(4) + ')';
+      }
+      if (pbg) pbg.style.setProperty('--zb', (1.08 + 0.1 * p).toFixed(4));
+      var ho = 1 - c01(p / 0.16);
+      hCopy.style.opacity = ho.toFixed(3); hCopy.style.transform = 'translateY(' + (-44 * (1 - ho)).toFixed(1) + 'px)';
+      hCopy.style.visibility = ho < 0.02 ? 'hidden' : 'visible'; if (cue) cue.style.opacity = ho.toFixed(3);
       var so = c01((p - 0.7) / 0.15); stage.style.opacity = so.toFixed(3); stage.classList.toggle('is-on', so > 0.5);
       stage.style.transform = 'translateY(' + (26 * (1 - so)).toFixed(1) + 'px)';
     }
@@ -210,9 +241,136 @@
     scrollers.push(lframe);
   });
 
-  /* ---------- header shadow ---------- */
-  var hdr = $('.hdr');
-  scrollers.push(function () { if (hdr) hdr.classList.toggle('is-scrolled', scrollY > 8); });
+  /* ---------- header: clear over the photo, solid once you scroll past it ---------- */
+  var hdr = $('.hdr'), heroEl = $('.hero-photo') || $('#portal');
+  scrollers.push(function () {
+    if (!hdr) return;
+    var lim = 8;
+    if (heroEl && d.body.classList.contains('over-hero')) lim = heroEl.id === 'portal' ? heroEl.offsetTop + heroEl.offsetHeight - innerHeight - 4 : heroEl.offsetTop + heroEl.offsetHeight - hdr.offsetHeight - 4;
+    hdr.classList.toggle('is-scrolled', scrollY > lim);
+    if (mbar) mbar.classList.toggle('is-top', !!heroEl && d.body.classList.contains('over-hero') && scrollY < innerHeight * 0.55);
+  });
+
+  /* ---------- photo heroes push in slowly as you scroll ---------- */
+  var zoomers = $$('[data-zoom]');
+  if (zoomers.length && !reduce) scrollers.push(function () {
+    zoomers.forEach(function (el) { var r = el.getBoundingClientRect(); if (r.bottom < 0) return; el.style.setProperty('--z', (1.06 + 0.14 * c01(-r.top / Math.max(1, r.height))).toFixed(4)); });
+  });
+
+  /* ---------- "Get an estimate": email first, then the step-by-step form ---------- */
+  var drawerEl = $('#drawer');
+  if (drawerEl) {
+    var dForm = $('#start-form', drawerEl), dEmail = $('#dr-email', drawerEl), dNeed = $('[name="need"]', dForm);
+    var dPanel = $('.drawer-panel', drawerEl), lastFocus = null, dHref = '', dNeedDefault = dNeed.value;
+    function openDrawer(href) {
+      lastFocus = d.activeElement; dHref = href || 'get-an-estimate';
+      var m = dHref.match(/#need-([a-z]+)/); dNeed.value = m ? m[1] : dNeedDefault; dForm.setAttribute('data-dest', dHref);
+      try { var sv = sessionStorage.getItem('9a_email'); if (sv && !dEmail.value) dEmail.value = sv; } catch (e) {}
+      drawerEl.removeAttribute('inert'); drawerEl.classList.add('is-open'); d.body.style.overflow = 'hidden';
+      setTimeout(function () { dEmail.focus({ preventScroll: true }); }, reduce ? 0 : 320);
+      window.dataLayer = window.dataLayer || []; window.dataLayer.push({ event: 'estimate_drawer_open', need: dNeed.value });
+    }
+    function closeDrawer() {
+      if (!drawerEl.classList.contains('is-open')) return;
+      drawerEl.classList.remove('is-open'); drawerEl.setAttribute('inert', ''); d.body.style.overflow = '';
+      if (lastFocus && lastFocus.focus) lastFocus.focus({ preventScroll: true });
+    }
+    d.addEventListener('click', function (e) {
+      var a = e.target.closest('[data-drawer]'); if (!a || e.metaKey || e.ctrlKey || e.shiftKey || e.button > 0) return;
+      e.preventDefault(); if (sheet && sheet.classList.contains('is-open')) closeSheet(); closeAll(); openDrawer(a.getAttribute('href'));
+    });
+    $$('[data-close]', drawerEl).forEach(function (b) { b.addEventListener('click', closeDrawer); });
+    drawerEl.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') { e.stopPropagation(); closeDrawer(); return; }
+      if (e.key !== 'Tab') return;
+      var f = $$('a[href],button,input:not([type=hidden]):not([tabindex="-1"])', dPanel).filter(function (x) { return x.offsetParent !== null; });
+      if (!f.length) return; var first = f[0], lastEl = f[f.length - 1];
+      if (e.shiftKey && d.activeElement === first) { e.preventDefault(); lastEl.focus(); } else if (!e.shiftKey && d.activeElement === lastEl) { e.preventDefault(); first.focus(); }
+    });
+  }
+
+  /* ---------- email-first start forms (pull-out and home hero) -> step-by-step form ---------- */
+  $$('.start-form').forEach(function (sf) {
+    var em = $('[name="email"]', sf), er = $('.ferr', sf), nd = $('[name="need"]', sf);
+    em.addEventListener('input', function () { er.hidden = true; em.removeAttribute('aria-invalid'); });
+    sf.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var v = em.value.trim();
+      if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(v)) { er.textContent = 'Add a valid email address so we can send your estimate.'; er.hidden = false; em.setAttribute('aria-invalid', 'true'); em.focus(); return; }
+      var q = new URLSearchParams(location.search);
+      $('[name="landing_page"]', sf).value = location.pathname; $('[name="referrer"]', sf).value = d.referrer || '';
+      ['utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content', 'gclid', 'fbclid'].forEach(function (k) {
+        var u = q.get(k); try { if (u) sessionStorage.setItem('9a_' + k, u); u = u || sessionStorage.getItem('9a_' + k); } catch (x) {}
+        var el = $('[name="' + k + '"]', sf); if (el && u) el.value = u;
+      });
+      try { sessionStorage.setItem('9a_email', v); sessionStorage.setItem('9a_go_form', '1'); } catch (x) {}
+      window.dataLayer = window.dataLayer || []; window.dataLayer.push({ event: 'estimate_start', need: nd.value, placement: sf.id });
+      var base = (sf.getAttribute('data-dest') || 'get-an-estimate').split('#')[0];
+      var dest = base + (nd.value ? '#need-' + nd.value : '');
+      var btn = $('[type=submit]', sf), label = btn.textContent; btn.disabled = true; btn.textContent = 'One moment...';
+      addEventListener('pageshow', function () { btn.disabled = false; btn.textContent = label; });
+      var live = /(^|\.)9arrow\.com$|netlify\.app$/.test(location.hostname);
+      if (!live) { location.href = dest; return; }
+      fetch('/', { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, body: new URLSearchParams(new FormData(sf)).toString() })
+        .catch(function () {}).then(function () { location.href = dest; });
+    });
+  });
+  /* ---------- numbers count up when they come into view ---------- */
+  var counters = $$('[data-count]');
+  if (counters.length && 'IntersectionObserver' in window && !reduce) {
+    counters.forEach(function (el) { el.textContent = '0'; });
+    var cio = new IntersectionObserver(function (es) {
+      es.forEach(function (e) {
+        if (!e.isIntersecting) return; cio.unobserve(e.target);
+        var el = e.target, to = +el.getAttribute('data-count'), t0 = performance.now(), dur = 1100;
+        (function tick(t) { var k = c01((t - t0) / dur); el.textContent = Math.round(to * (1 - Math.pow(1 - k, 3))); if (k < 1) requestAnimationFrame(tick); })(t0);
+      });
+    }, { threshold: 0.6 });
+    counters.forEach(function (el) { cio.observe(el); });
+  }
+
+  /* ---------- nine values: pick an arrow ---------- */
+  $$('[data-quiver]').forEach(function (sec) {
+    var tabs = $$('.q-tab', sec), panels = $$('.q-panel', sec), auto = null, touched = false;
+    tabs.forEach(function (t, i) { var ar = $('.q-arrow', t); if (ar) ar.style.setProperty('--d', (i * 0.07) + 's'); });
+    function pick(i, focus) {
+      tabs.forEach(function (t, j) { var on = j === i; t.setAttribute('aria-selected', on ? 'true' : 'false'); t.tabIndex = on ? 0 : -1; });
+      panels.forEach(function (p, j) { p.hidden = j !== i; });
+      if (focus) tabs[i].focus();
+    }
+    function stop() { touched = true; if (auto) { clearInterval(auto); auto = null; } }
+    tabs.forEach(function (t, i) {
+      t.addEventListener('click', function () { stop(); pick(i); });
+      t.addEventListener('keydown', function (e) {
+        var cur = tabs.indexOf(t), n = tabs.length, to = null;
+        if (e.key === 'ArrowRight' || e.key === 'ArrowDown') to = (cur + 1) % n; else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') to = (cur - 1 + n) % n; else if (e.key === 'Home') to = 0; else if (e.key === 'End') to = n - 1;
+        if (to !== null) { e.preventDefault(); stop(); pick(to, true); }
+      });
+    });
+    sec.addEventListener('pointerenter', function () { if (auto) { clearInterval(auto); auto = null; } });
+    sec.addEventListener('focusin', function () { if (auto) { clearInterval(auto); auto = null; } });
+    if (!('IntersectionObserver' in window) || reduce) { sec.classList.add('is-in', 'is-set'); return; }
+    var qio = new IntersectionObserver(function (es) {
+      es.forEach(function (e) {
+        if (e.isIntersecting) {
+          if (!sec.classList.contains('is-in')) { sec.classList.add('is-in'); setTimeout(function () { sec.classList.add('is-set'); }, 1400); }
+          if (!touched && !auto) auto = setInterval(function () { var cur = tabs.findIndex(function (t) { return t.getAttribute('aria-selected') === 'true'; }); pick((cur + 1) % tabs.length); }, 4200);
+        } else if (auto) { clearInterval(auto); auto = null; }
+      });
+    }, { threshold: 0.35 });
+    qio.observe(sec);
+  });
+
+  /* ---------- process steps fill in as you read down ---------- */
+  var stepLists = $$('.steps');
+  if (stepLists.length) scrollers.push(function () {
+    stepLists.forEach(function (ol) {
+      var r = ol.getBoundingClientRect(), p = reduce ? 1 : c01((innerHeight * 0.8 - r.top) / Math.max(1, r.height + innerHeight * 0.25));
+      ol.style.setProperty('--sp', p.toFixed(3));
+      var lis = ol.children, n = lis.length;
+      for (var i = 0; i < n; i++) lis[i].classList.toggle('is-on', p >= (n > 1 ? i / (n - 1) : 0) - 0.001);
+    });
+  });
 
   var ticking = false;
   function onScroll() { if (!ticking) { ticking = true; requestAnimationFrame(function () { ticking = false; scrollers.forEach(function (f) { f(); }); }); } }

@@ -340,24 +340,254 @@
   "alt": "Hill Country hillside after selective cedar removal with live oaks kept",
   "generated": true
  },
- "owners": {
-  "w": 916,
-  "h": 1100,
+ "r-hero": {
+  "w": 2048,
+  "h": 1365,
+  "sizes": [
+   480,
+   960,
+   1600
+  ],
+  "alt": "9 Arrow forestry mulcher working toward the camera through dust and morning light",
+  "generated": false
+ },
+ "r-haze": {
+  "w": 1638,
+  "h": 2048,
+  "sizes": [
+   480,
+   960,
+   1600
+  ],
+  "alt": "9 Arrow mulcher working in hazy light under the trees",
+  "generated": false
+ },
+ "r-trail-cat": {
+  "w": 1639,
+  "h": 2048,
+  "sizes": [
+   480,
+   960,
+   1600
+  ],
+  "alt": "9 Arrow track loader cutting a clean lane through Central Texas woods",
+  "generated": false
+ },
+ "r-blue": {
+  "w": 2048,
+  "h": 1536,
+  "sizes": [
+   480,
+   960,
+   1600
+  ],
+  "alt": "9 Arrow forestry mulcher working through dense woodland",
+  "generated": false
+ },
+ "r-head": {
+  "w": 2048,
+  "h": 1536,
+  "sizes": [
+   480,
+   960,
+   1600
+  ],
+  "alt": "9 Arrow mulcher head grinding brush and small trees in place",
+  "generated": false
+ },
+ "r-tire": {
+  "w": 2048,
+  "h": 1536,
+  "sizes": [
+   480,
+   960,
+   1600
+  ],
+  "alt": "Close view of a 9 Arrow articulated mulcher and its mulching head in the brush",
+  "generated": false
+ },
+ "r-head-tall": {
+  "w": 1638,
+  "h": 2048,
+  "sizes": [
+   480,
+   960,
+   1600
+  ],
+  "alt": "9 Arrow mulcher head working into brush",
+  "generated": false
+ },
+ "r-mulch": {
+  "w": 1365,
+  "h": 2048,
+  "sizes": [
+   480,
+   960,
+   1600
+  ],
+  "alt": "Fine mulch finish left by 9 Arrow forestry mulching",
+  "generated": false
+ },
+ "r-trail": {
+  "w": 2048,
+  "h": 1536,
+  "sizes": [
+   480,
+   960,
+   1600
+  ],
+  "alt": "Mulched lane through the woods after 9 Arrow land clearing",
+  "generated": false
+ },
+ "r-fleet": {
+  "w": 2048,
+  "h": 1536,
+  "sizes": [
+   480,
+   960,
+   1600
+  ],
+  "alt": "9 Arrow forestry mulchers and crew trucks lined up on a job site",
+  "generated": false
+ },
+ "r-red-truck": {
+  "w": 2048,
+  "h": 1536,
+  "sizes": [
+   480,
+   960,
+   1600
+  ],
+  "alt": "9 Arrow articulated forestry mulcher and crew truck",
+  "generated": false
+ },
+ "r-sharpen": {
+  "w": 2048,
+  "h": 1536,
+  "sizes": [
+   480,
+   960,
+   1600
+  ],
+  "alt": "9 Arrow crew member sharpening the teeth on a mulcher head",
+  "generated": false
+ },
+ "r-john-machine": {
+  "w": 1200,
+  "h": 1600,
+  "sizes": [
+   480,
+   960,
+   1600
+  ],
+  "alt": "John Wheelock with one of the 9 Arrow forestry mulchers",
+  "generated": false
+ },
+ "r-utv": {
+  "w": 1290,
+  "h": 1531,
+  "sizes": [
+   480,
+   960,
+   1600
+  ],
+  "alt": "9 Arrow crew driving a UTV across a job site",
+  "generated": false
+ },
+ "r-yellow": {
+  "w": 1920,
+  "h": 1080,
+  "sizes": [
+   480,
+   960,
+   1600
+  ],
+  "alt": "Large yellow articulated forestry mulcher clearing brush on a 9 Arrow job",
+  "generated": false
+ },
+ "r-yellow-2": {
+  "w": 1280,
+  "h": 720,
+  "sizes": [
+   480,
+   960,
+   1600
+  ],
+  "alt": "9 Arrow articulated mulcher grinding brush on a Central Texas property",
+  "generated": false
+ },
+ "r-yellow-3": {
+  "w": 1024,
+  "h": 768,
+  "sizes": [
+   480,
+   960,
+   1600
+  ],
+  "alt": "9 Arrow articulated mulcher clearing a wooded lot",
+  "generated": false
+ },
+ "r-yellow-head": {
+  "w": 768,
+  "h": 1024,
   "sizes": [
    480,
    960
+  ],
+  "alt": "Mulching head on a 9 Arrow articulated machine",
+  "generated": false
+ },
+ "r-operator": {
+  "w": 655,
+  "h": 1200,
+  "sizes": [
+   480,
+   960
+  ],
+  "alt": "9 Arrow operator with a yellow forestry mulcher",
+  "generated": false
+ },
+ "r-owners": {
+  "w": 1500,
+  "h": 2000,
+  "sizes": [
+   480,
+   960,
+   1600
   ],
   "alt": "John and Camille Wheelock, founders of 9 Arrow Land Service",
   "generated": false
  },
- "john": {
-  "w": 916,
-  "h": 1100,
+ "r-owners-gold": {
+  "w": 1080,
+  "h": 1080,
+  "sizes": [
+   480,
+   960,
+   1600
+  ],
+  "alt": "John and Camille Wheelock at sunset",
+  "generated": false
+ },
+ "r-oaks": {
+  "w": 700,
+  "h": 900,
   "sizes": [
    480,
    960
   ],
-  "alt": "John Wheelock with one of the 9 Arrow forestry mulchers",
+  "alt": "Cleared woodland under live oaks with green grass coming back",
+  "generated": false
+ },
+ "r-bw": {
+  "w": 1500,
+  "h": 2000,
+  "sizes": [
+   480,
+   960,
+   1600
+  ],
+  "alt": "9 Arrow crew member working on a mulching head",
   "generated": false
  },
  "trail-before": {
@@ -400,168 +630,6 @@
    1600
   ],
   "alt": "Road surface built from rock crushed on site by 9 Arrow",
-  "generated": false
- },
- "w-mulcher-dust": {
-  "w": 1100,
-  "h": 618,
-  "sizes": [
-   480,
-   960,
-   1600
-  ],
-  "alt": "9 Arrow mulcher clearing woodland in Central Texas",
-  "generated": false
- },
- "w-mulcher-head": {
-  "w": 1100,
-  "h": 825,
-  "sizes": [
-   480,
-   960,
-   1600
-  ],
-  "alt": "9 Arrow mulcher head grinding brush",
-  "generated": false
- },
- "w-sunrays": {
-  "w": 1100,
-  "h": 825,
-  "sizes": [
-   480,
-   960,
-   1600
-  ],
-  "alt": "9 Arrow mulcher working in dusty light under the trees",
-  "generated": false
- },
- "w-fleet": {
-  "w": 1100,
-  "h": 825,
-  "sizes": [
-   480,
-   960,
-   1600
-  ],
-  "alt": "9 Arrow mulchers and crew trucks on a job site",
-  "generated": false
- },
- "w-red": {
-  "w": 1100,
-  "h": 825,
-  "sizes": [
-   480,
-   960,
-   1600
-  ],
-  "alt": "9 Arrow articulated mulcher and truck",
-  "generated": false
- },
- "w-row": {
-  "w": 1000,
-  "h": 750,
-  "sizes": [
-   480,
-   960,
-   1600
-  ],
-  "alt": "Utility corridor in the Hill Country",
-  "generated": false
- },
- "w-line": {
-  "w": 900,
-  "h": 640,
-  "sizes": [
-   480,
-   960
-  ],
-  "alt": "9 Arrow mulcher cutting a line through brush",
-  "generated": false
- },
- "w-trail": {
-  "w": 1000,
-  "h": 720,
-  "sizes": [
-   480,
-   960,
-   1600
-  ],
-  "alt": "Mulched trail through trees after 9 Arrow clearing",
-  "generated": false
- },
- "w-hillside": {
-  "w": 900,
-  "h": 640,
-  "sizes": [
-   480,
-   960
-  ],
-  "alt": "Cleared hillside with a valley view",
-  "generated": false
- },
- "w-oaks": {
-  "w": 1100,
-  "h": 825,
-  "sizes": [
-   480,
-   960,
-   1600
-  ],
-  "alt": "Cleared ground under trees after 9 Arrow mulching",
-  "generated": false
- },
- "w-trench": {
-  "w": 1000,
-  "h": 750,
-  "sizes": [
-   480,
-   960,
-   1600
-  ],
-  "alt": "Waterline trench dug by 9 Arrow",
-  "generated": false
- },
- "w-road": {
-  "w": 900,
-  "h": 640,
-  "sizes": [
-   480,
-   960
-  ],
-  "alt": "9 Arrow machine on a freshly graded road",
-  "generated": false
- },
- "w-mulch": {
-  "w": 1100,
-  "h": 618,
-  "sizes": [
-   480,
-   960,
-   1600
-  ],
-  "alt": "Fine mulch finish from a 9 Arrow job",
-  "generated": false
- },
- "w-mow": {
-  "w": 1000,
-  "h": 750,
-  "sizes": [
-   480,
-   960,
-   1600
-  ],
-  "alt": "Mowed pasture with shredder",
-  "generated": false
- },
- "w-sharpen": {
-  "w": 1100,
-  "h": 825,
-  "sizes": [
-   480,
-   960,
-   1600
-  ],
-  "alt": "9 Arrow crew sharpening mulcher teeth",
   "generated": false
  }
 }
