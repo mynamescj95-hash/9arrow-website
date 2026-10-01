@@ -306,7 +306,7 @@ def services_explorer(slugs, head="Everything the land needs before you build on
                       f'<div class="svx-copy"><p class="svx-n">{i + 1:02d} / {len(slugs):02d}</p><h3>{esc(SVC_NAME[s])}</h3><p>{rich(p["lede"])}</p><ul class="bul">{hl}</ul>'
                       f'<div class="btn-row"><a class="btn btn-main" href="{url(s)}">See {esc(SVC_NAME[s].lower())}</a>'
                       f'<a class="btn btn-line" href="{est_url(s)}" data-need="{nd}" data-drawer>Get an estimate</a></div></div></div>')
-    return f"""<section class="sec svx-sec" id="services" aria-labelledby="svc-h"><div class="wrap">
+    return f"""<section class="sec alt svx-sec" id="services" aria-labelledby="svc-h"><div class="wrap">
 <div class="sec-head"><div><h2 class="h-lg" id="svc-h">{esc(head)}</h2><p class="lede mt-s">{esc(lede)}</p></div><a class="btn btn-line" href="{url('services')}">All services</a></div>
 <div class="svx" data-svx><div class="svx-tabs" role="tablist" aria-label="Services">{"".join(tabs)}</div><div class="svx-panels">{"".join(panels)}</div></div></div></section>"""
 
@@ -913,13 +913,13 @@ def lens(pairs, static=False, head="It does not get better.", text="Forestry mul
                    f'data-before-alt="{esc(IMGS[b]["alt"])}" data-after-alt="{esc(IMGS[a]["alt"])}" data-cap-b="{esc(cb)}" data-cap-a="{esc(ca)}">{esc(label)}</button>'
                    for i, (label, b, a, cb, ca) in enumerate(pairs))
     return f"""<section class="lens{' lens-static' if static else ''}{' dark' if dark else ''}" data-lens aria-labelledby="lens-h"><div class="lens-pin"><div class="wrap lens-in">
-<div class="lens-head"><div>{f'<p class="kicker lens-k">{esc(kicker)}</p>' if kicker else ""}<h2 class="h-lg" id="lens-h">{esc(head)}</h2><p class="lede mt-s">{esc(text)}</p></div><div class="pair-btns" role="group" aria-label="Choose a job">{btns}</div></div>
+<div class="lens-copy"><div class="lens-head"><div>{f'<p class="kicker lens-k">{esc(kicker)}</p>' if kicker else ""}<h2 class="h-lg" id="lens-h">{esc(head)}</h2><p class="lede mt-s">{esc(text)}</p></div><div class="pair-btns" role="group" aria-label="Choose a job">{btns}</div></div>
+<p class="lens-foot"><span class="lens-cap" data-before="{esc(b0[3])}" data-after="{esc(b0[4])}">{esc(b0[3])}</span><span>Real 9 Arrow job photos</span></p></div>
 <div class="lens-stage" tabindex="0" role="img" aria-label="Before and after comparison of a real 9 Arrow job. Use arrow keys to move the ring.">
 <img class="lens-before" src="{img_src(b0[1], 1600)}" alt="{esc(IMGS[b0[1]]['alt'])}" loading="lazy">
 <img class="lens-after" src="{img_src(b0[2], 1600)}" alt="{esc(IMGS[b0[2]]['alt'])}" loading="lazy">
 <span class="lens-ring" aria-hidden="true"></span>
 <span class="lens-tag b">Before</span><span class="lens-tag a">After</span></div>
-<p class="lens-foot"><span class="lens-cap" data-before="{esc(b0[3])}" data-after="{esc(b0[4])}">{esc(b0[3])}</span><span>Real 9 Arrow job photos</span></p>
 </div></div></section>"""
 
 LENS_PAIRS = [("Brush to trail", "trail-before", "trail-after", "A brushy trail, before mulching", "The same trail after forestry mulching"),
@@ -1034,7 +1034,7 @@ def start_form(fid, slug="", dest=None, cls="hero-start", btn="Get an estimate",
 <label class="vh" for="{fid}-email">Email</label>
 <div class="start-bar"><input id="{fid}-email" name="email" type="email" inputmode="email" autocomplete="email" placeholder="{placeholder}" required><button class="btn btn-gold" type="submit">{btn}</button></div>
 <p class="ferr" role="alert" hidden></p>
-<p class="start-note">Takes about two minutes. Next comes a quick discovery call about your land.</p></form>"""
+<p class="start-note">Free estimate. Takes about two minutes, then a quick discovery call about your land.</p></form>"""
 
 def render_home():
     slug = "index"

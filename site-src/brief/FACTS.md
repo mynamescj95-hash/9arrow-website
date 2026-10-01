@@ -40,6 +40,7 @@
   cannot be restored; selective clearing is often the best option to protect surrounding trees.
 
 ## Pricing (no numbers ever)
+- Free estimate (9arrow.com offers a free estimate, checked Oct 2026). Live site tagline: "Finished Quality Does Not Get Better"; H1 "Premier Land Clearing Services Across Texas".
 - Estimated after a discovery call and/or site visit. Factors: density, tree size and species, topography, access,
   maneuverability, soil conditions. Estimates shown by the day or by the acre.
 
