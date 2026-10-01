@@ -63,33 +63,50 @@ PHOTO = {  # content photo keys -> image keys. Real 9 Arrow photography first; g
 FALLBACK = ["r-blue", "r-tire", "r-yellow-3", "r-sharpen", "r-trail", "r-head-tall", "g02", "g05", "g19", "r-fleet", "g13", "r-operator"]
 HERO = {
     "index": "r-hero", "forestry-mulching-and-land-clearing": "r-head", "land-clearing": "r-yellow", "cedar-removal": "g03",
-    "brush-removal": "r-yellow-2", "ranch-pasture-clearing": "r-yellow-3", "site-prep": "g06", "precision-line-survey-clearing": "r-trail-cat",
+    "brush-removal": "g04", "ranch-pasture-clearing": "g26", "site-prep": "g06", "precision-line-survey-clearing": "r-trail-cat",
     "right-of-way-clearing": "g08", "roads-and-access-preparation": "g09", "rock-crushing": "g10",
     "site-work-light-utility-installation": "g11", "grounds-maintenance": "g12", "services": "r-fleet",
     "land-developers": "g15", "commercial-real-estate": "g21", "ranchers": "g05", "energy-utilities": "g17", "solar": "g16",
     "about-us": "r-owners-gold", "our-work": "r-fleet", "contact": "r-red-truck", "get-an-estimate": "r-trail", "faq": "r-mulch",
     "electrical-right-of-way-row-safety-manual-texas": "g08", "service-areas": "g28", "blog": "r-trail",
-    "land-clearing-spring-branch-tx": "g18", "land-clearing-bulverde-tx": "r-oaks", "land-clearing-canyon-lake-tx": "g20",
+    "land-clearing-spring-branch-tx": "g18", "land-clearing-bulverde-tx": "g02", "land-clearing-canyon-lake-tx": "g20",
     "land-clearing-new-braunfels-tx": "g15", "land-clearing-boerne-tx": "g27", "land-clearing-blanco-tx": "g26",
     "land-clearing-wimberley-tx": "g24", "land-clearing-kerrville-tx": "g25", "land-clearing-san-antonio-tx": "g21",
     "land-clearing-comal-county": "g28", "forestry-mulching-spring-branch-tx": "r-haze", "forestry-mulching-bulverde-tx": "r-blue",
     "forestry-mulching-canyon-lake-tx": "r-head-tall", "forestry-mulching-new-braunfels-tx": "r-tire",
-    "forestry-mulching-san-antonio-tx": "r-yellow-head", "forestry-mulching-texas-hill-country": "r-trail-cat",
+    "forestry-mulching-san-antonio-tx": "r-hero", "forestry-mulching-texas-hill-country": "r-trail-cat",
     "cedar-removal-spring-branch-tx": "g03", "cedar-removal-boerne-tx": "g30",
 }
 # focal point for wide crops of tall photos (object-position)
 FOCUS = {"r-owners-gold": "50% 30%", "r-haze": "50% 55%", "r-trail-cat": "50% 60%", "r-head-tall": "50% 45%", "r-yellow-head": "50% 50%",
          "r-mulch": "50% 60%", "r-owners": "50% 18%", "r-john-machine": "50% 30%", "r-operator": "50% 35%"}
 
-def img(key, sizes="(max-width: 900px) 100vw, 50vw", eager=False, alt=None, cls=""):
+def img(key, sizes="(max-width: 900px) 100vw, 50vw", eager=False, alt=None, cls="", xl=False):
     m = IMGS[key]; base = f"assets/img/{key}"
-    srcset = ", ".join(f"{base}-{w}.webp {min(w, m['w'])}w" for w in m["sizes"])
+    ws = [w for w in m["sizes"] if xl or w <= 1600]  # the 2400 tier ships only where a frame can use it
+    srcset = ", ".join(f"{base}-{w}.webp {min(w, m['w'])}w" for w in ws)
     mid = m["sizes"][1] if len(m["sizes"]) > 1 else m["sizes"][0]
     load = 'fetchpriority="high"' if eager else 'loading="lazy"'
     c = f' class="{cls}"' if cls else ""
     if key in FOCUS: c += f' style="object-position:{FOCUS[key]}"'
     return (f'<img src="{base}-{mid}.webp" srcset="{srcset}" sizes="{sizes}" width="{m["w"]}" height="{m["h"]}" '
             f'alt="{esc(m["alt"] if alt is None else alt)}" {load} decoding="async"{c}>')
+
+def cover_sizes(key, mobile_vw=80, mobile_ratio=4 / 3, desk_h="(100vh - 280px)", bp=960):
+    """sizes for an image that is cropped (object-fit: cover) into a frame of a different shape.
+    The browser picks by width only, so ask for the width the crop really needs."""
+    a = IMGS[key]["w"] / IMGS[key]["h"]
+    mob = max(mobile_vw, round(mobile_vw / mobile_ratio * a))
+    return f"(max-width: {bp}px) {mob}vw, calc({desk_h} * {a:.2f})"
+
+def hero_sizes(key):
+    """Full-bleed heroes: width-bound on desktop, height-bound on a tall phone screen."""
+    a = IMGS[key]["w"] / IMGS[key]["h"]
+    return f"(max-width: 760px) {max(107, round(200 * a))}vw, 107vw"
+
+def big(key, fallback="g02", min_w=1500):
+    """Never stretch a small original across a wide frame."""
+    return key if IMGS[key]["w"] >= min_w else fallback
 
 def img_src(key, w=960):
     m = IMGS[key]; ws = [s for s in m["sizes"] if s <= w] or m["sizes"][:1]
@@ -350,7 +367,8 @@ def phero(slug, p, crumb_items, img_key, h1=None, lede=None, cta=True, checks=Tr
     hl = "".join(f"<li>{rich(h)}</li>" for h in (p.get("highlights") or [])[:4]) if checks else ""
     btns = (f'<div class="btn-row"><a class="btn btn-light" href="{est_url(slug)}" data-drawer>Get an estimate</a>'
             f'<a class="btn btn-ghost-l" href="tel:{TEL}">{I["phone"]} {PHONE}</a></div>') if cta else ""
-    return f"""<section class="hero-photo" data-zoom><div class="hp-media">{img(img_key, "100vw", eager=True)}</div>
+    img_key = big(img_key)
+    return f"""<section class="hero-photo" data-zoom><div class="hp-media">{img(img_key, hero_sizes(img_key), eager=True, xl=True)}</div>
 <div class="wrap hp-in"><div class="hp-copy">{crumbs(crumb_items)}
 <h1>{esc(h1 or p['h1'])}</h1>
 <p class="lede">{rich(lede or p['lede'])}</p>
@@ -775,7 +793,7 @@ def render_post(slug):
 <header class="post-head topo"><div class="wrap">{crumbs(ci)}<h1 class="h-xl mt-s" style="max-width:22ch">{esc(m['h1'])}</h1>
 <p class="lede mt-s">{esc(m['excerpt'])}</p>
 <p class="post-meta mt-s"><span>By the 9 Arrow team</span><span>Published {fmt(m['date'])}</span><span>Updated {fmt(m.get('updated', m['date']))}</span><span>{mins} min read</span></p></div></header>
-<div class="wrap"><figure class="post-hero">{img(hk, "(max-width: 1200px) 100vw, 1200px", eager=True, alt=m.get('hero_alt') if hk in ('owners', 'john') else None)}</figure></div>
+<div class="wrap"><figure class="post-hero">{img(big(hk), "(max-width: 1200px) 100vw, 1200px", eager=True, xl=True, alt=m.get('hero_alt') if hk in ('owners', 'john') else None)}</figure></div>
 <section class="sec" style="padding-top:clamp(28px,4vw,48px)"><div class="wrap post-grid"><div>
 <section class="answer" aria-labelledby="ans-h">{emblem()}<div><h2 id="ans-h">{esc(m['answer_q'])}</h2><p>{rich(m['answer_a'])}</p></div></section>
 <div class="prose mt-l">{md(m['body'])}</div></div>
@@ -882,7 +900,7 @@ def render_home():
 <li><b>No limit</b><span>on tree size. Bigger trees just take longer.</span></li>
 <li><b>0</b><span>burn piles. Brush and old dozer piles become mulch on site.</span></li></ul>
 </div></section>"""
-    cards = "".join(f'<a class="tcard" href="{url(s)}"><figure>{img(hero_key(s, PAGES[s]), "(max-width: 960px) 82vw, 420px")}</figure><div class="tcard-b"><h3>{esc(SVC_NAME[s])}</h3><p>{esc(SVC_BLURB[s])}.</p><span class="arrow-link">Learn more</span></div></a>' for s in HOME_TRACK)
+    cards = "".join(f'<a class="tcard" href="{url(s)}"><figure>{img(hero_key(s, PAGES[s]), cover_sizes(hero_key(s, PAGES[s])), xl=True)}</figure><div class="tcard-b"><h3>{esc(SVC_NAME[s])}</h3><p>{esc(SVC_BLURB[s])}.</p><span class="arrow-link">Learn more</span></div></a>' for s in HOME_TRACK)
     track = f"""<section class="trk topo" id="services" aria-labelledby="svc-h"><div class="trk-sec" id="svc-track-sec"><div class="trk-in">
 <div class="wrap trk-head"><div><h2 class="h-lg" id="svc-h">Everything the land needs before you build on it.</h2><p class="lede mt-s">From the first cut to finished access, one family crew handles the whole scope.</p></div>
 <a class="btn btn-line" href="{url('services')}">All services</a></div>

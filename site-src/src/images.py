@@ -80,7 +80,7 @@ REAL = {
     "rock-before": ("Loose limestone surface rock before on-site rock crushing", "R:roads-before.jpg"),
     "rock-after": ("Road surface built from rock crushed on site by 9 Arrow", "R:roads-after.jpg"),
 }
-WIDTHS = (480, 960, 1600)
+WIDTHS = (480, 960, 1600, 2400)  # 2400 only for masters wider than 1600 (Retina laptops, phone heroes)
 
 
 def source(key):
