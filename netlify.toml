@@ -12,11 +12,6 @@
     Cache-Control = "public, max-age=31536000, immutable"
 
 [[headers]]
-  for = "/assets/video/*"
-  [headers.values]
-    Cache-Control = "public, max-age=31536000, immutable"
-
-[[headers]]
   for = "/assets/og/*"
   [headers.values]
     Cache-Control = "public, max-age=604800"
@@ -32,4 +27,20 @@
 [[redirects]]
   from = "/about"
   to = "/about-us"
+  status = 301
+
+# Old downloadable PDF guides (removed); send any outside links to the matching page
+[[redirects]]
+  from = "/assets/downloads/9arrow-land-clearing-cost-guide.pdf"
+  to = "/blog-land-clearing-cost-texas"
+  status = 301
+
+[[redirects]]
+  from = "/assets/downloads/9arrow-hill-country-cedar-removal-guide.pdf"
+  to = "/cedar-removal"
+  status = 301
+
+[[redirects]]
+  from = "/assets/downloads/9arrow-land-clearing-planning-checklist.pdf"
+  to = "/get-an-estimate"
   status = 301

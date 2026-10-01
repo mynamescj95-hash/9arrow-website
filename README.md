@@ -12,6 +12,8 @@ Static site for 9 Arrow Land Service (Spring Branch, TX), hosted on Netlify. No 
   Our Work gallery are real, and so are the hero photos on the home, service and about pages. Some area pages
   use generated Hill Country landscapes (documentary-style, unbranded).
 - `assets/og`: a share image for every page.
+- Old files from the previous site (HubSpot-era docs, PDF guides, unused images) were removed; old PDF links redirect to
+  the matching pages in `netlify.toml`.
 - `netlify.toml`, `netlify/functions/submission-created.js`: Netlify Forms to Monday.com.
 - `sitemap.xml`, `robots.txt` (AI search crawlers allowed), `llms.txt`.
 - `site-src/`: the content and generator that produced the pages.
