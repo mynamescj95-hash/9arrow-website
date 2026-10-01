@@ -869,15 +869,12 @@ def render_home():
 {hero_form}
 <p class="hero-sub"><b>Forestry mulching, rock crushing and road building.</b> One family crew for the whole job, across Central Texas and the Hill Country.</p>
 </div></div></div>
-<a class="cue" href="#stage-band" aria-label="Scroll to learn more">Scroll</a>
+<a class="cue" href="#intro" aria-label="Scroll to learn more">Scroll</a>
 </section>"""
-    band = f"""<section class="band dark" id="stage-band" aria-labelledby="band-h"><div class="band-media" data-par>{img("r-trail", "100vw")}</div>
-<div class="wrap band-in"><h2 class="display band-h" id="band-h">We don't just clear land. We stage it.</h2>
-<p>Overgrown, locked-up acreage turned into open, usable ground that buyers, builders and cattle can use.</p>
-<div class="btn-row"><a class="btn btn-gold" href="#services">See what we do</a></div></div></section>"""
-    intro = f"""<section class="sec intro"><div class="wrap grid-2">
-<div class="copy stack" style="gap:18px"><h2 class="h-lg">Central Texas land, cleared right the first time.</h2>
-<p class="lede">{esc(ENTITY)}</p>
+    intro = f"""<section class="sec intro" id="intro"><div class="wrap grid-2">
+<div class="copy stack" style="gap:18px"><h2 class="h-lg">We don't just clear land. We stage it.</h2>
+<p class="lede">Overgrown, locked-up acreage turned into open, usable ground that buyers, builders and cattle can use.</p>
+<p>{esc(ENTITY)}</p>
 <p><a class="arrow-link" href="{url('about-us')}">Meet the family behind 9 Arrow</a></p></div>
 <ul class="stats" aria-label="By the numbers">
 <li><b><span data-count="1">1</span>&ndash;<span data-count="3">3</span></b><span>acres a day on our high-horsepower mulchers, in reasonable density</span></li>
@@ -914,7 +911,7 @@ def render_home():
             + "".join(f'<figure class="review">{STARS}<blockquote><q>{esc(REVIEWS[k][0])}</q></blockquote><figcaption class="by">{esc(REVIEWS[k][1])}</figcaption></figure>' for k in ("ashley", "travis", "zachp", "kenny")))
     reviews = f'<section class="sec alt"><div class="wrap"><div class="sec-head"><h2 class="h-lg">Five stars from the people we clear for.</h2></div><div class="reviews">{revs}</div></div></section>'
     faq = faq_block({"faqs": hf}, slug, "Straight answers", "What landowners and developers ask us most.")
-    body = "\n".join([hero, band, intro, track, rock, lens(LENS_PAIRS), serve, areas, fam, quiver("What we stand on", "Nine children, nine arrows, nine values. Pick one to see what it means on your land."), reviews, faq.replace('class="sec alt"', 'class="sec"'), estimate_section("index")])
+    body = "\n".join([hero, intro, track, rock, lens(LENS_PAIRS), serve, areas, fam, quiver("What we stand on", "Nine children, nine arrows, nine values. Pick one to see what it means on your land."), reviews, faq.replace('class="sec alt"', 'class="sec"'), estimate_section("index")])
     return doc("", HOME_TITLE, HOME_DESC, body, schema("", HOME_TITLE, HOME_DESC, [("", "Home")], [faq_schema("", hf)]), og="assets/og/index.jpg")
 
 # ---------------------------------------------------------------- write everything
