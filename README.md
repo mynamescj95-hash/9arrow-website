@@ -15,6 +15,9 @@ Static site for 9 Arrow Land Service (Spring Branch, TX), hosted on Netlify. No 
 - Old files from the previous site (HubSpot-era docs, PDF guides, unused images) were removed; old PDF links redirect to
   the matching pages in `netlify.toml`.
 - `netlify.toml`, `netlify/functions/submission-created.js`: Netlify Forms to Monday.com.
+- `netlify/edge-functions/geo.js`: returns the visitor's approximate location (from their IP, via Netlify) at `/api/geo` so the
+  home page's service-area card can show the closest town, or "we'll come to you" for the rest of Texas. Nothing is stored.
+  To preview a match without being in Texas, add `?near=boerne` (any service-area town) or `?near=31.55,-97.15` to the home page URL.
 - `sitemap.xml`, `robots.txt` (AI search crawlers allowed), `llms.txt`.
 - `site-src/`: the content and generator that produced the pages.
 

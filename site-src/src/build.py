@@ -258,40 +258,41 @@ def texas_map():
     tl = "".join(f'<line x1="{a[0]:.1f}" y1="{a[1]:.1f}" x2="{b[0]:.1f}" y2="{b[1]:.1f}"/>' for a, b in tangents((fx, fy), TX_R, LC, LR))
     cx, cy = LC
     rings = "".join(f'<circle class="txm-ring" cx="{cx}" cy="{cy}" r="{LR * f:.0f}"/>' for f in (0.36, 0.62))
-    full = f"""<svg class="txm txm-full" viewBox="-6 -6 806 690" role="img" aria-labelledby="txm-t"><title id="txm-t">Map of Texas with 9 Arrow's home base in Spring Branch and the Hill Country towns we serve</title>
+    proj = f'data-lng0="{TX["lng0"]:.5f}" data-lat1="{TX["lat1"]:.5f}" data-c="{TX["c"]:.6f}" data-k="{TX["k"]}" data-hx="{fx:.1f}" data-hy="{fy:.1f}"'
+    full = f"""<svg class="txm txm-full" viewBox="-6 -6 806 690" role="img" aria-labelledby="txm-t" {proj}><title id="txm-t">Map of Texas with 9 Arrow's home base in Spring Branch and the Hill Country towns we serve</title>
 <defs><clipPath id="txm-clip"><circle cx="{cx}" cy="{cy}" r="{LR}"/></clipPath><clipPath id="txm-tx"><path d="{TX['path']}"/></clipPath></defs>
 <path class="txm-state" d="{TX['path']}"/><g clip-path="url(#txm-tx)"><image href="assets/img/topo.svg" x="-200" y="-100" width="1400" height="875" opacity=".7"/></g>
 <path class="txm-edge" d="{TX['path']}"/><text class="txm-word" x="196" y="262">TEXAS</text>
 <g class="txm-call">{tl}</g><circle class="txm-spot" cx="{fx:.1f}" cy="{fy:.1f}" r="{TX_R}"/><circle class="txm-hq" cx="{fx:.1f}" cy="{fy:.1f}" r="4"/>
+<g class="txm-you" data-scale="1"></g>
 <circle class="txm-lens-bg" cx="{cx}" cy="{cy}" r="{LR}"/><g clip-path="url(#txm-clip)"><image href="assets/img/topo.svg" x="{cx - 420}" y="{cy - 260}" width="1000" height="625" opacity=".9"/>{rings}</g>
 <circle class="txm-lens" cx="{cx}" cy="{cy}" r="{LR}"/>{lens_pins(LC, LR, 18)}
 <text class="txm-cap" x="{cx}" y="{cy + LR + 30}" text-anchor="middle">Hill Country towns around Spring Branch (not to scale)</text></svg>"""
     lc, lr = (210.0, 204.0), 170.0
     s = 0.2; ox, oy = 4, 6
-    mini = f'<g transform="translate({ox} {oy}) scale({s})"><path class="txm-state" d="{TX["path"]}"/><path class="txm-edge" d="{TX["path"]}" vector-effect="non-scaling-stroke"/><circle class="txm-spot" cx="{fx:.1f}" cy="{fy:.1f}" r="{TX_R * 1.6:.0f}" vector-effect="non-scaling-stroke"/></g>'
+    mini = f'<g transform="translate({ox} {oy}) scale({s})"><path class="txm-state" d="{TX["path"]}"/><path class="txm-edge" d="{TX["path"]}" vector-effect="non-scaling-stroke"/><circle class="txm-spot" cx="{fx:.1f}" cy="{fy:.1f}" r="{TX_R * 1.6:.0f}" vector-effect="non-scaling-stroke"/><g class="txm-you" data-scale="{1 / s:.1f}"></g></g>'
     mrings = "".join(f'<circle class="txm-ring" cx="{lc[0]}" cy="{lc[1]}" r="{lr * f:.0f}"/>' for f in (0.36, 0.62))
-    lens = f"""<svg class="txm txm-lens-only" viewBox="0 0 420 410" role="img" aria-label="Hill Country towns 9 Arrow serves around Spring Branch, not to scale">
+    lens = f"""<svg class="txm txm-lens-only" viewBox="0 0 420 410" role="img" {proj} aria-label="Hill Country towns 9 Arrow serves around Spring Branch, not to scale">
 <defs><clipPath id="txm-clip-m"><circle cx="{lc[0]}" cy="{lc[1]}" r="{lr}"/></clipPath></defs>
 <circle class="txm-lens-bg" cx="{lc[0]}" cy="{lc[1]}" r="{lr}"/><g clip-path="url(#txm-clip-m)"><image href="assets/img/topo.svg" x="-300" y="-120" width="1000" height="625" opacity=".9"/>{mrings}</g>
 <circle class="txm-lens" cx="{lc[0]}" cy="{lc[1]}" r="{lr}"/>{lens_pins(lc, lr, 17)}{mini}</svg>"""
     return full + lens
 
-def area_cards():
-    pin = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 22s7-6.4 7-12a7 7 0 1 0-14 0c0 5.6 7 12 7 12z" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="10" r="2.6" fill="currentColor"/></svg>'
+def areas_side():
     arrow = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.2"/></svg>'
-    cards = []
+    links = []
     for suf, name, *_ in TOWNS:
-        s = "land-clearing-" + suf; county = PAGES[s].get("city", {}).get("county", "")
-        tag = '<span class="ac-tag">Home base</span>' if suf == "spring-branch-tx" else ""
-        cards.append(f'<a class="area-card" href="{url(s)}" data-areas="{suf}"><span class="ac-pin">{pin}</span><span class="ac-body"><span class="ac-name">{esc(name)}{tag}</span>'
-                     f'<span class="ac-sub">{esc(county)}</span><span class="ac-go">Land clearing in {esc(name)} {arrow}</span></span></a>')
-    cards.append(f'<a class="area-card" href="{url("land-clearing-comal-county")}" data-areas="{" ".join(COMAL)}"><span class="ac-pin">{pin}</span><span class="ac-body"><span class="ac-name">Comal County</span>'
-                 f'<span class="ac-sub">Spring Branch, Bulverde, Canyon Lake, New Braunfels</span><span class="ac-go">Land clearing in Comal County {arrow}</span></span></a>')
-    cards.append(f'<a class="area-card" href="{url("forestry-mulching-texas-hill-country")}" data-areas="{" ".join(t[0] for t in TOWNS)}"><span class="ac-pin">{pin}</span><span class="ac-body"><span class="ac-name">Texas Hill Country</span>'
-                 f'<span class="ac-sub">The whole region</span><span class="ac-go">Forestry mulching in the Hill Country {arrow}</span></span></a>')
-    cards.append(f'<a class="area-card ac-tx" href="{est_url("")}" data-drawer><span class="ac-pin">{pin}</span><span class="ac-body"><span class="ac-name">Anywhere in Texas</span>'
-                 f'<span class="ac-sub">Right-of-way, utility, solar and large-acreage projects</span><span class="ac-go">Tell us about your project {arrow}</span></span></a>')
-    return f'<div class="area-cards">{"".join(cards)}</div>'
+        links.append(f'<li><a href="{url("land-clearing-" + suf)}" data-areas="{suf}">{esc(name)}{" <small>home base</small>" if suf == "spring-branch-tx" else ""}</a></li>')
+    links.append(f'<li><a href="{url("land-clearing-comal-county")}" data-areas="{" ".join(COMAL)}">Comal County</a></li>')
+    links.append(f'<li><a href="{url("forestry-mulching-texas-hill-country")}" data-areas="{" ".join(x[0] for x in TOWNS)}">The Hill Country</a></li>')
+    return f"""<div class="areas-side">
+<div class="spot" data-spot aria-live="polite"><p class="spot-k">Home base</p><h3 class="spot-h">Spring Branch, TX</h3>
+<p class="spot-sub">Comal County, in the middle of the Texas Hill Country</p>
+<p class="spot-p">Our crew and machines start here. We clear land across the Hill Country and take bigger projects anywhere in Texas.</p>
+<div class="spot-row"><a class="btn btn-main spot-go" href="{url('land-clearing-spring-branch-tx')}">Land clearing in Spring Branch</a><a class="arrow-link spot-est" href="{est_url('')}" data-drawer>Get an estimate</a></div></div>
+<div class="towns"><p class="towns-h">Towns we work in most</p><ul class="town-list">{"".join(links)}</ul></div>
+<p class="farther"><b>Farther out?</b> We take right-of-way, utility, solar and large-acreage projects across Texas. <a class="arrow-link" href="{est_url('')}" data-drawer>Tell us about your project</a></p>
+</div>"""
 
 def services_explorer(slugs, head="Everything the land needs before you build on it.", lede="Pick a service to see what it covers."):
     tabs, panels = [], []
@@ -1070,11 +1071,13 @@ def render_home():
     aud = "".join(f'<a class="atile" href="{url(s)}">{img(aud_img[s], "(max-width: 700px) 100vw, 33vw")}<span class="atile-b"><b>{esc(n)}</b><span class="arrow-link">See how we help</span></span></a>' for s, n in AUDIENCES)
     serve = f"""<section class="sec"><div class="wrap"><div class="sec-head"><div><h2 class="h-lg">Who we clear for</h2><p class="lede">Developers, utilities and solar crews need volume and precision. Ranchers and landowners need someone who treats the land like their own. We do both.</p></div></div>
 <div class="atiles">{aud}</div></div></section>"""
-    areas = f"""<section class="sec alt areas-sec" aria-labelledby="areas-h"><div class="wrap">
+    town_data = html.escape(json.dumps([{"s": x[0], "n": x[1], "lat": x[2], "lng": x[3], "c": PAGES["land-clearing-" + x[0]].get("city", {}).get("county", ""), "u": url("land-clearing-" + x[0])} for x in TOWNS]), quote=True)
+    areas = f"""<section class="sec alt areas-sec" aria-labelledby="areas-h" data-towns="{town_data}"><div class="wrap">
 <div class="sec-head"><div><p class="kicker">Service areas</p><h2 class="h-lg" id="areas-h">Based in Spring Branch. Working across Texas.</h2>
-<p class="lede mt-s">Home base is Spring Branch, in the Texas Hill Country. We clear land in the towns below and take right-of-way, utility, solar and large-acreage projects across Texas.</p></div>
+<p class="lede mt-s">Home base is Spring Branch, in the Texas Hill Country. We clear land all over the Hill Country and take right-of-way, utility, solar and large-acreage projects across the state.</p></div>
 <a class="btn btn-line" href="{url('service-areas')}">All service areas</a></div>
-<div class="areas-grid"><div class="txm-wrap" data-txm>{texas_map()}</div>{area_cards()}</div></div></section>"""
+<div class="areas-grid"><div class="txm-col"><div class="txm-wrap" data-txm>{texas_map()}</div>
+<ul class="txm-key"><li><i class="k-tx"></i>Projects across Texas</li><li><i class="k-hc"></i>Hill Country home base</li><li class="k-you-li" hidden><i class="k-you"></i>You (approximate)</li></ul></div>{areas_side()}</div></div></section>"""
     fam = founders(f"""<p class="kicker">The family behind the name</p><h2 class="h-lg">Nine children. Nine values. One name.</h2>
 <blockquote class="psalm">"As arrows are in the hand of a mighty man; so are children of the youth." <cite>Psalm 127:4</cite></blockquote>
 <p>John and Camille Wheelock started 9 Arrow from Texas ranch roots and years of building custom homes. In 2014 a project with a developer and a surveyor put a forestry mulcher in John's hands, and it became the heart of the business. We treat every property like our own, and a job isn't finished until we're proud of it.</p>""")
@@ -1115,7 +1118,7 @@ def main():
     sm = "".join(f"<url><loc>{canon(s if s != 'index' else '')}</loc><lastmod>{TODAY}</lastmod></url>" for s in sorted(urls, key=lambda x: (x != "index", x)))
     open(os.path.join(OUT, "sitemap.xml"), "w").write(f'<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">{sm}</urlset>\n')
     open(os.path.join(OUT, "robots.txt"), "w").write(
-        "# Search engines and AI answer engines are welcome.\nUser-agent: *\nAllow: /\nDisallow: /thanks\n\n"
+        "# Search engines and AI answer engines are welcome.\nUser-agent: *\nAllow: /\nDisallow: /thanks\nDisallow: /api/\n\n"
         "User-agent: OAI-SearchBot\nAllow: /\n\nUser-agent: ChatGPT-User\nAllow: /\n\nUser-agent: PerplexityBot\nAllow: /\n\n"
         "User-agent: Claude-SearchBot\nAllow: /\n\nUser-agent: Claude-User\nAllow: /\n\nSitemap: https://www.9arrow.com/sitemap.xml\n")
     llm = ["# 9 Arrow Land Service", "", "> " + ENTITY, "", f"Phone: {PHONE}. Email: {EMAIL}. Based in Spring Branch, TX.", "", "## Services"]
