@@ -1,0 +1,103 @@
+{
+  "slug": "land-clearing-blanco-tx",
+  "type": "city",
+  "nav_label": "Blanco",
+  "title_tag": "Land Clearing in Blanco, TX | Ranch Land | 9 Arrow",
+  "meta_description": "Land clearing in Blanco, TX for ranches and acreage. Pasture reclamation, fence lines and ranch roads built from your own rock. Call (210) 247-8410.",
+  "h1": "Blanco, TX land clearing for ranch country",
+  "primary_keyword": "land clearing blanco tx",
+  "secondary_keywords": [
+    "ranch clearing blanco county",
+    "pasture clearing blanco tx",
+    "fence line clearing blanco",
+    "ranch road building blanco"
+  ],
+  "lede": "9 Arrow Land Service does land clearing in Blanco, TX for ranches and acreage up US 281 from our Spring Branch base. We reclaim pasture, open fence lines and build ranch roads.",
+  "answer": {
+    "q": "What kind of land clearing do Blanco, TX ranches need?",
+    "a": "Land clearing for Blanco, TX ranches usually means taking pasture back from cedar and brush, opening overgrown fence lines, and building roads that hold up in wet weather. 9 Arrow Land Service mulches vegetation in place, grinds old brush piles instead of burning them, and can crush ranch rock into road base on site."
+  },
+  "highlights": [
+    "Pasture reclaimed without burn piles",
+    "Fence lines cut on surveyor GPS data",
+    "Ranch roads with crown and drainage",
+    "Old dozer piles mulched on site"
+  ],
+  "sections": [
+    {
+      "h2": "Ranch country up US 281",
+      "paras": [
+        "Blanco sits on the Blanco River in Blanco County, about 25 miles north of Bulverde on US 281 and past our home base, covered under [land clearing in Spring Branch](land-clearing-spring-branch-tx). US 281 runs right through downtown. Blanco was the original county seat until Johnson City took over in 1890. Blanco State Park follows about a mile of the river on the south edge of town, and the Pedernales River crosses the north end of the county.",
+        "Blanco County is entirely rural. Land around Blanco runs to working ranches and acreage homesteads, with live oak mottes, limestone ridges and Ashe juniper filling the gaps. Downstream, the Blanco River runs on toward [land clearing in Wimberley](land-clearing-wimberley-tx)."
+      ]
+    },
+    {
+      "h2": "Land clearing in Blanco for pasture reclamation",
+      "paras": [
+        "Cedar and brush crowd out grass on Blanco County pasture over the years. [Ranch land clearing](ranch-pasture-clearing) with a forestry mulcher grinds juniper and brush where they stand, leaves the soil intact and spreads a mulch layer that grass can grow back through.",
+        "Ranch land clearing near Blanco can run selective or wide open. Mass acreage clearing suits a pasture that has gone fully to cedar. Selective work suits ground where the oaks deserve to stay."
+      ],
+      "photo": "cleared-pasture-trees"
+    },
+    {
+      "h2": "Fence lines through Blanco County brush",
+      "paras": [
+        "A fence line lost in cedar is hard to repair and harder to check. Opening one with a forestry mulcher leaves a drivable lane and no piles to deal with afterward. Lines between tracts, along a pasture edge or around a homestead all clear the same way, with the mulch left on the ground.",
+        "When a Blanco fence line has to be exact, [survey line clearing](precision-line-survey-clearing) loads your licensed surveyor's CAD files into Trimble receivers on the machine, and the operator follows the certified line with real-time GPS. 9 Arrow is not a licensed surveyor and does not replace one."
+      ]
+    },
+    {
+      "h2": "Ranch roads from Blanco rock",
+      "paras": [
+        "Limestone on a Blanco ranch is a resource. [Rock crushing](rock-crushing) on site breaks surface rock down to a fine, consistent road base, so the road gets built without trucking in material from somewhere else.",
+        "Blanco ranch roads get rough and fine grading, drainage and erosion control, and culverts where water crosses. A proper crown sheds water so the road carries trucks and equipment through changing weather.",
+        "Kenny Henninger wrote in a five-star Google review, \"This business operates with all the values you'd expect from a Central Texas, Family run company.\" It does not get better."
+      ],
+      "photo": "road-long"
+    }
+  ],
+  "faqs": [
+    {
+      "q": "How long until grass returns on a mulched Blanco pasture?",
+      "a": "Grass on a mulched Blanco pasture can green up within days after rain where the mulch layer is light. Where heavy mulch builds up, as deep as 12 inches around big cedar, expect 2 to 3 years. Mulching leaves the soil intact, which gives grass a better start than dozed ground."
+    },
+    {
+      "q": "What happens to old brush piles on a Blanco ranch?",
+      "a": "Old brush piles on a Blanco ranch get mulched where they sit, including bulldozer piles as large as a house. Grinding them in place frees up the ground for grass and removes the need to burn, which is often prohibited during burn bans. Nothing gets hauled off unless you want it gone."
+    },
+    {
+      "q": "Can you clear around live oaks on a Blanco ranch?",
+      "a": "Yes. Selective clearing on a Blanco ranch keeps the live oaks and grinds the cedar and brush around them. Oak wilt is common in Central Texas and spreads in defined paths. Infected trees cannot be restored, so selective clearing is often the best way to protect the healthy trees nearby."
+    }
+  ],
+  "related_services": [
+    "ranch-pasture-clearing",
+    "rock-crushing",
+    "precision-line-survey-clearing",
+    "roads-and-access-preparation"
+  ],
+  "related_areas": [
+    "land-clearing-spring-branch-tx",
+    "land-clearing-wimberley-tx",
+    "land-clearing-canyon-lake-tx",
+    "land-clearing-kerrville-tx"
+  ],
+  "related_posts": [
+    "blog-cedar-mesquite-ranch",
+    "blog-clear-cedar-without-regrowth"
+  ],
+  "hero_photo": "road-trees",
+  "hero_alt": "Ranch road between trees on land opened up by land clearing",
+  "cta_service": "Forestry mulching / land clearing",
+  "city": {
+    "name": "Blanco",
+    "county": "Blanco County",
+    "lat": 30.1,
+    "lng": -98.42,
+    "nearby": [
+      "land-clearing-spring-branch-tx",
+      "land-clearing-wimberley-tx",
+      "land-clearing-canyon-lake-tx"
+    ]
+  }
+}

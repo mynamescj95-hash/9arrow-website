@@ -1,0 +1,103 @@
+{
+  "slug": "land-clearing-canyon-lake-tx",
+  "type": "city",
+  "nav_label": "Canyon Lake",
+  "title_tag": "Land Clearing in Canyon Lake, TX | Steep Lots | 9 Arrow",
+  "meta_description": "Land clearing in Canyon Lake, TX for steep, rocky lots. Compact track machines, clearing to your property line, driveways and pads. Request an estimate.",
+  "h1": "Land clearing for steep Canyon Lake, TX lots",
+  "primary_keyword": "land clearing canyon lake tx",
+  "secondary_keywords": [
+    "lot clearing canyon lake",
+    "steep lot clearing comal county",
+    "hillside clearing canyon lake",
+    "driveway clearing canyon lake"
+  ],
+  "lede": "9 Arrow Land Service does land clearing in Canyon Lake, TX, east of our Spring Branch base. Steep lots, rock, cedar and a federal boundary along the water make Canyon Lake its own kind of job.",
+  "answer": {
+    "q": "Can you clear a steep lot in Canyon Lake, TX?",
+    "a": "Yes, a steep lot in Canyon Lake, TX can be cleared with compact track machines built for slopes, tight access and uneven ground. 9 Arrow Land Service grinds cedar and brush in place and leaves root balls to hold the soil. Clearing stops at your property line, since Corps land along the shore is off-limits."
+  },
+  "highlights": [
+    "Compact track machines for steep lots",
+    "GPS guidance from your surveyor's CAD files",
+    "Root balls left in place on slopes",
+    "Surface rock crushed into driveway base"
+  ],
+  "sections": [
+    {
+      "h2": "Canyon Lake lots, from Sattler to the north shore",
+      "paras": [
+        "Canyon Lake is a U.S. Army Corps of Engineers reservoir on the Guadalupe River in Comal County, holding water since 1964. Sattler, Startzville and Canyon City grew up around it. FM 306 runs along the north side, and FM 2673 runs along the south side toward Sattler. The lake sits east of our home base, covered under [land clearing in Spring Branch](land-clearing-spring-branch-tx), and below the dam the Guadalupe runs on toward [land clearing in New Braunfels](land-clearing-new-braunfels-tx).",
+        "Land around the lake is limestone with a real grade to it, shallow soil and thick stands of cedar and oak. Many lots are small and sloped, reached by a single steep driveway. Those conditions decide which machine fits, how fast the work goes and where the mulch can sit."
+      ]
+    },
+    {
+      "h2": "Where your Canyon Lake lot ends and Corps land begins",
+      "paras": [
+        "Much of the shoreline around Canyon Lake is public land managed by the Corps. The U.S. boundary line is marked with concrete monuments, usually topped with brass caps. The Corps states plainly that removing trees or shrubs on public land to improve a lake view is illegal.",
+        "Before any land clearing in Canyon Lake starts, know where your line is. The Canyon Lake Project Office can help you locate the monuments. On bigger tracts, we load your licensed surveyor's CAD files into Trimble receivers on the machine and follow the lines with real-time GPS through [survey line clearing](precision-line-survey-clearing)."
+      ]
+    },
+    {
+      "h2": "Clearing a Canyon Lake hillside without losing the soil",
+      "paras": [
+        "Hillside soil near Canyon Lake is thin, and once it moves it does not come back. [Forestry mulching](forestry-mulching-and-land-clearing) grinds cedar and brush where they stand, leaves root balls in the ground and lays a mulch layer over the surface. Dozing the same slope disturbs the soil and raises erosion risk.",
+        "Selective clearing lets you open a building spot or a view on your own Canyon Lake lot while keeping the oaks that hold the grade. Compact track machines are built for exactly that kind of slope and uneven ground."
+      ],
+      "photo": "mulcher-brush"
+    },
+    {
+      "h2": "Land clearing in Canyon Lake for driveways and pads",
+      "paras": [
+        "Most Canyon Lake lots have rock to spare. On-site rock crushing breaks loose surface rock down into a fine, compactible road base, which eliminates imported material and speeds the job.",
+        "Our [access road building](roads-and-access-preparation) work covers rough and fine grading, road base, drainage and culverts, with a proper crown so a Canyon Lake driveway holds up through changing weather. We also cut pads, including garage pads, and excavate for septic systems and propane tanks."
+      ]
+    }
+  ],
+  "faqs": [
+    {
+      "q": "Can I clear Corps land behind my Canyon Lake lot for a view?",
+      "a": "No. The Corps of Engineers says removing trees or shrubs on public land around Canyon Lake to improve a view is illegal. Owners next to Corps land can apply for a permit to mow a narrow path. Your own lot is a different story, and selective clearing there can open up the view you want."
+    },
+    {
+      "q": "What machine clears a steep Canyon Lake lot?",
+      "a": "A compact track machine clears most steep Canyon Lake lots. Tracks handle slopes, tight access and uneven ground. Our CAT 275 compact track loader runs a mulching head that grinds cedar and brush in place, so nothing has to be dragged uphill, piled at the curb or burned on a small lot."
+    },
+    {
+      "q": "Will a mulched Canyon Lake slope wash out?",
+      "a": "A Canyon Lake slope cleared with forestry mulching holds up better than a dozed one. Mulching leaves root balls and topsoil in place and covers the ground with a layer of mulch. Dozing disturbs the soil and raises erosion risk, which matters on rocky grades that drain toward the lake."
+    }
+  ],
+  "related_services": [
+    "forestry-mulching-and-land-clearing",
+    "precision-line-survey-clearing",
+    "roads-and-access-preparation",
+    "site-work-light-utility-installation"
+  ],
+  "related_areas": [
+    "land-clearing-spring-branch-tx",
+    "land-clearing-new-braunfels-tx",
+    "land-clearing-wimberley-tx",
+    "land-clearing-comal-county",
+    "forestry-mulching-canyon-lake-tx"
+  ],
+  "related_posts": [
+    "blog-mulching-vs-traditional-land-clearing",
+    "blog-forestry-mulching-guide"
+  ],
+  "hero_photo": "cleared-hillside",
+  "hero_alt": "Cleared hillside with a long valley view after land clearing",
+  "cta_service": "Forestry mulching / land clearing",
+  "city": {
+    "name": "Canyon Lake",
+    "county": "Comal County",
+    "lat": 29.87,
+    "lng": -98.26,
+    "nearby": [
+      "land-clearing-spring-branch-tx",
+      "land-clearing-new-braunfels-tx",
+      "land-clearing-wimberley-tx",
+      "land-clearing-comal-county"
+    ]
+  }
+}

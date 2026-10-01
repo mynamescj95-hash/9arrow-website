@@ -1,0 +1,106 @@
+{
+  "slug": "get-an-estimate",
+  "type": "company",
+  "nav_label": "Get an estimate",
+  "title_tag": "Land Clearing Estimate in Central Texas | 9 Arrow",
+  "meta_description": "Request a land clearing estimate from 9 Arrow Land Service. A discovery call, a site visit when needed, then pricing by the day or by the acre.",
+  "h1": "Request a land clearing estimate for your property",
+  "primary_keyword": "land clearing estimate",
+  "secondary_keywords": [
+    "forestry mulching estimate",
+    "land clearing quote",
+    "land clearing site visit",
+    "price by the acre"
+  ],
+  "lede": "A land clearing estimate from 9 Arrow starts with a conversation about your land and your goal.",
+  "answer": {
+    "q": "What happens after you request a land clearing estimate?",
+    "a": "After you request a land clearing estimate, 9 Arrow Land Service sets up a discovery call about the property and your goal, then visits the site when needed. The estimate reflects density, tree size and species, topography, access, maneuverability and soil conditions, and it is priced by the day or by the acre."
+  },
+  "highlights": [
+    "Discovery call before any pricing",
+    "Site visit when the job needs one",
+    "Pricing by the day or acre",
+    "Family-owned crew from Spring Branch"
+  ],
+  "process": [
+    {
+      "step": "Send your request",
+      "detail": "Call, email or use the form with the property location, rough acreage and what you want the land to become."
+    },
+    {
+      "step": "Discovery call",
+      "detail": "We talk through your property, your goals and which services fit, from forestry mulching to roads or survey lines."
+    },
+    {
+      "step": "Site visit",
+      "detail": "When the job calls for it, we walk the land to see density, tree size, terrain, access and soil firsthand."
+    },
+    {
+      "step": "Your estimate",
+      "detail": "You get pricing by the day or by the acre, based on what your land actually holds."
+    }
+  ],
+  "sections": [
+    {
+      "h2": "What a land clearing estimate is based on",
+      "paras": [
+        "Every 9 Arrow land clearing estimate is built on six factors."
+      ],
+      "bullets": [
+        "Vegetation density",
+        "Tree size and species",
+        "Topography",
+        "Access to the property",
+        "Maneuverability on site",
+        "Soil conditions"
+      ],
+      "photo": "mulcher-brush"
+    },
+    {
+      "h2": "What to share in an estimate request",
+      "paras": [
+        "A useful 9 Arrow estimate request covers where the property is, roughly how many acres, what is growing on it and what you want the land to become. Developers and utility partners with survey files can mention them for [survey line clearing](precision-line-survey-clearing)."
+      ]
+    },
+    {
+      "h2": "How clearing pace shapes an estimate",
+      "paras": [
+        "Clearing pace matters when 9 Arrow prices by the day. Our smaller machines clear about half an acre to 1 acre per 8-hour day, and larger machines about 1 to 3 acres with reasonable tree coverage. Our [forestry mulching cost per acre](blog-forestry-mulching-cost-per-acre) guide covers cost factors in more detail."
+      ]
+    }
+  ],
+  "faqs": [
+    {
+      "q": "Can I get a land clearing price over the phone?",
+      "a": "9 Arrow prices land clearing after a discovery call, a site visit or both. The discovery call happens by phone, and for some jobs that conversation is enough to build an estimate. Other jobs need a site visit so the crew can see the land firsthand."
+    },
+    {
+      "q": "What if I am not sure which service I need?",
+      "a": "If you are not sure which service you need, choose \"Not sure yet\" on the form and describe the land and your goal. 9 Arrow works out the right mix on the discovery call, whether that means forestry mulching, roads, survey line clearing, site work or grounds maintenance."
+    },
+    {
+      "q": "Does 9 Arrow give estimates outside Spring Branch?",
+      "a": "Yes. 9 Arrow is based in Spring Branch and comes to your land across Central Texas and the Texas Hill Country. Include the property location in your request so we can plan the discovery call and any site visit. Our [service areas](service-areas) page lists the towns we cover."
+    }
+  ],
+  "related_services": [
+    "forestry-mulching-and-land-clearing",
+    "land-clearing",
+    "roads-and-access-preparation"
+  ],
+  "related_areas": [
+    "land-clearing-spring-branch-tx",
+    "land-clearing-bulverde-tx",
+    "land-clearing-canyon-lake-tx",
+    "land-clearing-new-braunfels-tx",
+    "land-clearing-boerne-tx"
+  ],
+  "related_posts": [
+    "blog-forestry-mulching-cost-per-acre",
+    "blog-land-clearing-cost-texas"
+  ],
+  "hero_photo": "john-machine",
+  "hero_alt": "John Wheelock of 9 Arrow Land Service standing in front of a forestry mulcher, ready to walk a site for a land clearing estimate",
+  "cta_service": "Not sure yet"
+}

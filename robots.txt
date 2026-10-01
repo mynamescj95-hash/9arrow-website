@@ -1,3 +1,21 @@
+# Search engines and AI answer engines are welcome.
 User-agent: *
 Allow: /
+Disallow: /thanks
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Claude-SearchBot
+Allow: /
+
+User-agent: Claude-User
+Allow: /
+
 Sitemap: https://www.9arrow.com/sitemap.xml

@@ -1,0 +1,84 @@
+{
+  "slug": "forestry-mulching-canyon-lake-tx",
+  "type": "city",
+  "nav_label": "Canyon Lake forestry mulching",
+  "title_tag": "Forestry Mulching in Canyon Lake, TX | 9 Arrow",
+  "meta_description": "Forestry mulching in Canyon Lake, TX for steep, rocky hillside lots. Compact track machines, soil left in place, a fine finish. Call (210) 247-8410.",
+  "h1": "Canyon Lake forestry mulching for steep hillside lots",
+  "primary_keyword": "forestry mulching canyon lake tx",
+  "secondary_keywords": ["Canyon Lake lot clearing with a mulcher", "hillside forestry mulching", "brush mulching Canyon Lake", "erosion control clearing Comal County"],
+  "lede": "9 Arrow Land Service brings forestry mulching to Canyon Lake, TX, where lots are steep, rocky and tight. We grind cedar and brush in place and leave the soil on the hill where it belongs.",
+  "answer": {
+    "q": "Is forestry mulching a good fit for Canyon Lake, TX lots?",
+    "a": "Forestry mulching is a strong fit for Canyon Lake, TX lots because it clears steep, rocky ground without pushing soil around. The mulcher grinds cedar and brush where they stand and leaves root balls in the ground. Compact track machines reach tight lots and slopes, and the fine mulch finish covers the soil."
+  },
+  "highlights": [
+    "Compact track machines for tight, steep lots",
+    "Root balls left in place",
+    "No burn piles and no hauling",
+    "GPS line clearing from your surveyor's files"
+  ],
+  "sections": [
+    {
+      "h2": "What Canyon Lake lots are like to clear",
+      "paras": [
+        "Canyon Lake is a reservoir on the Guadalupe River in Comal County, completed by the U.S. Army Corps of Engineers in 1964. Communities around the water, such as Startzville, Sattler, Fischer and Canyon City, are reached by FM 306 and FM 2673, with side roads that wind up into steep hills.",
+        "A typical Canyon Lake property is a hillside lot with limestone close to the surface, thick cedar, a few good oaks, and not much room to turn a machine around. Some lots look down on the water and some sit back in the hills, and most of them slope."
+      ]
+    },
+    {
+      "h2": "Why forestry mulching suits a Canyon Lake slope",
+      "paras": [
+        "Forestry mulching leaves soil intact. A dozer scrapes and pushes soil, and on a slope above Canyon Lake that disturbed soil raises the risk of erosion with every hard rain. Mulching leaves the root balls in the ground to hold the hillside together and spreads a layer of mulch over the surface.",
+        "Water moves fast in this country. The 2002 flood that sent water over the Canyon Lake spillway carved Canyon Lake Gorge out of bedrock in a matter of days. A cleared lot with its soil held in place stands a better chance in a heavy storm than one scraped bare."
+      ],
+      "photo": "mulch-texture"
+    },
+    {
+      "h2": "Compact machines for tight Canyon Lake access",
+      "paras": [
+        "Many Canyon Lake lots have narrow approaches and steep driveways. Compact track machines are built for tight access, slopes and uneven ground, which makes them the right fit for most hillside lots. Our equipment includes a CAT 275 compact track loader.",
+        "Larger articulated wheel machines bring more horsepower to bigger, open tracts back from the lake. Smaller machines cover about half an acre to an acre in an 8-hour day, and steep slopes and thick cedar slow that pace. Lots that have sat untouched for years fall under our [brush clearing](brush-removal) work as well."
+      ]
+    },
+    {
+      "h2": "Marking your line before mulching near the lake",
+      "paras": [
+        "The U.S. Army Corps of Engineers manages Canyon Lake and property around it, so a lot near the water may border federal land. Clearing has to stop at your line, and knowing exactly where that line runs matters more here than on most Hill Country land.",
+        "Our [survey line clearing](precision-line-survey-clearing) uses Trimble GPS receivers mounted on the mulching machines. We load your licensed surveyor's CAD files and follow the certified survey data in real time. 9 Arrow is not a surveyor and does not replace one. We clear to the line your surveyor sets.",
+        "The [forestry mulching in Central Texas](forestry-mulching-and-land-clearing) page covers the service in full. Neighbors to the west can read about [forestry mulching in Spring Branch](forestry-mulching-spring-branch-tx), and owners closer to I-35 can see [forestry mulching in New Braunfels](forestry-mulching-new-braunfels-tx)."
+      ]
+    }
+  ],
+  "faqs": [
+    {
+      "q": "Can your machines get onto a steep Canyon Lake lot?",
+      "a": "Compact track forestry mulchers are made for steep Canyon Lake lots, with tracks suited to tight access, slopes and uneven ground. Very steep or very rocky lots take more time to clear. The site visit tells us which machine fits your lot and how the slope will affect the schedule and the estimate."
+    },
+    {
+      "q": "Will forestry mulching cause erosion on my Canyon Lake property?",
+      "a": "Forestry mulching disturbs far less soil on Canyon Lake property than a bulldozer. The soil stays intact, root balls stay in the ground, and a layer of mulch covers what was bare. Dozing disturbs soil and raises erosion risk. Under light mulch, grass can return within days after a rain."
+    },
+    {
+      "q": "Can you clear right up to Corps of Engineers land at Canyon Lake?",
+      "a": "We clear Canyon Lake property up to your property line and no further. The U.S. Army Corps of Engineers manages the lake and land around it, so the line needs to be clear before work starts. With your licensed surveyor's CAD files loaded, our GPS-guided mulchers follow the certified survey line."
+    },
+    {
+      "q": "Do you haul the cedar off Canyon Lake lots?",
+      "a": "Cedar and brush on Canyon Lake lots are ground into mulch where they stand, so nothing has to be hauled down a narrow road. If you would rather have less mulch on the ground, the material can be stockpiled or hauled off. Under a light layer, grass can return within days after rain."
+    }
+  ],
+  "related_services": ["forestry-mulching-and-land-clearing", "precision-line-survey-clearing", "brush-removal", "site-prep"],
+  "related_areas": ["forestry-mulching-spring-branch-tx", "forestry-mulching-new-braunfels-tx", "land-clearing-canyon-lake-tx", "land-clearing-wimberley-tx"],
+  "related_posts": ["blog-mulching-vs-traditional-land-clearing", "blog-forestry-mulching-guide"],
+  "hero_photo": "cleared-hillside",
+  "hero_alt": "Hillside cleared by forestry mulching with a long Hill Country valley view",
+  "cta_service": "Forestry mulching / land clearing",
+  "city": {
+    "name": "Canyon Lake",
+    "county": "Comal County",
+    "lat": 29.8753,
+    "lng": -98.2625,
+    "nearby": ["forestry-mulching-spring-branch-tx", "forestry-mulching-new-braunfels-tx", "land-clearing-canyon-lake-tx", "land-clearing-wimberley-tx"]
+  }
+}

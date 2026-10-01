@@ -1,0 +1,82 @@
+{
+  "slug": "our-work",
+  "type": "company",
+  "nav_label": "Our work",
+  "title_tag": "Land Clearing Projects in Central Texas | 9 Arrow",
+  "meta_description": "See land clearing projects from 9 Arrow Land Service. Forestry mulching, survey lines, right-of-way, roads, rock crushing and cleanup across Central Texas.",
+  "h1": "Land clearing projects from the 9 Arrow crew",
+  "primary_keyword": "land clearing projects",
+  "secondary_keywords": [
+    "forestry mulching before and after",
+    "land clearing photos",
+    "right of way clearing photos",
+    "rock crushing road base photos"
+  ],
+  "lede": "These land clearing projects show 9 Arrow work across Central Texas, from forestry mulching and survey lines to roads, rock crushing and cleanup.",
+  "answer": {
+    "q": "What kind of work does 9 Arrow Land Service do?",
+    "a": "9 Arrow Land Service does forestry mulching and land clearing, GPS-guided survey line clearing, right-of-way clearing, access roads with on-site rock crushing, light site work and utility trenching, and grounds maintenance. The family-owned Spring Branch crew works across Central Texas for developers, ranchers, utilities and landowners."
+  },
+  "highlights": [
+    "Real photos from 9 Arrow jobs",
+    "Fine mulch finish, no burn piles",
+    "Roads from crushed on-site rock",
+    "Corridors cut to survey data"
+  ],
+  "sections": [
+    {
+      "h2": "Forestry mulching and land clearing projects",
+      "paras": [
+        "9 Arrow [forestry mulching](forestry-mulching-and-land-clearing) photos show selective clearing under oaks, mass acreage clearing and the fine finish our crew calls toothpicks. Ashley Cooke's 5-star Google review describes one cleared property. \"They cleared our 20 acres in Bulverde where Bulverde Market Day is held and did a great job! A year and a half later the land looks incredible.\""
+      ],
+      "photo": "trail-after"
+    },
+    {
+      "h2": "Survey line, right-of-way and road projects",
+      "paras": [
+        "9 Arrow corridor photos cover [survey line clearing](precision-line-survey-clearing) cut from surveyor data, utility rights-of-way, and access roads built from crushed on-site rock."
+      ],
+      "photo": "cleared-lane"
+    },
+    {
+      "h2": "Grounds maintenance and cleanup projects",
+      "paras": [
+        "9 Arrow grounds photos show mowing, debris cleanup and light demolition of small structures."
+      ],
+      "photo": "mowed-pasture"
+    }
+  ],
+  "faqs": [
+    {
+      "q": "Are the photos in the 9 Arrow gallery from real jobs?",
+      "a": "Yes. The photos in the 9 Arrow gallery come from real 9 Arrow jobs. They show the company's own machines and crews, the fine mulch finish, cleared corridors, finished roads and grounds work, so you can judge the work before you call."
+    },
+    {
+      "q": "How do I start a project like these with 9 Arrow?",
+      "a": "Start a project with 9 Arrow by requesting a [land clearing estimate](get-an-estimate) or calling (210) 247-8410. 9 Arrow sets up a discovery call about your property, visits the site when needed and prices the work by the day or by the acre."
+    },
+    {
+      "q": "What finish does 9 Arrow leave after forestry mulching?",
+      "a": "After forestry mulching, 9 Arrow leaves a fine mulch finish of small material the crew calls toothpicks or hamster chips. The fine finish looks better, is easier to drive over and lets grass regrow faster. It does not get better."
+    }
+  ],
+  "related_services": [
+    "forestry-mulching-and-land-clearing",
+    "precision-line-survey-clearing",
+    "rock-crushing",
+    "grounds-maintenance"
+  ],
+  "related_areas": [
+    "land-clearing-bulverde-tx",
+    "land-clearing-spring-branch-tx",
+    "land-clearing-wimberley-tx",
+    "forestry-mulching-texas-hill-country"
+  ],
+  "related_posts": [
+    "blog-does-clearing-increase-property-value",
+    "blog-forestry-mulching-guide"
+  ],
+  "hero_photo": "mulcher-dust",
+  "hero_alt": "Yellow tracked forestry mulcher working in Central Texas woods, one of the land clearing projects from 9 Arrow",
+  "cta_service": "Not sure yet"
+}

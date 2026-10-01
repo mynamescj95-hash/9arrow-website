@@ -1,0 +1,104 @@
+{
+  "slug": "land-clearing-san-antonio-tx",
+  "type": "city",
+  "nav_label": "San Antonio",
+  "title_tag": "Land Clearing in San Antonio, TX | 9 Arrow Land Service",
+  "meta_description": "Land clearing in San Antonio, TX for developers and commercial sites. GPS survey line clearing, pads, easements and access roads. Request an estimate.",
+  "h1": "San Antonio, TX land clearing for development sites",
+  "primary_keyword": "land clearing san antonio tx",
+  "secondary_keywords": [
+    "commercial land clearing san antonio",
+    "subdivision clearing bexar county",
+    "lot line clearing san antonio",
+    "easement clearing san antonio"
+  ],
+  "lede": "9 Arrow Land Service provides land clearing in San Antonio, TX for developers, commercial real estate and utility work, south of our Spring Branch base down US 281. We clear survey lines, pads, easements and access roads.",
+  "answer": {
+    "q": "Who handles land clearing for development in San Antonio, TX?",
+    "a": "9 Arrow Land Service handles land clearing for development in San Antonio, TX, working for land developers, commercial real estate, utilities and solar developers. The Spring Branch crew clears subdivision corridors, lot lines, pad sites and easements with GPS-guided forestry mulchers that follow your surveyor's files and grind vegetation in place."
+  },
+  "highlights": [
+    "Trimble GPS tied to your surveyor's files",
+    "Often first contractor on ROW jobs",
+    "Pads, roads and easements cleared",
+    "Five-star reviews from repeat clients"
+  ],
+  "sections": [
+    {
+      "h2": "San Antonio land, from the Hill Country edge to brush country",
+      "paras": [
+        "San Antonio is the Bexar County seat and the biggest metro in our service area. The Balcones Escarpment crosses the north side of Bexar County. North of it, along US 281 and I-10, the ground is Hill Country limestone with cedar and live oak. South and east, the land flattens into brush country where mesquite takes over.",
+        "The north and south split shapes a San Antonio project. Hill Country tracts on the north side bring rock, slope and the Edwards Aquifer zones. Flatter ground to the south brings heavy brush and mesquite regrowth to plan around.",
+        "Up US 281 across Cibolo Creek, the same Hill Country ground continues into [land clearing in Bulverde](land-clearing-bulverde-tx). Up I-10 to the northwest, it runs into [land clearing in Boerne](land-clearing-boerne-tx)."
+      ]
+    },
+    {
+      "h2": "GPS survey line clearing for San Antonio development",
+      "paras": [
+        "Subdivision street corridors, lot lines, pad sites and utility easements all start with a line through brush. [Survey line clearing](precision-line-survey-clearing) puts Trimble geospatial receivers on the mulching machines and loads your licensed surveyor's CAD survey files, so the operator follows certified survey data with real-time GPS.",
+        "Clearing on GPS can reduce or eliminate survey-crew pre-staking on a San Antonio site. On larger projects, cutting out pre-staking can save tens of thousands of dollars and reduce delays."
+      ],
+      "photo": "cleared-lane"
+    },
+    {
+      "h2": "Large-acreage clearing for San Antonio solar and commercial sites",
+      "paras": [
+        "Solar developers and commercial real estate projects around San Antonio can mean clearing big acreage in one push. Large articulated wheel machines bring the high horsepower and high production that mass acreage clearing needs, and compact track machines finish the tight edges near fences, drainage and existing structures.",
+        "When a San Antonio site needs bare ground for grading, the mulch can be stockpiled or hauled off. When it does not, the mulch stays as ground cover and the soil stays intact, which keeps erosion risk lower than dozing the same ground."
+      ],
+      "photo": "mulcher-red-field"
+    },
+    {
+      "h2": "Land clearing in San Antonio for pads, easements and roads",
+      "paras": [
+        "Once the lines are open, the site work follows. [Land clearing for a building site](site-prep) clears and grubs pad areas, and root balls get mulched on site. [Right of way clearing](right-of-way-clearing) opens gas pipeline, power line and waterline corridors through San Antonio brush, with survey data built into the cut.",
+        "Zach C., a developer, wrote in a five-star Google review, \"We exclusively use 9 Arrow for all land clearings, lot lines, and site prep scopes for our Texas projects. They are exceptional, keep up with our overwhelming volume, and deliver a level of quality and responsiveness we haven't seen anyone else rival.\""
+      ]
+    }
+  ],
+  "faqs": [
+    {
+      "q": "Do I still need a surveyor if 9 Arrow clears with GPS in San Antonio?",
+      "a": "Yes, a San Antonio project still needs a licensed surveyor. 9 Arrow is not a licensed surveyor and does not replace one. Your surveyor provides the certified CAD files, and we load them into Trimble receivers on the mulching machines so the clearing follows those lines in real time."
+    },
+    {
+      "q": "Do I need a permit to clear trees in San Antonio?",
+      "a": "A permit to clear trees in San Antonio is sometimes required. Tree removal inside city limits, and on platted property in parts of the city's extraterritorial jurisdiction, can need a city tree permit. Check with the Development Services Department first. Building on Edwards Aquifer recharge, transition or contributing zones also needs TCEQ plan approval."
+    },
+    {
+      "q": "Can 9 Arrow be the first contractor on a San Antonio easement?",
+      "a": "Yes. On right-of-way work around San Antonio, 9 Arrow is often the first contractor on site, opening the easement ahead of grading crews, dozers and excavators. Corridors typically run 30 to 120 feet wide, often 90 feet or more, and routes can run for many miles."
+    }
+  ],
+  "related_services": [
+    "precision-line-survey-clearing",
+    "site-prep",
+    "right-of-way-clearing",
+    "roads-and-access-preparation"
+  ],
+  "related_areas": [
+    "land-clearing-bulverde-tx",
+    "land-clearing-boerne-tx",
+    "land-clearing-new-braunfels-tx",
+    "forestry-mulching-san-antonio-tx"
+  ],
+  "related_posts": [
+    "blog-land-clearing-cost-texas",
+    "blog-mulching-vs-traditional-land-clearing"
+  ],
+  "hero_photo": "survey-cut",
+  "hero_alt": "Forestry mulcher cutting a survey line through brush during land clearing",
+  "cta_service": "Forestry mulching / land clearing",
+  "city": {
+    "name": "San Antonio",
+    "county": "Bexar County",
+    "lat": 29.42,
+    "lng": -98.49,
+    "nearby": [
+      "land-clearing-bulverde-tx",
+      "land-clearing-boerne-tx",
+      "land-clearing-new-braunfels-tx",
+      "land-clearing-spring-branch-tx"
+    ]
+  }
+}
