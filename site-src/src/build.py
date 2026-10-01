@@ -81,16 +81,98 @@ HERO = {
 FOCUS = {"r-owners-gold": "50% 30%", "r-haze": "50% 55%", "r-trail-cat": "50% 60%", "r-head-tall": "50% 45%", "r-yellow-head": "50% 50%",
          "r-mulch": "50% 60%", "r-owners": "50% 18%", "r-john-machine": "50% 30%", "r-operator": "50% 35%"}
 
-def img(key, sizes="(max-width: 900px) 100vw, 50vw", eager=False, alt=None, cls="", xl=False):
-    m = IMGS[key]; base = f"assets/img/{key}"
+# ---------------------------------------------------------------- image SEO
+# Every <img> alt is written for the page it sits on (9arrow-seo rule: primary keyword in at least one image alt,
+# descriptive, no stuffing). File names carry the keyword of the page the photo leads.
+CTX = {"slug": None, "used": set(), "n": 0}
+STOP = {"a", "an", "the", "of", "and", "in", "on", "at", "to", "for", "with", "by", "from", "its", "is", "9", "arrow"}
+PEOPLE = {"r-owners", "r-owners-gold", "r-john-machine"}
+
+def _slugify(s, n=7):
+    words = [w for w in re.sub(r"[^a-z0-9 ]+", " ", s.lower()).split() if w not in STOP]
+    return "-".join(words[:n])
+
+PROPER = {"texas": "Texas", "tx": "TX", "hill": "Hill", "country": "Country", "ashe": "Ashe", "county": "County", "spring": "Spring",
+          "branch": "Branch", "canyon": "Canyon", "lake": "Lake", "new": "New", "braunfels": "Braunfels", "san": "San", "antonio": "Antonio",
+          "bulverde": "Bulverde", "boerne": "Boerne", "blanco": "Blanco", "wimberley": "Wimberley", "kerrville": "Kerrville", "comal": "Comal",
+          "kendall": "Kendall", "bexar": "Bexar", "kerr": "Kerr", "hays": "Hays", "guadalupe": "Guadalupe", "central": "Central"}
+
+def natural(ph):
+    """Sentence case with place names kept capitalized: 'land clearing boerne tx' -> 'Land clearing Boerne TX'."""
+    words = ph.replace("&", "and").split()
+    out = []
+    for i, w in enumerate(words):
+        core = re.sub(r"[^A-Za-z]", "", w).lower()
+        nxt = re.sub(r"[^A-Za-z]", "", words[i + 1]).lower() if i + 1 < len(words) else ""
+        prv = re.sub(r"[^A-Za-z]", "", words[i - 1]).lower() if i else ""
+        keep = core in PROPER and (core not in ("spring", "new", "san", "central", "hill", "lake", "branch", "country", "county", "canyon")
+                                   or nxt in ("branch", "braunfels", "antonio", "texas", "country", "lake") or prv in ("spring", "new", "san", "hill", "canyon", "comal", "kendall", "bexar", "kerr", "hays", "blanco", "guadalupe"))
+        out.append(w.replace(re.sub(r"[^A-Za-z]", "", w), PROPER[core]) if keep else w.lower())
+    s = re.sub(r"\b9 arrow land service\b", "9 Arrow Land Service", " ".join(out))
+    s = re.sub(r"\b9 arrow\b", "9 Arrow", s)
+    return s[:1].upper() + s[1:]
+
+def kw_phrase(slug):
+    """The page's target keyword as a readable phrase."""
+    if slug in (None, "", "index"): return "Texas land clearing and forestry mulching"
+    if slug in POSTS: return natural(POSTS[slug].get("primary_keyword") or POSTS[slug]["h1"])
+    if slug in PAGES: return natural(re.sub(r"\s*\(.*?\)", "", PAGES[slug]["title_tag"].split("|")[0]).strip())
+    return ""
+
+def page_terms(slug):
+    if slug in PAGES: return [natural(k) for k in (PAGES[slug].get("secondary_keywords") or [])]
+    return []
+
+def _lf(s):
+    first = s.split(" ", 1)[0]
+    return s if first in ("Hill", "Ashe", "Texas", "Central", "John", "Spring", "San", "New") or s[:2] == s[:2].upper() else s[:1].lower() + s[1:]
+
+def seo_alt(key, dest=None, hero=False):
+    base = IMGS[key]["alt"]
+    if key in PEOPLE: return base
+    slug = CTX["slug"]
+    if dest:   # a card or tile that links to another page: describe it with that page's keyword
+        ph = kw_phrase(dest)
+        return f"{ph}: {_lf(base)}" if ph and ph.lower() not in base.lower() else base
+    prim = kw_phrase(slug)
+    if hero:
+        CTX["used"].add(prim.lower())
+        return f"{prim}: {_lf(base)}" if prim.lower() not in base.lower() else base
+    for ph in page_terms(slug) + [prim]:
+        if ph and ph.lower() not in CTX["used"] and ph.lower() not in base.lower():
+            CTX["used"].add(ph.lower())
+            return f"{ph}: {_lf(base)}"
+    return base
+
+HERO_PRIORITY = None
+def fname(key):
+    """Keyword file name for an image: the keyword of the page it leads, else its description."""
+    global HERO_PRIORITY
+    if HERO_PRIORITY is None:
+        HERO_PRIORITY = {}
+        for s, k in HERO.items():
+            if s in ("index", "services", "our-work", "blog", "faq", "contact", "get-an-estimate", "about-us"): continue
+            HERO_PRIORITY.setdefault(k, s)
+    fixed = {"trail-before": "forestry-mulching-before-brushy-trail", "trail-after": "forestry-mulching-after-cleared-trail",
+             "rock-before": "rock-crushing-before-loose-limestone", "rock-after": "rock-crushing-after-road-base",
+             "r-owners": "john-camille-wheelock-9-arrow-founders", "r-owners-gold": "john-camille-wheelock-spring-branch",
+             "r-john-machine": "john-wheelock-forestry-mulcher"}
+    if key in fixed: return fixed[key]
+    s = HERO_PRIORITY.get(key)
+    stem = _slugify(kw_phrase(s), 6) if s else _slugify(IMGS[key]["alt"])
+    return f"{stem}-{key}"
+
+def img(key, sizes="(max-width: 900px) 100vw, 50vw", eager=False, alt=None, cls="", xl=False, dest=None, hero=False):
+    m = IMGS[key]; base = f"assets/img/{fname(key)}"
     ws = [w for w in m["sizes"] if xl or w <= 1600]  # the 2400 tier ships only where a frame can use it
     srcset = ", ".join(f"{base}-{w}.webp {min(w, m['w'])}w" for w in ws)
     mid = m["sizes"][1] if len(m["sizes"]) > 1 else m["sizes"][0]
     load = 'fetchpriority="high"' if eager else 'loading="lazy"'
     c = f' class="{cls}"' if cls else ""
     if key in FOCUS: c += f' style="object-position:{FOCUS[key]}"'
+    a = seo_alt(key, dest, hero) if alt is None else alt
     return (f'<img src="{base}-{mid}.webp" srcset="{srcset}" sizes="{sizes}" width="{m["w"]}" height="{m["h"]}" '
-            f'alt="{esc(m["alt"] if alt is None else alt)}" {load} decoding="async"{c}>')
+            f'alt="{esc(a)}" {load} decoding="async"{c}>')
 
 def cover_sizes(key, mobile_vw=80, mobile_ratio=4 / 3, desk_h="(100vh - 280px)", bp=960):
     """sizes for an image that is cropped (object-fit: cover) into a frame of a different shape.
@@ -110,7 +192,7 @@ def big(key, fallback="g02", min_w=1500):
 
 def img_src(key, w=960):
     m = IMGS[key]; ws = [s for s in m["sizes"] if s <= w] or m["sizes"][:1]
-    return f"assets/img/{key}-{ws[-1]}.webp"
+    return f"assets/img/{fname(key)}-{ws[-1]}.webp"
 
 def hero_key(slug, page=None):
     if slug in HERO: return HERO[slug]
@@ -302,7 +384,7 @@ def services_explorer(slugs, head="Everything the land needs before you build on
                     f'<svg viewBox="0 0 28 28" aria-hidden="true">{TILE_ICONS[nd]}</svg><span class="svx-t">{esc(SVC_NAME[s])}</span><span class="svx-b">{esc(SVC_BLURB[s])}</span></button>')
         hl = "".join(f"<li>{esc(h)}</li>" for h in (p.get("highlights") or [])[:3])
         panels.append(f'<div class="svx-panel" role="tabpanel" id="svp-{i}" aria-labelledby="svt-{i}"{"" if on else " hidden"}>'
-                      f'<figure class="svx-pic">{img(hero_key(s, p), "(max-width: 960px) 92vw, 640px", eager=on)}</figure>'
+                      f'<figure class="svx-pic">{img(hero_key(s, p), "(max-width: 960px) 92vw, 640px", eager=on, dest=s)}</figure>'
                       f'<div class="svx-copy"><p class="svx-n">{i + 1:02d} / {len(slugs):02d}</p><h3>{esc(SVC_NAME[s])}</h3><p>{rich(p["lede"])}</p><ul class="bul">{hl}</ul>'
                       f'<div class="btn-row"><a class="btn btn-main" href="{url(s)}">See {esc(SVC_NAME[s].lower())}</a>'
                       f'<a class="btn btn-line" href="{est_url(s)}" data-need="{nd}" data-drawer>Get an estimate</a></div></div></div>')
@@ -425,7 +507,7 @@ def schema(slug, title, desc, crumb_items, extra=()):
         {"@type": "ListItem", "position": i + 1, "name": n, "item": canon(s if s is not None else slug)} for i, (s, n) in enumerate(crumb_items)]}
     page = {"@type": "WebPage", "@id": canon(slug) + "#webpage", "url": canon(slug), "name": title, "description": desc,
             "isPartOf": {"@id": SITE + "/#website"}, "about": {"@id": ORG_ID}, "inLanguage": "en-US", "dateModified": TODAY}
-    graph = [org(), {"@type": "WebSite", "@id": SITE + "/#website", "url": SITE + "/", "name": "9 Arrow Land Service", "publisher": {"@id": ORG_ID}}, page, bc] + list(extra)
+    graph = [org(), {"@type": "WebSite", "@id": SITE + "/#website", "url": SITE + "/", "name": "9 Arrow Land Service", "alternateName": ["9 Arrow", "Nine Arrow Land Service"], "publisher": {"@id": ORG_ID}}, page, bc] + list(extra)
     return '<script type="application/ld+json">' + json.dumps({"@context": "https://schema.org", "@graph": graph}, ensure_ascii=False).replace("</", "<\\/") + "</script>"
 
 def faq_schema(slug, faqs):
@@ -448,7 +530,11 @@ def doc(slug, title, desc, body, sch, og=None, hero_preload=None, noindex=False)
 <meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="geo.region" content="US-TX"><meta name="geo.placename" content="Spring Branch">
+<link rel="icon" href="assets/logo/favicon.ico" sizes="48x48">
 <link rel="icon" href="assets/logo/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="assets/logo/favicon-192.png" type="image/png" sizes="192x192">
+<link rel="apple-touch-icon" href="assets/logo/apple-touch-icon.png">
+<link rel="manifest" href="assets/logo/site.webmanifest">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="{FONTS}">
 <link rel="stylesheet" href="assets/css/site.css">
@@ -477,7 +563,7 @@ def phero(slug, p, crumb_items, img_key, h1=None, lede=None, cta=True, checks=Tr
     btns = (f'<div class="btn-row"><a class="btn btn-light" href="{est_url(slug)}" data-need="{need_for(slug)}" data-drawer>Get an estimate</a>'
             f'<a class="btn btn-ghost-l" href="tel:{TEL}">{I["phone"]} {PHONE}</a></div>') if cta else ""
     img_key = big(img_key)
-    return f"""<section class="hero-photo" data-zoom><div class="hp-media">{img(img_key, hero_sizes(img_key), eager=True, xl=True)}</div>
+    return f"""<section class="hero-photo" data-zoom><div class="hp-media">{img(img_key, hero_sizes(img_key), eager=True, xl=True, hero=True)}</div>
 <div class="wrap hp-in"><div class="hp-copy">{crumbs(crumb_items)}
 <h1>{esc(h1 or p['h1'])}</h1>
 <p class="lede">{rich(lede or p['lede'])}</p>
@@ -544,7 +630,7 @@ def related(p, slug):
     out = []
     rs = [s for s in (p.get("related_services") or []) if s in PAGES and s != slug][:4]
     if rs:
-        cards = "".join(f'<a class="card" href="{url(s)}"><figure class="pic">{img(hero_key(s, PAGES[s]), "(max-width: 600px) 100vw, 300px")}</figure>'
+        cards = "".join(f'<a class="card" href="{url(s)}"><figure class="pic">{img(hero_key(s, PAGES[s]), "(max-width: 600px) 100vw, 300px", dest=s)}</figure>'
                         f'<div class="card-b"><h3>{esc(SVC_NAME.get(s, PAGES[s]["nav_label"]))}</h3><p>{esc(SVC_BLURB.get(s, PAGES[s]["lede"][:110] + "..."))}</p><span class="arrow-link">Learn more</span></div></a>' for s in rs)
         out.append(f'<div><div class="sec-head"><h2 class="h-md">Related services</h2></div><div class="cards">{cards}</div></div>')
     ra = [s for s in (p.get("related_areas") or []) if s in PAGES and s != slug][:8]
@@ -560,7 +646,7 @@ def related(p, slug):
 
 def post_card(s):
     m = POSTS[s]
-    return (f'<a class="card" href="{url(s)}"><figure class="pic">{img(PHOTO.get(m.get("hero_photo"), "g02"), "(max-width: 600px) 100vw, 380px")}</figure>'
+    return (f'<a class="card" href="{url(s)}"><figure class="pic">{img(PHOTO.get(m.get("hero_photo"), "g02"), "(max-width: 600px) 100vw, 380px", dest=s)}</figure>'
             f'<div class="card-b"><h3>{esc(m["h1"])}</h3><p>{esc(m["excerpt"])}</p><span class="arrow-link">Read the guide</span></div></a>')
 
 def cta_band(slug="", head="Ready to see what your land can become?", text=None):
@@ -772,7 +858,7 @@ def render_services_hub():
               ("Lines, corridors and upkeep", ["precision-line-survey-clearing", "right-of-way-clearing", "grounds-maintenance"])]
     g = ""
     for name, slugs in groups:
-        cards = "".join(f'<a class="card" href="{url(s)}"><figure class="pic">{img(hero_key(s, PAGES[s]), "(max-width: 600px) 100vw, 380px")}</figure>'
+        cards = "".join(f'<a class="card" href="{url(s)}"><figure class="pic">{img(hero_key(s, PAGES[s]), "(max-width: 600px) 100vw, 380px", dest=s)}</figure>'
                         f'<div class="card-b"><h3>{esc(SVC_NAME[s])}</h3><p>{esc(SVC_BLURB[s])}.</p><span class="arrow-link">Learn more</span></div></a>' for s in slugs)
         g += f'<div><h2 class="h-md" style="margin-bottom:18px">{esc(name)}</h2><div class="cards">{cards}</div></div>'
     aud = "".join(f'<a class="chip-link" href="{url(s)}">{esc(n)}</a>' for s, n in AUDIENCES)
@@ -967,7 +1053,7 @@ def render_post(slug):
 <header class="post-head topo"><div class="wrap">{crumbs(ci)}<h1 class="h-xl mt-s" style="max-width:22ch">{esc(m['h1'])}</h1>
 <p class="lede mt-s">{esc(m['excerpt'])}</p>
 <p class="post-meta mt-s"><span>By the 9 Arrow team</span><span>Published {fmt(m['date'])}</span><span>Updated {fmt(m.get('updated', m['date']))}</span><span>{mins} min read</span></p></div></header>
-<div class="wrap"><figure class="post-hero">{img(big(hk), "(max-width: 1200px) 100vw, 1200px", eager=True, xl=True, alt=m.get('hero_alt') if hk in ('owners', 'john') else None)}</figure></div>
+<div class="wrap"><figure class="post-hero">{img(big(hk), "(max-width: 1200px) 100vw, 1200px", eager=True, xl=True, hero=True, alt=m.get('hero_alt') if hk in ('owners', 'john') else None)}</figure></div>
 <section class="sec" style="padding-top:clamp(28px,4vw,48px)"><div class="wrap post-grid"><div>
 <section class="answer" aria-labelledby="ans-h">{emblem()}<div><h2 id="ans-h">{esc(m['answer_q'])}</h2><p>{rich(m['answer_a'])}</p></div></section>
 <div class="prose mt-l">{md(m['body'])}</div></div>
@@ -986,7 +1072,7 @@ def render_post(slug):
 def render_blog_index():
     b = BLOG_INDEX; slugs = sorted(POSTS, key=lambda s: POSTS[s]["date"], reverse=True)
     lead = slugs[0]; m = POSTS[lead]
-    feat = (f'<a class="feature" href="{url(lead)}"><figure class="pic">{img(PHOTO.get(m.get("hero_photo"), "g02"), "(max-width: 900px) 100vw, 60vw", eager=True)}</figure>'
+    feat = (f'<a class="feature" href="{url(lead)}"><figure class="pic">{img(PHOTO.get(m.get("hero_photo"), "g02"), "(max-width: 900px) 100vw, 60vw", eager=True, dest=lead)}</figure>'
             f'<div class="feature-b"><p class="kicker">Latest guide</p><h2 class="h-lg">{esc(m["h1"])}</h2><p>{esc(m["excerpt"])}</p><span class="arrow-link">Read the guide</span></div></a>')
     cards = "".join(post_card(s) for s in slugs[1:])
     body = f"""<section class="phero topo est-hero"><div class="wrap">{crumbs([("", "Home"), (None, "Blog")])}<h1 class="mt-s">{esc(b['h1'])}</h1><p class="lede mt-s">{esc(b['lede'])}</p></div></section>
@@ -1019,8 +1105,8 @@ def render_404():
     return doc("404", "Page not found | 9 Arrow Land Service", "This page could not be found.", body, "", noindex=True)
 
 # ---------------------------------------------------------------- home
-HOME_TITLE = "Land Clearing & Forestry Mulching in Central Texas | 9 Arrow"
-HOME_DESC = "Forestry mulching, land clearing, rock crushing and survey line clearing across Central Texas. Family-owned in Spring Branch, TX. Get an estimate."
+HOME_TITLE = "Texas Land Clearing & Forestry Mulching | 9 Arrow"
+HOME_DESC = "Texas land clearing, forestry mulching and on-site rock crushing from a family crew in Spring Branch. Finished quality. Get a free estimate."
 HOME_TRACK = ["forestry-mulching-and-land-clearing", "rock-crushing", "land-clearing", "cedar-removal", "roads-and-access-preparation",
               "precision-line-survey-clearing", "right-of-way-clearing", "site-work-light-utility-installation", "grounds-maintenance"]
 HOME_FAQ_Q = ["How much does land clearing cost", "How many acres", "Can you crush rock", "What does the land look like", "Are there trees too big", "How long does it take for grass"]
@@ -1075,7 +1161,7 @@ def render_home():
 <li><b>0</b><span>burn piles. Brush and old dozer piles become mulch on site.</span></li></ul>
 </div></section>"""
     aud_img = {"land-developers": "g15", "commercial-real-estate": "g21", "energy-utilities": "g17", "solar": "g16", "ranchers": "g05"}
-    aud = "".join(f'<a class="atile" href="{url(s)}">{img(aud_img[s], "(max-width: 700px) 100vw, 33vw")}<span class="atile-b"><b>{esc(n)}</b><span class="arrow-link">See how we help</span></span></a>' for s, n in AUDIENCES)
+    aud = "".join(f'<a class="atile" href="{url(s)}">{img(aud_img[s], "(max-width: 700px) 100vw, 33vw", dest=s)}<span class="atile-b"><b>{esc(n)}</b><span class="arrow-link">See how we help</span></span></a>' for s, n in AUDIENCES)
     serve = f"""<section class="sec"><div class="wrap"><div class="sec-head"><div><h2 class="h-lg">Who we clear for</h2><p class="lede">Developers, utilities and solar crews need volume and precision. Ranchers and landowners need someone who treats the land like their own. We do both.</p></div></div>
 <div class="atiles">{aud}</div></div></section>"""
     town_data = html.escape(json.dumps([{"s": x[0], "n": x[1], "lat": x[2], "lng": x[3], "c": PAGES["land-clearing-" + x[0]].get("city", {}).get("county", ""), "u": url("land-clearing-" + x[0])} for x in TOWNS]), quote=True)
@@ -1107,23 +1193,38 @@ def main():
     os.makedirs(os.path.join(A, "css")); os.makedirs(os.path.join(A, "js"))
     shutil.copy(os.path.join(ROOT, "src/static/site.css"), os.path.join(A, "css/site.css"))
     shutil.copy(os.path.join(ROOT, "src/static/site.js"), os.path.join(A, "js/site.js"))
-    pages = {"index": render_home(), "services": render_services_hub(), "service-areas": render_areas_hub(), "about-us": render_about(),
-             "faq": render_faq(), "get-an-estimate": render_estimate(), "contact": render_contact(), "our-work": render_our_work(),
-             "blog": render_blog_index(), "rock-crushing": render_rock(), "privacy-policy": legal("privacy-policy", "Privacy Policy"),
-             "terms-and-conditions": legal("terms-and-conditions", "Terms & Conditions"), "thanks": render_thanks(), "404": render_404()}
+    jobs = {"index": render_home, "services": render_services_hub, "service-areas": render_areas_hub, "about-us": render_about,
+            "faq": render_faq, "get-an-estimate": render_estimate, "contact": render_contact, "our-work": render_our_work,
+            "blog": render_blog_index, "rock-crushing": render_rock, "privacy-policy": lambda: legal("privacy-policy", "Privacy Policy"),
+            "terms-and-conditions": lambda: legal("terms-and-conditions", "Terms & Conditions"), "thanks": render_thanks, "404": render_404}
     for s in PAGES:
-        if s not in pages: pages[s] = render_standard(s)
-    for s in POSTS: pages[s] = render_post(s)
+        if s not in jobs: jobs[s] = (lambda s=s: render_standard(s))
+    for s in POSTS: jobs[s] = (lambda s=s: render_post(s))
+    pages = {}
+    for s, fn in jobs.items():
+        CTX.update(slug=s, used=set(), n=0); pages[s] = fn()
+    # keyword file names for every image size
+    for f in os.listdir(os.path.join(A, "img")):
+        mm = re.match(r"^(.+)-(\d+)\.webp$", f)
+        if mm and mm.group(1) in IMGS:
+            os.rename(os.path.join(A, "img", f), os.path.join(A, "img", f"{fname(mm.group(1))}-{mm.group(2)}.webp"))
     for s, h in pages.items():
         open(os.path.join(OUT, s + ".html"), "w").write(h)
     # ship only the image files a page or the stylesheet actually references
     used = "".join(pages.values()) + open(os.path.join(A, "css/site.css")).read()
     for sub in ("img", "logo"):
         for f in os.listdir(os.path.join(A, sub)):
-            if f not in used: os.remove(os.path.join(A, sub, f))
+            if f not in used and not f.startswith(("favicon", "apple-touch", "site.webmanifest")): os.remove(os.path.join(A, sub, f))
+    shutil.copy(os.path.join(A, "logo", "favicon.ico"), os.path.join(OUT, "favicon.ico"))   # browsers and Google look here first
     urls = [s for s in pages if s not in ("thanks", "404")]
-    sm = "".join(f"<url><loc>{canon(s if s != 'index' else '')}</loc><lastmod>{TODAY}</lastmod></url>" for s in sorted(urls, key=lambda x: (x != "index", x)))
-    open(os.path.join(OUT, "sitemap.xml"), "w").write(f'<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">{sm}</urlset>\n')
+    def imgs_of(s):
+        out, seen = [], set()
+        for src, alt in re.findall(r'<img src="(assets/img/[^"]+\.webp)"[^>]*?alt="([^"]*)"', pages[s]):
+            if src in seen or not alt: continue
+            seen.add(src); out.append(f"<image:image><image:loc>{SITE}/{src}</image:loc></image:image>")
+        return "".join(out)
+    sm = "".join(f"<url><loc>{canon(s if s != 'index' else '')}</loc><lastmod>{TODAY}</lastmod>{imgs_of(s)}</url>" for s in sorted(urls, key=lambda x: (x != "index", x)))
+    open(os.path.join(OUT, "sitemap.xml"), "w").write(f'<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">{sm}</urlset>\n')
     open(os.path.join(OUT, "robots.txt"), "w").write(
         "# Search engines and AI answer engines are welcome.\nUser-agent: *\nAllow: /\nDisallow: /thanks\nDisallow: /api/\n\n"
         "User-agent: OAI-SearchBot\nAllow: /\n\nUser-agent: ChatGPT-User\nAllow: /\n\nUser-agent: PerplexityBot\nAllow: /\n\n"

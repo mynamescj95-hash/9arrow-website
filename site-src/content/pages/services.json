@@ -1,107 +1,107 @@
 {
-  "slug": "services",
-  "type": "hub",
-  "nav_label": "Services",
-  "title_tag": "Land services in Central Texas | 9 Arrow Land Service",
-  "meta_description": "Land services in Central Texas from 9 Arrow. Clearing, mulching, cedar, brush, survey lines, right-of-way, roads, rock crushing and site work.",
-  "h1": "Land services for Central Texas property, from clearing to roads",
-  "primary_keyword": "land services central texas",
-  "secondary_keywords": [
-    "9 arrow services",
-    "land clearing and site work",
-    "hill country land services"
-  ],
-  "lede": "9 Arrow Land Service offers land services across Central Texas and the Hill Country, from clearing and mulching to roads, rock crushing, site work and grounds upkeep.",
-  "answer": {
-    "q": "What services does 9 Arrow Land Service offer?",
-    "a": "9 Arrow Land Service offers forestry mulching, land clearing, cedar and brush removal, pasture clearing, building site prep, survey line and right-of-way clearing, access roads, on-site rock crushing, light site work and grounds maintenance. The family-owned company is based in Spring Branch, TX and works across Central Texas and the Hill Country."
+ "slug": "services",
+ "type": "hub",
+ "nav_label": "Services",
+ "title_tag": "Land Services in Central Texas | 9 Arrow Land Service",
+ "meta_description": "Land services in Central Texas from 9 Arrow. Clearing, mulching, cedar, brush, survey lines, right-of-way, roads, rock crushing and site work.",
+ "h1": "Land services for Central Texas property, from clearing to roads",
+ "primary_keyword": "land services central texas",
+ "secondary_keywords": [
+  "9 arrow services",
+  "land clearing and site work",
+  "hill country land services"
+ ],
+ "lede": "9 Arrow Land Service offers land services across Central Texas and the Hill Country, from clearing and mulching to roads, rock crushing, site work and grounds upkeep.",
+ "answer": {
+  "q": "What services does 9 Arrow Land Service offer?",
+  "a": "9 Arrow Land Service offers forestry mulching, land clearing, cedar and brush removal, pasture clearing, building site prep, survey line and right-of-way clearing, access roads, on-site rock crushing, light site work and grounds maintenance. The family-owned company is based in Spring Branch, TX and works across Central Texas and the Hill Country."
+ },
+ "highlights": [
+  "Family-owned in Spring Branch, TX",
+  "GPS-guided survey line clearing",
+  "Surface rock crushed into road base",
+  "Estimates after a discovery call or visit"
+ ],
+ "sections": [
+  {
+   "h2": "Central Texas land services for clearing and mulching",
+   "paras": [
+    "Clearing is the core of 9 Arrow's work, and each type of clearing job has its own page."
+   ],
+   "bullets": [
+    "[Forestry mulching in Central Texas](forestry-mulching-and-land-clearing) grinds trees and brush in place with no burn piles or hauling.",
+    "[Land clearing in Central Texas](land-clearing) covers lots and acreage, with grubbing and mowing where they fit.",
+    "[Cedar removal in Texas](cedar-removal) takes out Ashe juniper selectively and keeps your oaks.",
+    "[Brush clearing in Texas](brush-removal) handles underbrush, overgrown lots and old brush piles.",
+    "[Ranch land clearing in Texas](ranch-pasture-clearing) reclaims pasture from cedar, mesquite and brush.",
+    "[Land clearing for a building site](site-prep) readies home sites and removes root balls under foundations."
+   ],
+   "photo": "mulcher-sunrays"
   },
-  "highlights": [
-    "Family-owned in Spring Branch, TX",
-    "GPS-guided survey line clearing",
-    "Surface rock crushed into road base",
-    "Estimates after a discovery call or visit"
-  ],
-  "sections": [
-    {
-      "h2": "Central Texas land services for clearing and mulching",
-      "paras": [
-        "Clearing is the core of 9 Arrow's work, and each type of clearing job has its own page."
-      ],
-      "bullets": [
-        "[Forestry mulching in Central Texas](forestry-mulching-and-land-clearing) grinds trees and brush in place with no burn piles or hauling.",
-        "[Land clearing in Central Texas](land-clearing) covers lots and acreage, with grubbing and mowing where they fit.",
-        "[Cedar removal in Texas](cedar-removal) takes out Ashe juniper selectively and keeps your oaks.",
-        "[Brush clearing in Texas](brush-removal) handles underbrush, overgrown lots and old brush piles.",
-        "[Ranch land clearing in Texas](ranch-pasture-clearing) reclaims pasture from cedar, mesquite and brush.",
-        "[Land clearing for a building site](site-prep) readies home sites and removes root balls under foundations."
-      ],
-      "photo": "mulcher-sunrays"
-    },
-    {
-      "h2": "Survey lines and right-of-way",
-      "paras": [
-        "Line and corridor clearing serves developers, energy and utility providers, solar developers and landowners."
-      ],
-      "bullets": [
-        "[Survey line clearing in Texas](precision-line-survey-clearing) uses Trimble GPS on our mulchers to follow your licensed surveyor's files.",
-        "[Right of way clearing in Texas](right-of-way-clearing) opens and maintains pipeline, powerline and waterline corridors."
-      ],
-      "photo": "powerline-corridor"
-    },
-    {
-      "h2": "Roads, rock crushing and site work",
-      "paras": [
-        "Roads and dirt work turn cleared ground into usable property."
-      ],
-      "bullets": [
-        "[Access road building in Texas](roads-and-access-preparation) covers ranch roads, driveways, culverts and drainage.",
-        "[Rock crushing in Central Texas](rock-crushing) turns surface rock on your land into compactible road base.",
-        "[Site work and utility installation](site-work-light-utility-installation) covers pads, grading and trenching for small waterlines and conduit."
-      ],
-      "photo": "road-finished"
-    },
-    {
-      "h2": "Grounds maintenance and upkeep",
-      "paras": [
-        "[Grounds maintenance in Central Texas](grounds-maintenance) keeps property mowed, trimmed and clean, from small acreage to 1,000+ acres. Residential agreements can be recurring, and rural and ranch properties are scheduled by season and conditions."
-      ],
-      "photo": "mowed-pasture"
-    }
-  ],
-  "faqs": [
-    {
-      "q": "Which 9 Arrow service do I need?",
-      "a": "The right 9 Arrow service depends on your land and your goal. Clearing for grass or a sale usually starts with mulching, a new house needs building site prep, and a long corridor needs right-of-way or survey line clearing. A discovery call or site visit sorts out the right fit before any estimate."
-    },
-    {
-      "q": "Where does 9 Arrow Land Service work?",
-      "a": "9 Arrow Land Service is based in Spring Branch, TX and works across Central Texas and the Texas Hill Country. The company is a service-area business, so the crew comes to your land. Call (210) 247-8410 or email john@9arrow.com to ask about your property and its location."
-    },
-    {
-      "q": "How are 9 Arrow services priced?",
-      "a": "9 Arrow prices each job after a discovery call or a site visit. For clearing work, density, tree size and species, topography, access, maneuverability and soil conditions all change the cost. Estimates are shown by the day or by the acre. Call (210) 247-8410 to start the conversation."
-    }
-  ],
-  "related_services": [
-    "forestry-mulching-and-land-clearing",
-    "land-clearing",
-    "right-of-way-clearing",
-    "rock-crushing"
-  ],
-  "related_areas": [
-    "land-clearing-spring-branch-tx",
-    "land-clearing-bulverde-tx",
-    "land-clearing-new-braunfels-tx",
-    "land-clearing-san-antonio-tx",
-    "forestry-mulching-texas-hill-country",
-    "land-clearing-comal-county"
-  ],
-  "related_posts": [
-    "blog-forestry-mulching-guide",
-    "blog-land-clearing-cost-texas"
-  ],
-  "hero_photo": "fleet",
-  "hero_alt": "9 Arrow Land Service mulchers and crew trucks lined up in a field",
-  "cta_service": "Not sure yet"
+  {
+   "h2": "Survey lines and right-of-way",
+   "paras": [
+    "Line and corridor clearing serves developers, energy and utility providers, solar developers and landowners."
+   ],
+   "bullets": [
+    "[Survey line clearing in Texas](precision-line-survey-clearing) uses Trimble GPS on our mulchers to follow your licensed surveyor's files.",
+    "[Right of way clearing in Texas](right-of-way-clearing) opens and maintains pipeline, powerline and waterline corridors."
+   ],
+   "photo": "powerline-corridor"
+  },
+  {
+   "h2": "Roads, rock crushing and site work",
+   "paras": [
+    "Roads and dirt work turn cleared ground into usable property."
+   ],
+   "bullets": [
+    "[Access road building in Texas](roads-and-access-preparation) covers ranch roads, driveways, culverts and drainage.",
+    "[Rock crushing in Central Texas](rock-crushing) turns surface rock on your land into compactible road base.",
+    "[Site work and utility installation](site-work-light-utility-installation) covers pads, grading and trenching for small waterlines and conduit."
+   ],
+   "photo": "road-finished"
+  },
+  {
+   "h2": "Grounds maintenance and upkeep",
+   "paras": [
+    "[Grounds maintenance in Central Texas](grounds-maintenance) keeps property mowed, trimmed and clean, from small acreage to 1,000+ acres. Residential agreements can be recurring, and rural and ranch properties are scheduled by season and conditions."
+   ],
+   "photo": "mowed-pasture"
+  }
+ ],
+ "faqs": [
+  {
+   "q": "Which 9 Arrow service do I need?",
+   "a": "The right 9 Arrow service depends on your land and your goal. Clearing for grass or a sale usually starts with mulching, a new house needs building site prep, and a long corridor needs right-of-way or survey line clearing. A discovery call or site visit sorts out the right fit before any estimate."
+  },
+  {
+   "q": "Where does 9 Arrow Land Service work?",
+   "a": "9 Arrow Land Service is based in Spring Branch, TX and works across Central Texas and the Texas Hill Country. The company is a service-area business, so the crew comes to your land. Call (210) 247-8410 or email john@9arrow.com to ask about your property and its location."
+  },
+  {
+   "q": "How are 9 Arrow services priced?",
+   "a": "9 Arrow prices each job after a discovery call or a site visit. For clearing work, density, tree size and species, topography, access, maneuverability and soil conditions all change the cost. Estimates are shown by the day or by the acre. Call (210) 247-8410 to start the conversation."
+  }
+ ],
+ "related_services": [
+  "forestry-mulching-and-land-clearing",
+  "land-clearing",
+  "right-of-way-clearing",
+  "rock-crushing"
+ ],
+ "related_areas": [
+  "land-clearing-spring-branch-tx",
+  "land-clearing-bulverde-tx",
+  "land-clearing-new-braunfels-tx",
+  "land-clearing-san-antonio-tx",
+  "forestry-mulching-texas-hill-country",
+  "land-clearing-comal-county"
+ ],
+ "related_posts": [
+  "blog-forestry-mulching-guide",
+  "blog-land-clearing-cost-texas"
+ ],
+ "hero_photo": "fleet",
+ "hero_alt": "9 Arrow Land Service mulchers and crew trucks lined up in a field",
+ "cta_service": "Not sure yet"
 }

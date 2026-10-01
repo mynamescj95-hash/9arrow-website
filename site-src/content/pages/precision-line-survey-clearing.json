@@ -1,123 +1,123 @@
 {
-  "slug": "precision-line-survey-clearing",
-  "type": "service",
-  "nav_label": "Survey line clearing",
-  "title_tag": "Survey line clearing in Texas | 9 Arrow Land Service",
-  "meta_description": "Survey line clearing in Texas with Trimble GPS on our mulchers. We follow your surveyor's CAD files through dense brush, with less pre-staking.",
-  "h1": "GPS-guided survey line clearing through Texas brush",
-  "primary_keyword": "survey line clearing texas",
-  "secondary_keywords": [
-    "precision line clearing",
-    "GPS guided land clearing",
-    "property line clearing",
-    "lot line clearing",
-    "boundary line clearing"
-  ],
-  "lede": "Survey line clearing in Texas often means cutting an exact line through brush you cannot see across. 9 Arrow mounts Trimble GPS receivers on our forestry mulching machines and follows your licensed surveyor's files in real time, so the line we clear follows the certified survey data.",
-  "answer": {
-    "q": "What is precision survey line clearing?",
-    "a": "Precision survey line clearing is forestry mulching guided by GPS. 9 Arrow loads your licensed surveyor's CAD survey files into Trimble data collectors and receivers mounted on the mulching machine. The operator follows the digital line in real time while clearing, which reduces or eliminates survey-crew pre-staking, even in dense timber."
+ "slug": "precision-line-survey-clearing",
+ "type": "service",
+ "nav_label": "Survey line clearing",
+ "title_tag": "Survey Line Clearing in Texas | 9 Arrow Land Service",
+ "meta_description": "Survey line clearing in Texas with Trimble GPS on our mulchers. We follow your surveyor's CAD files through dense brush, with less pre-staking.",
+ "h1": "GPS-guided survey line clearing through Texas brush",
+ "primary_keyword": "survey line clearing texas",
+ "secondary_keywords": [
+  "precision line clearing",
+  "GPS guided land clearing",
+  "property line clearing",
+  "lot line clearing",
+  "boundary line clearing"
+ ],
+ "lede": "Survey line clearing in Texas often means cutting an exact line through brush you cannot see across. 9 Arrow mounts Trimble GPS receivers on our forestry mulching machines and follows your licensed surveyor's files in real time, so the line we clear follows the certified survey data.",
+ "answer": {
+  "q": "What is precision survey line clearing?",
+  "a": "Precision survey line clearing is forestry mulching guided by GPS. 9 Arrow loads your licensed surveyor's CAD survey files into Trimble data collectors and receivers mounted on the mulching machine. The operator follows the digital line in real time while clearing, which reduces or eliminates survey-crew pre-staking, even in dense timber."
+ },
+ "highlights": [
+  "Trimble receivers mounted on the mulcher",
+  "Follows your surveyor's CAD survey files",
+  "Reduces or eliminates survey-crew pre-staking",
+  "Clears lines through dense brush and timber"
+ ],
+ "sections": [
+  {
+   "h2": "How survey line clearing works in Texas brush",
+   "paras": [
+    "Survey line clearing at 9 Arrow starts with your surveyor. Your licensed surveyor provides the CAD survey files, and we load them into Trimble geospatial data collectors and receivers mounted on our forestry mulching machines. GPS guidance shows the operator the line in real time, so the machine follows certified survey data through brush nobody can see across.",
+    "Thick cedar and oak can hide every flag and stake on a tract. GPS guidance keeps the operator on line where flagging would be hard to find, and the mulcher grinds the trees and brush in place as it goes. The result is a cleared line with no burn piles and nothing to haul."
+   ],
+   "photo": "mulcher-brush"
   },
-  "highlights": [
-    "Trimble receivers mounted on the mulcher",
-    "Follows your surveyor's CAD survey files",
-    "Reduces or eliminates survey-crew pre-staking",
-    "Clears lines through dense brush and timber"
-  ],
-  "sections": [
-    {
-      "h2": "How survey line clearing works in Texas brush",
-      "paras": [
-        "Survey line clearing at 9 Arrow starts with your surveyor. Your licensed surveyor provides the CAD survey files, and we load them into Trimble geospatial data collectors and receivers mounted on our forestry mulching machines. GPS guidance shows the operator the line in real time, so the machine follows certified survey data through brush nobody can see across.",
-        "Thick cedar and oak can hide every flag and stake on a tract. GPS guidance keeps the operator on line where flagging would be hard to find, and the mulcher grinds the trees and brush in place as it goes. The result is a cleared line with no burn piles and nothing to haul."
-      ],
-      "photo": "mulcher-brush"
-    },
-    {
-      "h2": "What precision line clearing saves on a project",
-      "paras": [
-        "Line clearing without GPS often has to wait on a survey crew to walk the line and stake it by hand before a machine can cut. With the survey files loaded on the mulcher, 9 Arrow can reduce or eliminate that pre-staking. On larger projects, skipping that step can save tens of thousands of dollars and cut the delays that come from scheduling crews around each other.",
-        "Precision line clearing also keeps the clearing matched to the plan. Lot lines, road corridors and easements are cleared along the approved survey data, which matters when property boundaries, easements and planned infrastructure all have to fit together.",
-        "Zach C., a developer, wrote in a five-star Google review, “We exclusively use 9 Arrow for all land clearings, lot lines, and site prep scopes for our Texas projects.”"
-      ]
-    },
-    {
-      "h2": "Where survey line clearing is used",
-      "paras": [
-        "Precision survey line clearing fits any job where the cleared ground has to match a survey. Developers use it to open subdivision street corridors and lot lines. Utility and energy clients use it for easements and pad sites. Landowners use it to clear property lines and fence lines between tracts. Common uses include the following."
-      ],
-      "bullets": [
-        "Property lines between adjacent tracts",
-        "Land acquisition and pre-development work",
-        "Future road locations through dense timber",
-        "Utility rights-of-way and easements",
-        "Subdivision street corridors and lot lines",
-        "Pad sites for oilfield and utility projects",
-        "Fence lines"
-      ]
-    },
-    {
-      "h2": "Survey line clearing does not replace your surveyor",
-      "paras": [
-        "9 Arrow is not a licensed surveyor and does not replace one. Precision survey line clearing depends on certified survey data from your licensed surveyor. Our job is to clear along that data. If your project still needs a survey, the surveyor comes first, and we load the files once they are ready.",
-        "9 Arrow's forestry mulching started on development work. A 2014 project with a land developer and a surveyor is what introduced John Wheelock to forestry mulching. Today precision line clearing serves development, utility and energy projects as well as private landowners. Long corridors are covered on our [right-of-way clearing](right-of-way-clearing) page, and new roads through timber on our [access road building](roads-and-access-preparation) page.",
-        "9 Arrow is based in Spring Branch and serves Central Texas and the Texas Hill Country. Fast-growing areas such as New Braunfels are covered on our [land clearing in New Braunfels](land-clearing-new-braunfels-tx) page. Clean lot lines also help buyers read a property, a point our post on [whether clearing increases property value](blog-does-clearing-increase-property-value) covers."
-      ]
-    }
-  ],
-  "process": [
-    {
-      "step": "Get the survey files",
-      "detail": "Your licensed surveyor provides the CAD survey files for the lines, corridors or pad sites."
-    },
-    {
-      "step": "Load the machine",
-      "detail": "We load the files into Trimble data collectors and receivers mounted on the forestry mulcher."
-    },
-    {
-      "step": "Clear on the line",
-      "detail": "The operator follows GPS guidance in real time and mulches along the certified survey data."
-    },
-    {
-      "step": "Hand off the line",
-      "detail": "The cleared line is ready for the next phase, such as fencing, road building or utility work."
-    }
-  ],
-  "faqs": [
-    {
-      "q": "Do I still need a surveyor for survey line clearing?",
-      "a": "Yes, survey line clearing depends on a licensed surveyor. 9 Arrow is not a licensed surveyor and does not replace one. Your surveyor provides the certified CAD survey files, and we load those files into the Trimble equipment on our mulchers and clear along the data. The surveyor stays responsible for the survey itself."
-    },
-    {
-      "q": "Can you clear a survey line through dense brush?",
-      "a": "Yes, GPS-guided survey line clearing works in dense brush and timber. The operator follows the survey data in real time, so the line does not depend on spotting stakes or flagging through the trees. Clearing future road locations through dense timber is one of the main uses for precision line clearing."
-    },
-    {
-      "q": "How does survey line clearing save money?",
-      "a": "Precision survey line clearing saves money by reducing or eliminating survey-crew pre-staking. Your surveyor's files go straight onto the mulcher, so the line does not have to be staked by hand before clearing starts. On larger projects, that can save tens of thousands of dollars and reduce delays on the schedule."
-    },
-    {
-      "q": "What do you need from my surveyor?",
-      "a": "9 Arrow needs the CAD survey files from your licensed surveyor. We load those files into the Trimble data collectors and receivers on our forestry mulching machines and clear along the certified survey data. Bring your surveyor into the conversation early so the files are ready before clearing begins. Call (210) 247-8410 to start."
-    }
-  ],
-  "related_services": [
-    "right-of-way-clearing",
-    "roads-and-access-preparation",
-    "forestry-mulching-and-land-clearing",
-    "site-prep"
-  ],
-  "related_areas": [
-    "land-clearing-new-braunfels-tx",
-    "land-clearing-san-antonio-tx",
-    "land-clearing-boerne-tx",
-    "land-clearing-comal-county"
-  ],
-  "related_posts": [
-    "blog-does-clearing-increase-property-value",
-    "blog-land-clearing-cost-texas"
-  ],
-  "hero_photo": "survey-cut",
-  "hero_alt": "Yellow forestry mulcher cutting a survey line through brush in warm evening light",
-  "cta_service": "Survey line clearing"
+  {
+   "h2": "What precision line clearing saves on a project",
+   "paras": [
+    "Line clearing without GPS often has to wait on a survey crew to walk the line and stake it by hand before a machine can cut. With the survey files loaded on the mulcher, 9 Arrow can reduce or eliminate that pre-staking. On larger projects, skipping that step can save tens of thousands of dollars and cut the delays that come from scheduling crews around each other.",
+    "Precision line clearing also keeps the clearing matched to the plan. Lot lines, road corridors and easements are cleared along the approved survey data, which matters when property boundaries, easements and planned infrastructure all have to fit together.",
+    "Zach C., a developer, wrote in a five-star Google review, “We exclusively use 9 Arrow for all land clearings, lot lines, and site prep scopes for our Texas projects.”"
+   ]
+  },
+  {
+   "h2": "Where survey line clearing is used",
+   "paras": [
+    "Precision survey line clearing fits any job where the cleared ground has to match a survey. Developers use it to open subdivision street corridors and lot lines. Utility and energy clients use it for easements and pad sites. Landowners use it to clear property lines and fence lines between tracts. Common uses include the following."
+   ],
+   "bullets": [
+    "Property lines between adjacent tracts",
+    "Land acquisition and pre-development work",
+    "Future road locations through dense timber",
+    "Utility rights-of-way and easements",
+    "Subdivision street corridors and lot lines",
+    "Pad sites for oilfield and utility projects",
+    "Fence lines"
+   ]
+  },
+  {
+   "h2": "Survey line clearing does not replace your surveyor",
+   "paras": [
+    "9 Arrow is not a licensed surveyor and does not replace one. Precision survey line clearing depends on certified survey data from your licensed surveyor. Our job is to clear along that data. If your project still needs a survey, the surveyor comes first, and we load the files once they are ready.",
+    "9 Arrow's forestry mulching started on development work. A 2014 project with a land developer and a surveyor is what introduced John Wheelock to forestry mulching. Today precision line clearing serves development, utility and energy projects as well as private landowners. Long corridors are covered on our [right-of-way clearing](right-of-way-clearing) page, and new roads through timber on our [access road building](roads-and-access-preparation) page.",
+    "9 Arrow is based in Spring Branch and serves Central Texas and the Texas Hill Country. Fast-growing areas such as New Braunfels are covered on our [land clearing in New Braunfels](land-clearing-new-braunfels-tx) page. Clean lot lines also help buyers read a property, a point our post on [whether clearing increases property value](blog-does-clearing-increase-property-value) covers."
+   ]
+  }
+ ],
+ "process": [
+  {
+   "step": "Get the survey files",
+   "detail": "Your licensed surveyor provides the CAD survey files for the lines, corridors or pad sites."
+  },
+  {
+   "step": "Load the machine",
+   "detail": "We load the files into Trimble data collectors and receivers mounted on the forestry mulcher."
+  },
+  {
+   "step": "Clear on the line",
+   "detail": "The operator follows GPS guidance in real time and mulches along the certified survey data."
+  },
+  {
+   "step": "Hand off the line",
+   "detail": "The cleared line is ready for the next phase, such as fencing, road building or utility work."
+  }
+ ],
+ "faqs": [
+  {
+   "q": "Do I still need a surveyor for survey line clearing?",
+   "a": "Yes, survey line clearing depends on a licensed surveyor. 9 Arrow is not a licensed surveyor and does not replace one. Your surveyor provides the certified CAD survey files, and we load those files into the Trimble equipment on our mulchers and clear along the data. The surveyor stays responsible for the survey itself."
+  },
+  {
+   "q": "Can you clear a survey line through dense brush?",
+   "a": "Yes, GPS-guided survey line clearing works in dense brush and timber. The operator follows the survey data in real time, so the line does not depend on spotting stakes or flagging through the trees. Clearing future road locations through dense timber is one of the main uses for precision line clearing."
+  },
+  {
+   "q": "How does survey line clearing save money?",
+   "a": "Precision survey line clearing saves money by reducing or eliminating survey-crew pre-staking. Your surveyor's files go straight onto the mulcher, so the line does not have to be staked by hand before clearing starts. On larger projects, that can save tens of thousands of dollars and reduce delays on the schedule."
+  },
+  {
+   "q": "What do you need from my surveyor?",
+   "a": "9 Arrow needs the CAD survey files from your licensed surveyor. We load those files into the Trimble data collectors and receivers on our forestry mulching machines and clear along the certified survey data. Bring your surveyor into the conversation early so the files are ready before clearing begins. Call (210) 247-8410 to start."
+  }
+ ],
+ "related_services": [
+  "right-of-way-clearing",
+  "roads-and-access-preparation",
+  "forestry-mulching-and-land-clearing",
+  "site-prep"
+ ],
+ "related_areas": [
+  "land-clearing-new-braunfels-tx",
+  "land-clearing-san-antonio-tx",
+  "land-clearing-boerne-tx",
+  "land-clearing-comal-county"
+ ],
+ "related_posts": [
+  "blog-does-clearing-increase-property-value",
+  "blog-land-clearing-cost-texas"
+ ],
+ "hero_photo": "survey-cut",
+ "hero_alt": "Yellow forestry mulcher cutting a survey line through brush in warm evening light",
+ "cta_service": "Survey line clearing"
 }
