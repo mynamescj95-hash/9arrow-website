@@ -1009,3 +1009,16 @@ body.over-hero .hdr.is-tinted::before{display:none}
   .txm-key{justify-content:center}
 }
 .areas-sec.is-far .farther{display:none}
+
+/* lens on desktop: copy on the left, a right-sized photo frame on the right (the job photos are tall, ~825px wide) */
+@media (min-width:961px){
+  .lens-in{grid-template-columns:minmax(0,1fr) auto;grid-template-areas:"head stage" "foot stage";grid-template-rows:minmax(0,1fr) minmax(0,1fr);column-gap:clamp(40px,6vw,96px);row-gap:0;align-items:center}
+  .lens-head{grid-area:head;flex-direction:column;align-items:flex-start;justify-content:flex-end;align-self:end;gap:26px;padding-bottom:22px}
+  .lens-foot{grid-area:foot;align-self:start;flex-direction:column;gap:4px}
+  .lens-stage{grid-area:stage;aspect-ratio:4/5;height:min(680px,calc(100svh - var(--hdr) - 120px));width:auto;justify-self:end}
+  .lens.is-live:not(.lens-static) .lens-in{grid-template-columns:minmax(0,1fr) auto;grid-template-rows:minmax(0,1fr) minmax(0,1fr);height:100%}
+  .lens.is-live:not(.lens-static) .lens-stage{aspect-ratio:4/5;height:min(680px,calc(100svh - var(--hdr) - 88px))}
+  .lens-static .lens-in{grid-template-rows:auto auto;align-content:center}
+}
+@media (min-width:761px) and (max-width:960px){.lens-stage{aspect-ratio:4/3;max-height:70svh}}
+.dark .lens-k{color:var(--brass-2)}

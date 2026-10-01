@@ -900,13 +900,13 @@ def render_contact():
     if p.get("faqs"): extra.append(faq_schema(slug, p["faqs"]))
     return doc(slug, p["title_tag"], p["meta_description"], "\n".join(b for b in body if b), schema(slug, p["title_tag"], p["meta_description"], [("", "Home"), (slug, "Contact")], extra), hero_preload=img_src("r-red-truck", 1600))
 
-def lens(pairs, static=False, head="See what we leave behind.", text="Real 9 Arrow jobs. As you scroll, the ring moves across the ground before we cleared it. Inside the ring is the same spot after we finished. Drag it to look around.", dark=True):
+def lens(pairs, static=False, head="It does not get better.", text="Real 9 Arrow jobs. As you scroll, the ring moves across the ground before we cleared it. Inside the ring is the same spot after we finished. Drag it to look around.", dark=True, kicker="The finished job"):
     b0 = pairs[0]
     btns = "".join(f'<button type="button" class="pair-btn" data-pair aria-pressed="{"true" if i == 0 else "false"}" data-before="{img_src(b, 1600)}" data-after="{img_src(a, 1600)}" '
                    f'data-before-alt="{esc(IMGS[b]["alt"])}" data-after-alt="{esc(IMGS[a]["alt"])}" data-cap-b="{esc(cb)}" data-cap-a="{esc(ca)}">{esc(label)}</button>'
                    for i, (label, b, a, cb, ca) in enumerate(pairs))
     return f"""<section class="lens{' lens-static' if static else ''}{' dark' if dark else ''}" data-lens aria-labelledby="lens-h"><div class="lens-pin"><div class="wrap lens-in">
-<div class="lens-head"><div><h2 class="h-lg" id="lens-h">{esc(head)}</h2><p class="lede mt-s">{esc(text)}</p></div><div class="pair-btns" role="group" aria-label="Choose a job">{btns}</div></div>
+<div class="lens-head"><div>{f'<p class="kicker lens-k">{esc(kicker)}</p>' if kicker else ""}<h2 class="h-lg" id="lens-h">{esc(head)}</h2><p class="lede mt-s">{esc(text)}</p></div><div class="pair-btns" role="group" aria-label="Choose a job">{btns}</div></div>
 <div class="lens-stage" tabindex="0" role="img" aria-label="Before and after comparison of a real 9 Arrow job. Use arrow keys to move the ring.">
 <img class="lens-before" src="{img_src(b0[1], 1600)}" alt="{esc(IMGS[b0[1]]['alt'])}" loading="lazy">
 <img class="lens-after" src="{img_src(b0[2], 1600)}" alt="{esc(IMGS[b0[2]]['alt'])}" loading="lazy">
@@ -924,7 +924,7 @@ def render_our_work():
     gal = ["r-hero", "r-yellow", "r-head", "r-trail-cat", "r-blue", "r-tire", "r-haze", "r-red-truck", "r-yellow-2", "r-trail", "r-mulch", "r-sharpen", "r-john-machine", "r-yellow-head", "r-operator", "r-oaks", "r-bw", "r-utv"]
     tiles = "".join(f'<figure class="g-item">{img(k, "(max-width: 600px) 100vw, (max-width: 1000px) 50vw, 33vw")}<figcaption>{esc(IMGS[k]["alt"])}</figcaption></figure>' for k in gal)
     blocks = sections(p, set(gal) | {"trail-after", "r-fleet"})
-    body = [phero(slug, p, ci, "r-fleet"), answer(p), lens(LENS_PAIRS, static=True, head="Every job, before and after.", text="Move the ring across the photo, or switch jobs. Inside the ring is the same ground after our crew finished.", dark=False),
+    body = [phero(slug, p, ci, "r-fleet"), answer(p), lens(LENS_PAIRS, static=True, head="Every job, before and after.", text="Move the ring across the photo, or switch jobs. Inside the ring is the same ground after our crew finished.", dark=False, kicker=""),
             f'<section class="sec alt"><div class="wrap"><div class="sec-head"><div><h2 class="h-lg">Photos from our job sites</h2><p class="lede">Every photo on this page is from a real 9 Arrow job in Central Texas.</p></div><a class="arrow-link" href="https://www.instagram.com/9.arrow/" rel="noopener">More on Instagram</a></div><div class="gallery">{tiles}</div></div></section>',
             f'<section class="sec"><div class="wrap stack">{"".join(blocks)}</div></section>' if blocks else "",
             faq_block(p, slug), cta_band(slug)]
@@ -1050,9 +1050,9 @@ def render_home():
 <svg class="em-mark" viewBox="-160 -160 320 320">{ring}<use href="#g9" x="-160" y="-160" width="320" height="320" fill="#E8EBE7"/></svg></div></div></div>
 <div class="hero-copy" id="hero-copy"><div class="wrap"><div class="hc-in">
 <p class="where"><span class="rule" aria-hidden="true"></span>Family-owned in Spring Branch, Texas</p>
-<h1 id="h1" class="display">Central Texas land clearing, done right</h1>
+<h1 id="h1" class="display">Texas land clearing, done right</h1>
 {hero_form}
-<p class="hero-sub"><b>Forestry mulching, rock crushing and road building.</b> One family crew for the whole job, across Central Texas and the Hill Country.</p>
+<p class="hero-sub"><b>A finished job that does not get better.</b> Forestry mulching, rock crushing and road building from one family crew, across the Hill Country and Texas.</p>
 </div></div></div>
 <a class="cue" href="#intro" aria-label="Scroll to learn more">Scroll</a>
 </section>"""
