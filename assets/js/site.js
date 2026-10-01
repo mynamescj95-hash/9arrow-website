@@ -59,8 +59,10 @@
     $('[name="landing_page"]', form).value = location.pathname;
     $('[name="referrer"]', form).value = d.referrer || '';
     function syncServices() { $('[name="services"]', form).value = $$('[data-need]:checked', form).map(function (c) { return c.value; }).join(', '); }
-    var m = location.hash.match(/^#need-([a-z]+)/);
-    if (m) { var pre = $('[data-need="' + m[1] + '"]', form); if (pre) { pre.checked = true; syncServices(); } }
+    var m = location.hash.match(/^#need-([a-z]+)/), want = m ? m[1] : '';
+    try { want = want || sessionStorage.getItem('9a_need') || ''; sessionStorage.removeItem('9a_need'); } catch (e) {}
+    if (want) { var pre = $('input[data-need="' + want + '"]', form); if (pre) pre.checked = true; }
+    syncServices();
     function show(i, focus) {
       cur = i;
       steps.forEach(function (s, j) { s.classList.toggle('is-active', j === i); s.setAttribute('aria-hidden', j === i ? 'false' : 'true'); });
@@ -252,9 +254,9 @@
   if (drawerEl) {
     var dForm = $('#start-form', drawerEl), dEmail = $('#dr-email', drawerEl), dNeed = $('[name="need"]', dForm);
     var dPanel = $('.drawer-panel', drawerEl), lastFocus = null, dHref = '', dNeedDefault = dNeed.value;
-    function openDrawer(href) {
+    function openDrawer(href, needFor) {
       lastFocus = d.activeElement; dHref = href || 'get-an-estimate';
-      var m = dHref.match(/#need-([a-z]+)/); dNeed.value = m ? m[1] : dNeedDefault; dForm.setAttribute('data-dest', dHref);
+      dNeed.value = needFor || dNeedDefault; dForm.setAttribute('data-dest', dHref);
       try { var sv = sessionStorage.getItem('9a_email'); if (sv && !dEmail.value) dEmail.value = sv; } catch (e) {}
       drawerEl.removeAttribute('inert'); drawerEl.classList.add('is-open'); d.body.style.overflow = 'hidden';
       setTimeout(function () { dEmail.focus({ preventScroll: true }); }, reduce ? 0 : 320);
@@ -267,7 +269,7 @@
     }
     d.addEventListener('click', function (e) {
       var a = e.target.closest('[data-drawer]'); if (!a || e.metaKey || e.ctrlKey || e.shiftKey || e.button > 0) return;
-      e.preventDefault(); if (sheet && sheet.classList.contains('is-open')) closeSheet(); closeAll(); openDrawer(a.getAttribute('href'));
+      e.preventDefault(); if (sheet && sheet.classList.contains('is-open')) closeSheet(); closeAll(); openDrawer(a.getAttribute('href'), a.getAttribute('data-need'));
     });
     $$('[data-close]', drawerEl).forEach(function (b) { b.addEventListener('click', closeDrawer); });
     drawerEl.addEventListener('keydown', function (e) {
@@ -278,6 +280,22 @@
       if (e.shiftKey && d.activeElement === first) { e.preventDefault(); lastEl.focus(); } else if (!e.shiftKey && d.activeElement === lastEl) { e.preventDefault(); first.focus(); }
     });
   }
+
+  /* ---------- clean addresses: estimate links remember the service, in-page links never add #… ---------- */
+  d.addEventListener('click', function (e) {
+    var a = e.target.closest('a[data-need]');
+    if (a) { try { sessionStorage.setItem('9a_need', a.getAttribute('data-need')); } catch (x) {} }
+  }, true);
+  d.addEventListener('click', function (e) {
+    var a = e.target.closest('a[href^="#"]'); if (!a || e.defaultPrevented || a.hasAttribute('data-drawer')) return;
+    var id = a.getAttribute('href').slice(1), t = id && d.getElementById(id); if (!t) return;
+    e.preventDefault();
+    var y = t.getBoundingClientRect().top + scrollY - ((hdr && hdr.offsetHeight) || 0) - 12;
+    scrollTo({ top: Math.max(0, y), behavior: reduce ? 'auto' : 'smooth' });
+    if (!t.hasAttribute('tabindex') && !/^(A|BUTTON|INPUT|SELECT|TEXTAREA|SUMMARY)$/.test(t.tagName)) t.setAttribute('tabindex', '-1');
+    t.focus({ preventScroll: true });
+  });
+  if (location.hash && history.replaceState) setTimeout(function () { history.replaceState(null, '', location.pathname + location.search); }, 600);
 
   /* ---------- email-first start forms (pull-out and home hero) -> step-by-step form ---------- */
   $$('.start-form').forEach(function (sf) {
@@ -296,7 +314,8 @@
       try { sessionStorage.setItem('9a_email', v); sessionStorage.setItem('9a_go_form', '1'); } catch (x) {}
       window.dataLayer = window.dataLayer || []; window.dataLayer.push({ event: 'estimate_start', need: nd.value, placement: sf.id });
       var base = (sf.getAttribute('data-dest') || 'get-an-estimate').split('#')[0];
-      var dest = base + (nd.value ? '#need-' + nd.value : '');
+      var dest = base;
+      try { if (nd.value) sessionStorage.setItem('9a_need', nd.value); } catch (x) {}
       var btn = $('[type=submit]', sf), label = btn.textContent; btn.disabled = true; btn.textContent = 'One moment...';
       addEventListener('pageshow', function () { btn.disabled = false; btn.textContent = label; });
       var live = /(^|\.)9arrow\.com$|netlify\.app$/.test(location.hostname);

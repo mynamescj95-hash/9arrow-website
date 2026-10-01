@@ -47,6 +47,8 @@ GENERATED = {
     "g28": ("Aerial view of Hill Country woodland, pasture and a winding river", "work-17.jpg"),
     "g29": ("Track loader mulcher grinding an old brush pile of dead cedar", "ba-before.jpg"),
     "g30": ("Hill Country hillside after selective cedar removal with live oaks kept", "land-after.jpg"),
+    "g31": ("Crushing head grinding surface limestone into road base on a Hill Country road", "roads-before.jpg"),
+    "g32": ("Graded road with a crowned surface and a drainage ditch along the edge", "roads-after.jpg"),
 }
 RD = os.path.join(ROOT, "real") + "/"
 REAL = {

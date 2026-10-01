@@ -1,123 +1,123 @@
 {
-  "slug": "site-prep",
-  "type": "service",
-  "nav_label": "Site prep",
-  "title_tag": "Land clearing for building sites | Home site prep | 9 Arrow",
-  "meta_description": "Land clearing for building sites in Central Texas. Home site clearing, root ball removal under foundations and pad prep. Call (210) 247-8410.",
-  "h1": "Clearing land for your building site, from first tree to finished pad",
-  "primary_keyword": "land clearing for building site",
-  "secondary_keywords": [
-    "site preparation",
-    "building pad clearing",
-    "home site clearing",
-    "construction site clearing",
-    "root ball removal"
-  ],
-  "lede": "Land clearing for a building site takes more care than clearing open pasture. 9 Arrow clears home sites across Central Texas, grubs out root balls where the foundation goes and hands off to site work for the pad.",
-  "answer": {
-    "q": "What does land clearing for a building site include?",
-    "a": "Land clearing for a building site includes clearing trees and brush from the home site, driveway and work area, then removing root balls from under the foundation footprint. 9 Arrow grubs those roots with dozers and excavators, mulches them on site where possible, and can move straight into pad cutting and fine grading."
+ "slug": "site-prep",
+ "type": "service",
+ "nav_label": "Site prep",
+ "title_tag": "Land clearing for building sites | Home site prep | 9 Arrow",
+ "meta_description": "Land clearing for building sites in Central Texas. Home site clearing, root ball removal under foundations and pad prep. Call (210) 247-8410.",
+ "h1": "Clearing land for your building site, from first tree to finished pad",
+ "primary_keyword": "land clearing for building site",
+ "secondary_keywords": [
+  "site preparation",
+  "building pad clearing",
+  "home site clearing",
+  "construction site clearing",
+  "root ball removal"
+ ],
+ "lede": "Land clearing for a building site takes more care than clearing open pasture. 9 Arrow clears home sites across Central Texas, grubs out root balls where the foundation goes and hands off to site work for the pad.",
+ "answer": {
+  "q": "What does land clearing for a building site include?",
+  "a": "Land clearing for a building site includes clearing trees and brush from the home site, driveway and work area, then removing root balls from under the foundation footprint. 9 Arrow grubs those roots with dozers and excavators, mulches them on site where possible, and can move straight into pad cutting and fine grading."
+ },
+ "highlights": [
+  "Root balls grubbed out under foundations",
+  "Grubbed root balls mulched on site",
+  "Pads cut and fine-graded for foundations",
+  "Clearing guided by your surveyor's files"
+ ],
+ "sections": [
+  {
+   "h2": "Land clearing for a building site around the trees you keep",
+   "paras": [
+    "A home site in the Hill Country usually comes with trees worth saving. Selective clearing takes out the brush, cedar and declining trees around the house site and leaves the trees you want for shade and character. John Wheelock's background includes construction and custom home building, so we clear with the build in mind.",
+    "Compact track machines fit tight access between trees and work slopes and uneven ground, which suits wooded home sites. The mulching machines have no tree size limit, so large trees near the house site can come out with the rest.",
+    "Drought stress and oak wilt are common in Central Texas. Oak wilt spreads in defined paths and infected trees cannot be restored, so selective clearing is often the best way to protect the healthy trees around a new home. Cedar-heavy lots are covered on our [cedar removal in Texas](cedar-removal) page."
+   ],
+   "photo": "cleared-wimberley"
   },
-  "highlights": [
-    "Root balls grubbed out under foundations",
-    "Grubbed root balls mulched on site",
-    "Pads cut and fine-graded for foundations",
-    "Clearing guided by your surveyor's files"
-  ],
-  "sections": [
-    {
-      "h2": "Land clearing for a building site around the trees you keep",
-      "paras": [
-        "A home site in the Hill Country usually comes with trees worth saving. Selective clearing takes out the brush, cedar and declining trees around the house site and leaves the trees you want for shade and character. John Wheelock's background includes construction and custom home building, so we clear with the build in mind.",
-        "Compact track machines fit tight access between trees and work slopes and uneven ground, which suits wooded home sites. The mulching machines have no tree size limit, so large trees near the house site can come out with the rest.",
-        "Drought stress and oak wilt are common in Central Texas. Oak wilt spreads in defined paths and infected trees cannot be restored, so selective clearing is often the best way to protect the healthy trees around a new home. Cedar-heavy lots are covered on our [cedar removal in Texas](cedar-removal) page."
-      ],
-      "photo": "cleared-wimberley"
-    },
-    {
-      "h2": "Root ball removal under the foundation",
-      "paras": [
-        "Root balls under a slab have to come out, because buried roots decay over time. Mulching normally leaves root balls in place to keep the soil stable, which suits yards and open ground. Under the foundation footprint, 9 Arrow grubs with bulldozers and excavators to take the roots out.",
-        "We prefer to mulch grubbed root balls on site, so they stay out of a burn pile and off a haul truck. Dozing disturbs soil and raises erosion risk, so it makes sense to keep grubbing to the footprint and leave the rest of the site mulched with roots in place. Mulch from the clearing can be stockpiled on site or hauled off if you want the ground bare."
-      ],
-      "photo": "chainsaw"
-    },
-    {
-      "h2": "Building site clearing that follows your survey",
-      "paras": [
-        "Building site clearing has to match the plan on paper. 9 Arrow's mulching machines can carry Trimble GPS equipment that loads your licensed surveyor's CAD files and follows the certified survey data in real time, keeping clearing on the lot lines and the driveway route. 9 Arrow is not a licensed surveyor and does not replace one. The same GPS approach is used on subdivision street corridors and lot lines for development projects. See [survey line clearing in Texas](precision-line-survey-clearing) for details.",
-        "\"9 Arrow has cleared over a dozen properties for me, and every project has been handled with exceptional attention to detail,\" wrote Zach P. in a Google review."
-      ],
-      "photo": "survey-cut"
-    },
-    {
-      "h2": "From cleared ground to a finished building pad",
-      "paras": [
-        "Once the building site is cleared, the dirt work begins. Our [site work and utility installation](site-work-light-utility-installation) service cuts pads, including garage pads, and installs and fine-grades pad sites for foundations and future buildings. Site work also covers excavating for propane tanks and septic systems and trenching for low-pressure waterlines 3 inches or smaller, electrical conduit and septic lines. Our dozers and excavation equipment work in rocky terrain and difficult soil, with excavation up to about 4 feet deep.",
-        "We do not install electrical wire, make final water or electrical tie-ins, or excavate swimming pools. We coordinate with your licensed plumbers and electricians, engineers, general contractor and site supervisor.",
-        "Most home sites also need a way in. [Access road building in Texas](roads-and-access-preparation) covers driveways, culverts and drainage, and existing surface rock can be crushed on site into road base."
-      ],
-      "photo": "trench"
-    }
-  ],
-  "process": [
-    {
-      "step": "Plan",
-      "detail": "A discovery call or site visit to review the house site, driveway, survey and trees to keep."
-    },
-    {
-      "step": "Clear",
-      "detail": "Selective clearing of brush and unwanted trees across the home site, driveway and work area."
-    },
-    {
-      "step": "Grub",
-      "detail": "Root balls come out of the foundation footprint with bulldozers and excavators."
-    },
-    {
-      "step": "Mulch",
-      "detail": "Grubbed root balls are mulched on site wherever possible."
-    },
-    {
-      "step": "Pad and site work",
-      "detail": "Pads are cut and fine-graded, with trenching and excavation coordinated with your builder and trades."
-    }
-  ],
-  "faqs": [
-    {
-      "q": "Do you remove stumps and roots for a house foundation?",
-      "a": "Yes. For a house foundation, 9 Arrow grubs out root balls with bulldozers and excavators so the footprint is free of roots. Grubbed root balls are then mulched on site where possible, which is our preferred approach. Outside the footprint, mulching leaves roots in place to keep the soil stable."
-    },
-    {
-      "q": "Can you clear around trees I want to keep near the house?",
-      "a": "Yes. Selective clearing takes the brush and unwanted trees around a home site and leaves the trees you choose. Oaks need extra care in Central Texas because of oak wilt. Texas A&M Forest Service advises avoiding wounds to oaks from February through June and painting oak wounds at any time of year."
-    },
-    {
-      "q": "Do you build the house pad after clearing?",
-      "a": "Yes. 9 Arrow cuts pads, including garage pads, and installs and fine-grades pad sites for foundations and future buildings. Site work also covers trenching for small waterlines, conduit and septic lines. We coordinate with your licensed plumbers, electricians, engineers and general contractor for final tie-ins and work outside our scope."
-    },
-    {
-      "q": "How is building site clearing priced?",
-      "a": "Building site clearing is priced after a discovery call or a site visit. Density, tree size and species, topography, access, maneuverability and soil conditions all affect the estimate, and every home site has its own mix of those factors. 9 Arrow shows estimates by the day or by the acre."
-    }
-  ],
-  "related_services": [
-    "site-work-light-utility-installation",
-    "roads-and-access-preparation",
-    "land-clearing",
-    "precision-line-survey-clearing"
-  ],
-  "related_areas": [
-    "land-clearing-bulverde-tx",
-    "land-clearing-spring-branch-tx",
-    "land-clearing-canyon-lake-tx",
-    "land-clearing-boerne-tx",
-    "land-clearing-new-braunfels-tx"
-  ],
-  "related_posts": [
-    "blog-does-clearing-increase-property-value",
-    "blog-land-clearing-cost-texas"
-  ],
-  "hero_photo": "site-pad",
-  "hero_alt": "Cleared pad site with machines after land clearing for a building site",
-  "cta_service": "Forestry mulching / land clearing"
+  {
+   "h2": "Root ball removal under the foundation",
+   "paras": [
+    "Root balls under a slab have to come out, because buried roots decay over time. Mulching normally leaves root balls in place to keep the soil stable, which suits yards and open ground. Under the foundation footprint, 9 Arrow grubs with bulldozers and excavators to take the roots out.",
+    "We prefer to mulch grubbed root balls on site, so they stay out of a burn pile and off a haul truck. Dozing disturbs soil and raises erosion risk, so it makes sense to keep grubbing to the footprint and leave the rest of the site mulched with roots in place. Mulch from the clearing can be stockpiled on site or hauled off if you want the ground bare."
+   ],
+   "photo": "chainsaw"
+  },
+  {
+   "h2": "Building site clearing that follows your survey",
+   "paras": [
+    "Building site clearing has to match the plan on paper. 9 Arrow's mulching machines can carry Trimble GPS equipment that loads your licensed surveyor's CAD files and follows the certified survey data in real time, keeping clearing on the lot lines and the driveway route. 9 Arrow is not a licensed surveyor and does not replace one. The same GPS approach is used on subdivision street corridors and lot lines for development projects. See [survey line clearing in Texas](precision-line-survey-clearing) for details.",
+    "\"9 Arrow has cleared over a dozen properties for me, and every project has been handled with exceptional attention to detail,\" wrote Zach P. in a Google review."
+   ],
+   "photo": "survey-cut"
+  },
+  {
+   "h2": "From cleared ground to a finished building pad",
+   "paras": [
+    "Once the building site is cleared, the dirt work begins. Our [site work and utility installation](site-work-light-utility-installation) service cuts pads, including garage pads, and installs and fine-grades pad sites for foundations and future buildings. Site work also covers excavating for propane tanks and septic systems and trenching for low-pressure waterlines 3 inches or smaller, electrical conduit and septic lines. Our dozers and excavation equipment work in rocky terrain and difficult soil, with excavation up to about 4 feet deep.",
+    "We do not install electrical wire, make final water or electrical tie-ins, or excavate swimming pools. We coordinate with your licensed plumbers and electricians, engineers, general contractor and site supervisor.",
+    "Most home sites also need a way in. [Access road building in Texas](roads-and-access-preparation) covers driveways, culverts and drainage, and existing surface rock can be crushed on site into road base."
+   ],
+   "photo": "trench"
+  }
+ ],
+ "process": [
+  {
+   "step": "Plan",
+   "detail": "A discovery call or site visit to review the house site, driveway, survey and trees to keep."
+  },
+  {
+   "step": "Clear",
+   "detail": "Selective clearing of brush and unwanted trees across the home site, driveway and work area."
+  },
+  {
+   "step": "Grub",
+   "detail": "Root balls come out of the foundation footprint with bulldozers and excavators."
+  },
+  {
+   "step": "Mulch",
+   "detail": "Grubbed root balls are mulched on site wherever possible."
+  },
+  {
+   "step": "Pad and site work",
+   "detail": "Pads are cut and fine-graded, with trenching and excavation coordinated with your builder and trades."
+  }
+ ],
+ "faqs": [
+  {
+   "q": "Do you remove stumps and roots for a house foundation?",
+   "a": "Yes. For a house foundation, 9 Arrow grubs out root balls with bulldozers and excavators so the footprint is free of roots. Grubbed root balls are then mulched on site where possible, which is our preferred approach. Outside the footprint, mulching leaves roots in place to keep the soil stable."
+  },
+  {
+   "q": "Can you clear around trees I want to keep near the house?",
+   "a": "Yes. Selective clearing takes the brush and unwanted trees around a home site and leaves the trees you choose. Oaks need extra care in Central Texas because of oak wilt. Texas A&M Forest Service advises avoiding wounds to oaks from February through June and painting oak wounds at any time of year."
+  },
+  {
+   "q": "Do you build the house pad after clearing?",
+   "a": "Yes. 9 Arrow cuts pads, including garage pads, and installs and fine-grades pad sites for foundations and future buildings. Site work also covers trenching for small waterlines, conduit and septic lines. We coordinate with your licensed plumbers, electricians, engineers and general contractor for final tie-ins and work outside our scope."
+  },
+  {
+   "q": "How is building site clearing priced?",
+   "a": "Building site clearing is priced after a discovery call or a site visit. Density, tree size and species, topography, access, maneuverability and soil conditions all affect the estimate, and every home site has its own mix of those factors. 9 Arrow shows estimates by the day or by the acre."
+  }
+ ],
+ "related_services": [
+  "site-work-light-utility-installation",
+  "roads-and-access-preparation",
+  "land-clearing",
+  "rock-crushing"
+ ],
+ "related_areas": [
+  "land-clearing-bulverde-tx",
+  "land-clearing-spring-branch-tx",
+  "land-clearing-canyon-lake-tx",
+  "land-clearing-boerne-tx",
+  "land-clearing-new-braunfels-tx"
+ ],
+ "related_posts": [
+  "blog-does-clearing-increase-property-value",
+  "blog-land-clearing-cost-texas"
+ ],
+ "hero_photo": "site-pad",
+ "hero_alt": "Cleared pad site with machines after land clearing for a building site",
+ "cta_service": "Forestry mulching / land clearing"
 }

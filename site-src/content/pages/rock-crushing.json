@@ -1,120 +1,173 @@
 {
-  "slug": "rock-crushing",
-  "type": "service",
-  "nav_label": "Rock crushing",
-  "title_tag": "Rock crushing in Central Texas | 9 Arrow Land Service",
-  "meta_description": "On-site rock crushing in Central Texas. We turn the surface rock on your land into fine, compactible road base, with no imported material to haul in.",
-  "h1": "Central Texas rock crushing that turns surface rock into road base",
-  "primary_keyword": "rock crushing central texas",
-  "secondary_keywords": [
-    "on-site rock crushing",
-    "crushed rock road base",
-    "road base crushing",
-    "limestone rock crushing",
-    "rock crushing for roads"
-  ],
-  "lede": "Rock crushing in Central Texas lets you build roads with the rock already lying on your land. 9 Arrow crushes existing surface rock on site into a fine, compactible road base, so you can skip buying and trucking in imported material.",
-  "answer": {
-    "q": "What is on-site rock crushing?",
-    "a": "On-site rock crushing is the process of breaking existing surface rock into road base right on the property. 9 Arrow uses crushing heads and attachments that break rock down to a fine, consistent grade. The result is a compactible road base made from your own material, with no imported rock to buy or haul in."
+ "slug": "rock-crushing",
+ "type": "service",
+ "nav_label": "Rock crushing",
+ "title_tag": "Rock Crushing & Rock Milling in Central Texas | 9 Arrow",
+ "meta_description": "On-site rock crushing and rock milling in Central Texas. We turn the rock on your land into road base for roads and driveways. Get an estimate.",
+ "h1": "On-site rock crushing for Central Texas roads and driveways",
+ "primary_keyword": "rock crushing central texas",
+ "secondary_keywords": [
+  "on-site rock crushing",
+  "rock milling",
+  "rock grinding",
+  "crushed rock road base",
+  "rock crushing for roads",
+  "rock crushing for driveways",
+  "rock crushing near me",
+  "limestone road base"
+ ],
+ "lede": "9 Arrow crushes the surface rock already on your land into a fine, compactible road base, then builds the road on it. Rock crushing, also called rock milling or rock grinding, means no imported base to buy and no trucks to wait on.",
+ "answer": {
+  "q": "What is on-site rock crushing?",
+  "a": "On-site rock crushing, also called rock milling or rock grinding, breaks the loose surface rock on a property into road base right where it lies. 9 Arrow uses crushing heads and attachments that grind rock to a fine, consistent grade. The result is a compactible base for roads and driveways, made from your own rock."
+ },
+ "highlights": [
+  "Your own rock, made into road base",
+  "No imported base to buy or haul",
+  "Graded with crown and drainage",
+  "Built for trucks and heavy equipment"
+ ],
+ "sections": [
+  {
+   "h2": "Rock crushing turns Hill Country rock into road base",
+   "paras": [
+    "Much of Central Texas and the Hill Country sits on limestone, with thin soil over rock and loose rock across the surface. That rock makes ground rough to drive and hard to build on. On-site rock crushing puts it to work.",
+    "9 Arrow grinds the existing surface rock with crushing heads and attachments until it reaches a fine, consistent grade. Crushed that fine, the rock compacts into a firm road base. Loose rock left as it lies will not pack into a smooth road. The same rock that made the land hard to use becomes the surface you drive on.",
+    "Around the Hill Country you will hear this called rock crushing, rock milling or rock grinding. The idea is the same: your own rock, processed on site into base for a road or driveway."
+   ],
+   "photo": "rock-crushing-head"
   },
-  "highlights": [
-    "Crushes existing surface rock on site",
-    "Fine, consistent, compactible road base",
-    "Eliminates imported road base material",
-    "Stronger, more stable road surface"
+  {
+   "h2": "What we build with crushed rock",
+   "paras": [
+    "Crushed rock base is the layer a good road stands on. We use it wherever a property needs a way in that holds up."
+   ],
+   "bullets": [
+    "Ranch roads that carry trucks and trailers",
+    "Internal roads on development tracts",
+    "Driveways to home sites",
+    "New access where there was none"
+   ],
+   "photo": "road-finished"
+  },
+  {
+   "h2": "One crew for the whole road",
+   "paras": [
+    "Rock crushing is the material processing step in a full road build. 9 Arrow handles the rest too: land clearing and brush removal, rough grading and leveling, drainage and erosion control, culvert installation, road base preparation and fine grading. See the full scope on our [access road building](roads-and-access-preparation) page.",
+    "Every road is graded with proper crown and drainage and built to support heavy equipment and truck traffic, so it stays usable through changing weather. When the route runs through cedar and brush, our [forestry mulching](forestry-mulching-and-land-clearing) machines open it first and grind the growth in place."
+   ],
+   "photo": "road-drainage"
+  }
+ ],
+ "process": [
+  {
+   "step": "Look at the ground",
+   "detail": "A discovery call and a site visit show us the rock you have, the route and the access."
+  },
+  {
+   "step": "Clear the route",
+   "detail": "Forestry mulching removes cedar and brush so the rock and ground are open to work."
+  },
+  {
+   "step": "Crush the rock",
+   "detail": "Crushing heads and attachments grind the surface rock to a fine, consistent grade on site."
+  },
+  {
+   "step": "Grade, crown and drain",
+   "detail": "The base is shaped with proper crown and drainage, with culverts where water needs to cross."
+  }
+ ],
+ "faqs": [
+  {
+   "q": "Is rock crushing the same as rock milling?",
+   "a": "In Central Texas, rock crushing, rock milling and rock grinding usually describe the same job: breaking surface rock into finer material on site. 9 Arrow uses crushing heads and attachments that bring rock down to a fine, consistent grade, so the result is a compactible road base made from rock already on your property."
+  },
+  {
+   "q": "Can you turn the rock on my property into road base?",
+   "a": "Yes, when your land has surface rock to work with. On-site rock crushing at 9 Arrow turns existing surface rock into a fine, compactible road base right on the property, using crushing heads and attachments that break the rock to a consistent grade. A discovery call or site visit tells us what your ground has to offer."
+  },
+  {
+   "q": "How much does rock crushing cost?",
+   "a": "9 Arrow prices rock crushing after a discovery call or site visit, because every property is different. Topography, access, maneuverability and soil conditions all shape the work, and the estimate is shown by the day or by the acre. Crushing your own rock also removes the cost of buying and trucking in imported road base."
+  },
+  {
+   "q": "Is crushing rock on site cheaper than hauling in road base?",
+   "a": "On-site rock crushing reduces project cost because it eliminates imported road base material. You skip buying base from a supplier and trucking it to the property. Every job is different, so 9 Arrow prices rock crushing after a discovery call or site visit and shows the estimate by the day or by the acre."
+  },
+  {
+   "q": "How strong is a crushed rock road base?",
+   "a": "A crushed rock road base from 9 Arrow is fine, consistent and compactible, which makes for a stronger and more stable road surface. Roads are graded with proper crown and drainage and built to support heavy equipment and truck traffic, so the road stays usable through changing weather and regular use."
+  },
+  {
+   "q": "Does on-site rock crushing make a project go faster?",
+   "a": "On-site rock crushing speeds project completion because the road base is made on the property. There is no waiting on imported material deliveries. 9 Arrow can clear the route, crush the surface rock and grade the road as one project, which keeps the work moving from brush to finished base."
+  },
+  {
+   "q": "Do you build the whole road or only crush the rock?",
+   "a": "9 Arrow builds the whole access road. Road building covers land clearing and brush removal, rough grading and leveling, drainage and erosion control, culvert installation, road base preparation, fine grading and material processing such as on-site rock crushing. Every road is graded with proper crown and drainage to carry heavy equipment and truck traffic."
+  },
+  {
+   "q": "Do you offer rock crushing near me?",
+   "a": "9 Arrow is based in Spring Branch and crushes rock across Central Texas and the Texas Hill Country, including Bulverde, Canyon Lake, New Braunfels, Boerne, Blanco, Wimberley, Kerrville, San Antonio and Comal County. We come to your land. Call (210) 247-8410 or request an estimate to check your property."
+  }
+ ],
+ "related_services": [
+  "roads-and-access-preparation",
+  "site-work-light-utility-installation",
+  "site-prep",
+  "forestry-mulching-and-land-clearing"
+ ],
+ "related_areas": [],
+ "related_posts": [
+  "blog-land-clearing-cost-texas",
+  "blog-does-clearing-increase-property-value"
+ ],
+ "hero_photo": "rock-surface",
+ "hero_alt": "Track loader with a rock crushing attachment turning surface limestone into road base in Central Texas",
+ "cta_service": "Rock crushing & roads",
+ "compare": {
+  "h2": "Rock crushing vs. hauling in road base",
+  "cols": [
+   "Crush rock on site",
+   "Haul in road base"
   ],
-  "sections": [
-    {
-      "h2": "How rock crushing works in Central Texas",
-      "paras": [
-        "Much of the Texas Hill Country sits on limestone, with thin soil over rock, and loose rock covers the surface of many tracts. On-site rock crushing puts that rock to work. 9 Arrow uses crushing heads and attachments to break the existing surface rock down to a fine, consistent grade. The crushed material makes a compactible road base.",
-        "Rock crushing at 9 Arrow happens on your property. The road base comes from your own ground, so there are no quarry loads to order and no delivery trucks to schedule. The same rock that made the ground hard to drive becomes the surface you drive on."
-      ]
-    },
-    {
-      "h2": "Why crush rock on site",
-      "paras": [
-        "Buying road base means paying for the material, paying for the trucking and waiting on deliveries. On-site rock crushing turns rock you already own into the base. Crushing the rock to a fine, consistent grade is what makes it compactible, because loose surface rock left as it lies will not pack into a smooth road. On-site rock crushing brings four advantages to a road project."
-      ],
-      "bullets": [
-        "Eliminates imported road base material",
-        "Reduces overall project cost",
-        "Speeds up project completion",
-        "Builds a stronger, more stable road surface"
-      ],
-      "photo": "road-finished"
-    },
-    {
-      "h2": "Rock crushing as one step in road building",
-      "paras": [
-        "On-site rock crushing is the material processing step in a larger road build. The full build, from clearing the route and rough grading to culverts, drainage and fine grading, is covered on our [access road building](roads-and-access-preparation) page. Crushed rock becomes the road base layer, and the finished road is graded with proper crown and drainage.",
-        "Roads built on crushed rock base from 9 Arrow are made to support heavy equipment and truck traffic and to stay usable through changing weather. Strength matters on development tracts with daily construction traffic and on ranch roads that carry trucks and trailers year round."
-      ],
-      "photo": "road-grade"
-    },
-    {
-      "h2": "Where on-site rock crushing fits",
-      "paras": [
-        "On-site rock crushing fits rocky ground where a road, driveway or access route is planned. Developers use crushed rock road base for internal roads on new tracts. Ranchers use it for ranch roads. Landowners use it for a driveway to a home site.",
-        "Clearing usually comes first. Our [forestry mulching](forestry-mulching-and-land-clearing) machines open the route through cedar and brush and grind the material in place, so the rock and ground are open to work before crushing starts.",
-        "9 Arrow is based in Spring Branch, where rocky limestone ground is part of daily life. Local conditions are covered on our [land clearing in Spring Branch](land-clearing-spring-branch-tx) page. For how site conditions shape the price of clearing, read our post on [land clearing cost in Texas](blog-land-clearing-cost-texas)."
-      ]
-    }
+  "rows": [
+   [
+    "Where the base comes from",
+    "Rock already on your property",
+    "A supplier, trucked to your land"
+   ],
+   [
+    "Material to buy",
+    "None. Your rock is the material",
+    "Every load of road base"
+   ],
+   [
+    "Deliveries",
+    "No delivery trucks to schedule",
+    "Work waits on loads arriving"
+   ],
+   [
+    "The loose rock on site",
+    "Becomes part of the road",
+    "Stays on the ground or gets moved"
+   ],
+   [
+    "Overall cost",
+    "Reduced, with no imported material",
+    "Material plus trucking"
+   ]
   ],
-  "process": [
-    {
-      "step": "Clear the route",
-      "detail": "Forestry mulching removes trees and brush so the rock and ground are open to work."
-    },
-    {
-      "step": "Crush the surface rock",
-      "detail": "Crushing heads and attachments break existing surface rock down to a fine, consistent grade on site."
-    },
-    {
-      "step": "Grade the road base",
-      "detail": "The crushed base is shaped and graded with proper crown and drainage."
-    }
-  ],
-  "faqs": [
-    {
-      "q": "Can you turn the rock on my property into road base?",
-      "a": "Yes, when your land has surface rock to work with. On-site rock crushing at 9 Arrow turns existing surface rock into a fine, compactible road base right on the property, using crushing heads and attachments that break the rock to a consistent grade. A discovery call or site visit tells us what your ground has to offer."
-    },
-    {
-      "q": "Is crushing rock on site cheaper than hauling in road base?",
-      "a": "On-site rock crushing reduces project cost because it eliminates imported road base material. You skip buying base from a supplier and trucking it to the property. Every job is different, so 9 Arrow prices rock crushing after a discovery call or site visit and shows the estimate by the day or by the acre."
-    },
-    {
-      "q": "How strong is a crushed rock road base?",
-      "a": "A crushed rock road base from 9 Arrow is fine, consistent and compactible, which makes for a stronger and more stable road surface. Roads are graded with proper crown and drainage and built to support heavy equipment and truck traffic, so the road stays usable through changing weather and regular use."
-    },
-    {
-      "q": "Does on-site rock crushing make a project go faster?",
-      "a": "On-site rock crushing speeds project completion because the road base is made on the property. There is no waiting on imported material deliveries. 9 Arrow can clear the route, crush the surface rock and grade the road as one project, which keeps the work moving from brush to finished base."
-    },
-    {
-      "q": "Do you build the whole road or only crush the rock?",
-      "a": "9 Arrow builds the whole access road. Road building covers land clearing and brush removal, rough grading and leveling, drainage and erosion control, culvert installation, road base preparation, fine grading and material processing such as on-site rock crushing. Every road is graded with proper crown and drainage to carry heavy equipment and truck traffic."
-    }
-  ],
-  "related_services": [
-    "roads-and-access-preparation",
-    "site-work-light-utility-installation",
-    "forestry-mulching-and-land-clearing"
-  ],
-  "related_areas": [
-    "land-clearing-spring-branch-tx",
-    "land-clearing-canyon-lake-tx",
-    "land-clearing-blanco-tx",
-    "land-clearing-kerrville-tx",
-    "forestry-mulching-texas-hill-country"
-  ],
-  "related_posts": [
-    "blog-land-clearing-cost-texas",
-    "blog-does-clearing-increase-property-value"
-  ],
-  "hero_photo": "rock-surface",
-  "hero_alt": "Loose limestone surface rock, the raw material for on-site rock crushing in Central Texas",
-  "cta_service": "Rock crushing & roads"
+  "note": "Every property is different. On a discovery call or site visit we look at your ground and the road you need, and tell you straight whether crushing on site is the right call."
+ },
+ "fit": {
+  "h2": "Is on-site rock crushing right for your land?",
+  "items": [
+   "You see loose rock and limestone across the ground",
+   "You need a road, driveway or access route",
+   "Cedar or brush is in the way. We clear it first",
+   "You would rather not buy and truck in road base",
+   "Trucks, trailers or heavy equipment will use the road"
+  ]
+ }
 }

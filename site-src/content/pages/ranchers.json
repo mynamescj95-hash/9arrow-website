@@ -1,96 +1,96 @@
 {
-  "slug": "ranchers",
-  "type": "audience",
-  "nav_label": "Ranchers",
-  "title_tag": "Ranch Land Services in Central Texas | 9 Arrow",
-  "meta_description": "Ranch land services in Central Texas. Cedar and brush clearing, fence lines, ranch roads, stock tanks and mowing from a family-owned Spring Branch crew.",
-  "h1": "Ranch land services from a family with Texas ranching roots",
-  "primary_keyword": "ranch land services",
-  "secondary_keywords": [
-    "ranch land services central texas",
-    "cedar clearing for ranchers",
-    "fence line clearing",
-    "ranch road building",
-    "stock tank grading"
-  ],
-  "lede": "9 Arrow Land Service provides ranch land services across Central Texas, from cedar and brush clearing to fence lines, ranch roads, stock tanks and mowing. John Wheelock comes from Texas ranching roots, and we treat your ranch as if it were our own.",
-  "answer": {
-    "q": "What ranch land services does 9 Arrow offer in Central Texas?",
-    "a": "9 Arrow Land Service offers ranch land services across Central Texas and the Hill Country, including cedar and brush clearing by forestry mulching, pasture reclamation, fence line clearing, ranch road building with on-site rock crushing, stock tank grading, low-pressure waterline trenching and seasonal mowing on properties from small acreage to more than 1,000 acres."
+ "slug": "ranchers",
+ "type": "audience",
+ "nav_label": "Ranchers",
+ "title_tag": "Ranch Land Services in Central Texas | 9 Arrow",
+ "meta_description": "Ranch land services in Central Texas. Cedar and brush clearing, fence lines, ranch roads, stock tanks and mowing from a family-owned Spring Branch crew.",
+ "h1": "Ranch land services from a family with Texas ranching roots",
+ "primary_keyword": "ranch land services",
+ "secondary_keywords": [
+  "ranch land services central texas",
+  "cedar clearing for ranchers",
+  "fence line clearing",
+  "ranch road building",
+  "stock tank grading"
+ ],
+ "lede": "9 Arrow Land Service provides ranch land services across Central Texas, from cedar and brush clearing to fence lines, ranch roads, stock tanks and mowing. John Wheelock comes from Texas ranching roots, and we treat your ranch as if it were our own.",
+ "answer": {
+  "q": "What ranch land services does 9 Arrow offer in Central Texas?",
+  "a": "9 Arrow Land Service offers ranch land services across Central Texas and the Hill Country, including cedar and brush clearing by forestry mulching, pasture reclamation, fence line clearing, ranch road building with on-site rock crushing, stock tank grading, low-pressure waterline trenching and seasonal mowing on properties from small acreage to more than 1,000 acres."
+ },
+ "highlights": [
+  "Texas ranching roots in the family",
+  "Brush piles mulched instead of burned",
+  "Ranch roads from your own rock",
+  "Mowing from small acreage to 1,000+ acres"
+ ],
+ "sections": [
+  {
+   "h2": "Ranch land services for cedar, brush and pasture",
+   "paras": [
+    "Ashe juniper, the tree most Texans call cedar, spreads across Hill Country pasture, and mesquite and brush crowd in too. 9 Arrow grinds cedar, brush and trees where they stand with forestry mulching. Nothing is pushed, piled or burned, and the root balls stay in the ground to hold the soil. Our [ranch land clearing](ranch-pasture-clearing) work reclaims pasture without the soil disturbance a dozer causes.",
+    "Under a light mulch, grass comes back within days after rain. Heavy mulch up to 12 inches deep can take 2 to 3 years. Selective clearing leaves the shade trees you want, and our [cedar removal](cedar-removal) work targets the Ashe juniper you want gone."
+   ],
+   "photo": "cleared-pasture-trees"
   },
-  "highlights": [
-    "Texas ranching roots in the family",
-    "Brush piles mulched instead of burned",
-    "Ranch roads from your own rock",
-    "Mowing from small acreage to 1,000+ acres"
-  ],
-  "sections": [
-    {
-      "h2": "Ranch land services for cedar, brush and pasture",
-      "paras": [
-        "Ashe juniper, the tree most Texans call cedar, spreads across Hill Country pasture, and mesquite and brush crowd in too. 9 Arrow grinds cedar, brush and trees where they stand with forestry mulching. Nothing is pushed, piled or burned, and the root balls stay in the ground to hold the soil. Our [ranch land clearing](ranch-pasture-clearing) work reclaims pasture without the soil disturbance a dozer causes.",
-        "Under a light mulch, grass comes back within days after rain. Heavy mulch up to 12 inches deep can take 2 to 3 years. Selective clearing leaves the shade trees you want, and our [cedar removal](cedar-removal) work targets the Ashe juniper you want gone."
-      ],
-      "photo": "cleared-pasture-trees"
-    },
-    {
-      "h2": "Brush piles, fence lines and declining oaks on the ranch",
-      "paras": [
-        "Old bulldozer piles, some as large as a house, sit on plenty of Texas ranches. 9 Arrow mulches existing brush piles on site, which matters because burning is often prohibited during burn bans. We also clear fence lines, including lines cut from your surveyor's data with Trimble GPS guidance through our [survey line clearing](precision-line-survey-clearing) service.",
-        "Drought stress and oak wilt are common in Central Texas. Oak wilt spreads in defined paths, and infected trees cannot be restored. Selective clearing is often the best way to protect the healthy oaks around them."
-      ],
-      "photo": "mulcher-brush"
-    },
-    {
-      "h2": "Ranch roads, stock tanks and water lines",
-      "paras": [
-        "9 Arrow builds ranch roads with proper crown and drainage, culverts and erosion control, made to carry trucks and equipment and stay usable through changing weather. Where your ranch has surface rock, we crush it on site into fine, compactible road base, which eliminates imported material. Our [access road building](roads-and-access-preparation) page covers the full process.",
-        "Our dozers and excavators also grade stock tanks, small lakes and creek crossings, and we trench for low-pressure waterlines 3 inches or smaller. We leave final water tie-ins to licensed plumbers and coordinate with them."
-      ],
-      "photo": "road-trees"
-    },
-    {
-      "h2": "Seasonal mowing and ranch headquarters upkeep",
-      "paras": [
-        "9 Arrow mows tall grass and light brush with agricultural equipment, and our grounds crews keep ranch headquarters clean with weed eating, selective chainsaw trimming and debris cleanup. We schedule rural and ranch properties by season and conditions. Monthly mowing is ideal in the growing season, and one final mow usually carries a property through winter.",
-        "\"I have had 9 Arrow do multiple jobs for me and they come through every time. This business operates with all the values you'd expect from a Central Texas, Family run company. I wouldn't hesitate to recommend them for any of their services as they have gone above and beyond for me.\" (Kenny Henninger, 5-star Google review)"
-      ],
-      "photo": "mowed-pasture"
-    }
-  ],
-  "faqs": [
-    {
-      "q": "Does grass grow back after clearing cedar from pasture?",
-      "a": "Grass grows back after forestry mulching clears cedar from pasture, and mulch depth sets the timeline. Under a light mulch, grass returns within days after rain. Heavy mulch up to 12 inches deep can take 2 to 3 years. Root balls stay in place during mulching, which keeps the pasture soil stable."
-    },
-    {
-      "q": "Can 9 Arrow get rid of old brush piles on a ranch?",
-      "a": "Yes. 9 Arrow mulches existing brush piles on site, including old bulldozer piles as large as a house. Mulching replaces burning, which is often prohibited during Texas burn bans. The piles are ground into fine mulch on the ranch, so nothing has to be loaded, hauled or burned."
-    },
-    {
-      "q": "How is ranch clearing priced?",
-      "a": "9 Arrow prices ranch clearing after a discovery call, a site visit or both. The estimate depends on vegetation density, tree size and species, topography, access, maneuverability and soil conditions, and we show it by the day or by the acre. Dense cedar on steep, rocky ground takes longer than light brush."
-    }
-  ],
-  "related_services": [
-    "ranch-pasture-clearing",
-    "cedar-removal",
-    "roads-and-access-preparation",
-    "grounds-maintenance"
-  ],
-  "related_areas": [
-    "land-clearing-blanco-tx",
-    "land-clearing-kerrville-tx",
-    "land-clearing-boerne-tx",
-    "forestry-mulching-texas-hill-country",
-    "land-clearing-spring-branch-tx"
-  ],
-  "related_posts": [
-    "blog-cedar-mesquite-ranch",
-    "blog-clear-cedar-without-regrowth",
-    "blog-best-time-to-clear-land-texas"
-  ],
-  "hero_photo": "cleared-pasture-trees",
-  "hero_alt": "Central Texas ranch pasture cleared of cedar and brush with shade trees left standing",
-  "cta_service": "Forestry mulching / land clearing"
+  {
+   "h2": "Brush piles, fence lines and declining oaks on the ranch",
+   "paras": [
+    "Old bulldozer piles, some as large as a house, sit on plenty of Texas ranches. 9 Arrow mulches existing brush piles on site, which matters because burning is often prohibited during burn bans. We also clear fence lines, including lines cut from your surveyor's data with Trimble GPS guidance through our [survey line clearing](precision-line-survey-clearing) service.",
+    "Drought stress and oak wilt are common in Central Texas. Oak wilt spreads in defined paths, and infected trees cannot be restored. Selective clearing is often the best way to protect the healthy oaks around them."
+   ],
+   "photo": "mulcher-brush"
+  },
+  {
+   "h2": "Ranch roads, stock tanks and water lines",
+   "paras": [
+    "9 Arrow builds ranch roads with proper crown and drainage, culverts and erosion control, made to carry trucks and equipment and stay usable through changing weather. Where your ranch has surface rock, we crush it on site into fine, compactible road base, which eliminates imported material. Our [access road building](roads-and-access-preparation) page covers the full process.",
+    "Our dozers and excavators also grade stock tanks, small lakes and creek crossings, and we trench for low-pressure waterlines 3 inches or smaller. We leave final water tie-ins to licensed plumbers and coordinate with them."
+   ],
+   "photo": "road-trees"
+  },
+  {
+   "h2": "Seasonal mowing and ranch headquarters upkeep",
+   "paras": [
+    "9 Arrow mows tall grass and light brush with agricultural equipment, and our grounds crews keep ranch headquarters clean with weed eating, selective chainsaw trimming and debris cleanup. We schedule rural and ranch properties by season and conditions. Monthly mowing is ideal in the growing season, and one final mow usually carries a property through winter.",
+    "\"I have had 9 Arrow do multiple jobs for me and they come through every time. This business operates with all the values you'd expect from a Central Texas, Family run company. I wouldn't hesitate to recommend them for any of their services as they have gone above and beyond for me.\" (Kenny Henninger, 5-star Google review)"
+   ],
+   "photo": "mowed-pasture"
+  }
+ ],
+ "faqs": [
+  {
+   "q": "Does grass grow back after clearing cedar from pasture?",
+   "a": "Grass grows back after forestry mulching clears cedar from pasture, and mulch depth sets the timeline. Under a light mulch, grass returns within days after rain. Heavy mulch up to 12 inches deep can take 2 to 3 years. Root balls stay in place during mulching, which keeps the pasture soil stable."
+  },
+  {
+   "q": "Can 9 Arrow get rid of old brush piles on a ranch?",
+   "a": "Yes. 9 Arrow mulches existing brush piles on site, including old bulldozer piles as large as a house. Mulching replaces burning, which is often prohibited during Texas burn bans. The piles are ground into fine mulch on the ranch, so nothing has to be loaded, hauled or burned."
+  },
+  {
+   "q": "How is ranch clearing priced?",
+   "a": "9 Arrow prices ranch clearing after a discovery call, a site visit or both. The estimate depends on vegetation density, tree size and species, topography, access, maneuverability and soil conditions, and we show it by the day or by the acre. Dense cedar on steep, rocky ground takes longer than light brush."
+  }
+ ],
+ "related_services": [
+  "ranch-pasture-clearing",
+  "cedar-removal",
+  "roads-and-access-preparation",
+  "rock-crushing"
+ ],
+ "related_areas": [
+  "land-clearing-blanco-tx",
+  "land-clearing-kerrville-tx",
+  "land-clearing-boerne-tx",
+  "forestry-mulching-texas-hill-country",
+  "land-clearing-spring-branch-tx"
+ ],
+ "related_posts": [
+  "blog-cedar-mesquite-ranch",
+  "blog-clear-cedar-without-regrowth",
+  "blog-best-time-to-clear-land-texas"
+ ],
+ "hero_photo": "cleared-pasture-trees",
+ "hero_alt": "Central Texas ranch pasture cleared of cedar and brush with shade trees left standing",
+ "cta_service": "Forestry mulching / land clearing"
 }

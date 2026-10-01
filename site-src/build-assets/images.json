@@ -371,6 +371,28 @@
   "alt": "Hill Country hillside after selective cedar removal with live oaks kept",
   "generated": true
  },
+ "g31": {
+  "w": 1040,
+  "h": 780,
+  "sizes": [
+   480,
+   960,
+   1600
+  ],
+  "alt": "Crushing head grinding surface limestone into road base on a Hill Country road",
+  "generated": true
+ },
+ "g32": {
+  "w": 1560,
+  "h": 1106,
+  "sizes": [
+   480,
+   960,
+   1600
+  ],
+  "alt": "Graded road with a crowned surface and a drainage ditch along the edge",
+  "generated": true
+ },
  "r-hero": {
   "w": 2048,
   "h": 1365,

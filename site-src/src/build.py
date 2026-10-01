@@ -55,7 +55,7 @@ PHOTO = {  # content photo keys -> image keys. Real 9 Arrow photography first; g
     "mulcher-blue": "r-blue", "mulcher-red-field": "r-tire", "red-mulcher-truck": "r-red-truck", "fleet": "r-fleet", "crew-sharpening": "r-sharpen",
     "chainsaw": "g23", "powerline-corridor": "g08", "survey-cut": "r-trail-cat", "cleared-lane": "r-trail", "cleared-trail": "r-trail",
     "cleared-hillside": "g06", "cleared-oaks": "r-oaks", "cleared-wimberley": "g27", "cleared-pasture-trees": "g05",
-    "winter-cleared": "g30", "mowed-pasture": "g12", "mowed-field": "g12", "rock-surface": "g10", "road-finished": "g09",
+    "winter-cleared": "g30", "mowed-pasture": "g12", "mowed-field": "g12", "rock-surface": "g10", "rock-crushing-head": "g31", "road-drainage": "g32", "road-finished": "g09",
     "road-grade": "g09", "road-long": "g09", "road-trees": "g09", "trench": "g11", "site-pad": "g06", "demo-cleanup": "g23",
     "mulch-hand": "r-mulch", "mulch-texture": "r-mulch", "john-machine": "r-john-machine", "owners": "r-owners",
     "trail-before": "trail-before", "trail-after": "trail-after",
@@ -168,7 +168,11 @@ def need_for(slug):
     if slug.startswith("land-clearing"): return "clearing"
     return ""
 def est_url(slug=""):
-    n = need_for(slug); return url("get-an-estimate", f"#need-{n}" if n else "")
+    return url("get-an-estimate")
+
+def clean_hashes(html):
+    """No page address ever ends in a #fragment: estimate links carry the service in data-need."""
+    return re.sub(r'href="((?:/get-an-estimate)|(?:get-an-estimate\.html))#need-([a-z]+)"', r'href="\1" data-need="\2"', html)
 
 # ---------------------------------------------------------------- navigation data
 SERVICES = [
@@ -229,7 +233,7 @@ def header(active=""):
 <a class="nav-top nav-plain" href="{url('about-us')}">About</a><a class="nav-top nav-plain" href="{url('blog')}">Blog</a>
 </nav>
 <a class="hdr-phone" href="tel:{TEL}">{PHONE}</a>
-<a class="btn btn-main hdr-cta" href="{est_url(active)}" data-drawer>Get an estimate</a>
+<a class="btn btn-main hdr-cta" href="{est_url(active)}" data-need="{need_for(active)}" data-drawer>Get an estimate</a>
 <a class="call-btn" href="tel:{TEL}" aria-label="Call 9 Arrow at {PHONE}">{I['phone']}</a>
 <button class="menu-btn" id="menu-btn" type="button" aria-expanded="false" aria-controls="sheet" aria-label="Open menu">{I['menu']}</button>
 </div></header>
@@ -242,7 +246,7 @@ def header(active=""):
 <a class="solo" href="{url('our-work')}">Our work</a><a class="solo" href="{url('about-us')}">About the family</a>
 <a class="solo" href="{url('blog')}">Blog &amp; guides</a><a class="solo" href="{url('faq')}">FAQ</a><a class="solo" href="{url('contact')}">Contact</a>
 </div>
-<div class="sheet-foot"><a class="btn btn-line" href="tel:{TEL}">{I['phone']} Call</a><a class="btn btn-main" href="{est_url(active)}" data-drawer>Get an estimate</a></div>
+<div class="sheet-foot"><a class="btn btn-line" href="tel:{TEL}">{I['phone']} Call</a><a class="btn btn-main" href="{est_url(active)}" data-need="{need_for(active)}" data-drawer>Get an estimate</a></div>
 </div>"""
 
 def footer():
@@ -285,7 +289,7 @@ def drawer(slug=""):
 <p class="small">Rather talk? Call <a href="tel:{TEL}">{PHONE}</a></p></div></div></div>"""
 
 def mbar(slug=""):
-    return f'<div class="mbar"><a class="btn btn-line" href="tel:{TEL}">{I["phone"]} Call</a><a class="btn btn-main" href="{est_url(slug)}" data-drawer>Get an estimate</a></div>'
+    return f'<div class="mbar"><a class="btn btn-line" href="tel:{TEL}">{I["phone"]} Call</a><a class="btn btn-main" href="{est_url(slug)}" data-need="{need_for(slug)}" data-drawer>Get an estimate</a></div>'
 
 def crumbs(items):
     li = "".join(f'<li><a href="{url(s)}">{esc(n)}</a></li>' if s is not None else f'<li aria-current="page">{esc(n)}</li>' for s, n in items)
@@ -357,6 +361,7 @@ def doc(slug, title, desc, body, sch, og=None, hero_preload=None, noindex=False)
 {mbar(slug)}
 {drawer(slug) if slug != "get-an-estimate" else ""}
 <script src="assets/js/site.js" defer></script>"""
+    page = clean_hashes(page).replace(' data-need=""', '')
     if MODE == "preview" and slug in ("", "index"):
         head = head.replace(f"<title>{esc(title)}</title>", "<title>9 Arrow Website</title>", 1)
         return '<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">\n' + head + "\n<script>(function(){function a(){document.body.classList.add('over-hero')}if(document.body)a();else document.addEventListener('DOMContentLoaded',a)})()</script>\n" + page  # the preview host wraps the main page itself
@@ -365,7 +370,7 @@ def doc(slug, title, desc, body, sch, og=None, hero_preload=None, noindex=False)
 # ---------------------------------------------------------------- shared blocks
 def phero(slug, p, crumb_items, img_key, h1=None, lede=None, cta=True, checks=True):
     hl = "".join(f"<li>{rich(h)}</li>" for h in (p.get("highlights") or [])[:4]) if checks else ""
-    btns = (f'<div class="btn-row"><a class="btn btn-light" href="{est_url(slug)}" data-drawer>Get an estimate</a>'
+    btns = (f'<div class="btn-row"><a class="btn btn-light" href="{est_url(slug)}" data-need="{need_for(slug)}" data-drawer>Get an estimate</a>'
             f'<a class="btn btn-ghost-l" href="tel:{TEL}">{I["phone"]} {PHONE}</a></div>') if cta else ""
     img_key = big(img_key)
     return f"""<section class="hero-photo" data-zoom><div class="hp-media">{img(img_key, hero_sizes(img_key), eager=True, xl=True)}</div>
@@ -458,7 +463,7 @@ def cta_band(slug="", head="Ready to see what your land can become?", text=None)
     text = text or "Book a discovery call. We'll talk through the property and your goals, walk it with you, and price the work by the acre or by the day."
     return f"""<section class="dark cta-band"><div class="bg">{img("r-fleet", "100vw", alt="")}</div><div class="wrap cta-in">
 <div><h2>{esc(head)}</h2><p>{esc(text)}</p></div>
-<div class="cta-side"><a class="btn btn-main" href="{est_url(slug)}" data-drawer>Get an estimate</a><a class="cta-phone" href="tel:{TEL}">{PHONE}</a></div>
+<div class="cta-side"><a class="btn btn-main" href="{est_url(slug)}" data-need="{need_for(slug)}" data-drawer>Get an estimate</a><a class="cta-phone" href="tel:{TEL}">{PHONE}</a></div>
 </div></section>"""
 
 # ---------------------------------------------------------------- map
@@ -486,8 +491,8 @@ def map_svg(highlight=None, title="Map of 9 Arrow service areas around Spring Br
 # ---------------------------------------------------------------- estimate form
 TOWN_LIST = ["Spring Branch", "Bulverde", "Canyon Lake", "New Braunfels", "Boerne", "Blanco", "Wimberley", "Kerrville",
              "San Antonio", "Comal County", "Kendall County", "Hays County", "Fredericksburg", "San Marcos", "Bandera"]
-def form(variant="page"):
-    tiles = "".join(f'<label class="tile"><input type="checkbox" data-need="{k}" value="{esc(v)}"><span class="tile-in">'
+def form(variant="page", preset=None):
+    tiles = "".join(f'<label class="tile"><input type="checkbox" data-need="{k}" value="{esc(v)}"{" checked" if k == preset else ""}><span class="tile-in">'
                     f'<svg viewBox="0 0 28 28" aria-hidden="true">{TILE_ICONS[k]}</svg><span class="tile-t">{esc(v)}</span><span class="tick" aria-hidden="true"></span></span></label>' for k, v in NEEDS)
     acre = "".join(f'<label class="opt"><input type="radio" name="acreage" value="{esc(v)}"><span>{esc(v)}</span></label>'
                    for v in ("Under 5 acres", "5 to 20 acres", "20 to 100 acres", "100+ acres", "Linear work: lines, ROW or roads", "Not sure"))
@@ -530,14 +535,17 @@ def form(variant="page"):
 <p>The 9 Arrow team will reach out to set up your discovery call. Need us sooner? Call <a href="tel:{TEL}">{PHONE}</a>.</p><dl class="fdone-sum"></dl></div>
 </form>"""
 
-def estimate_section(slug="index", head="Tell us about your land.", text=None, dark=True):
+EST_PATH = [("Discovery call", "Your land, your goal, your timeline."), ("Site walk", "Density, tree size, terrain, access and soil."),
+            ("Estimate", "By the acre or by the day."), ("The work", "Not finished until we're proud of it.")]
+
+def estimate_section(slug="index", head="Tell us about your land.", text=None, dark=True, path=None, preset=None):
     text = text or "Four quick steps. We'll call to set up a discovery call, walk the property with you, and price the work by the acre or by the day."
+    steps = "".join(f"<li><b>{esc(a)}</b><span>{esc(b)}</span></li>" for a, b in (path or EST_PATH))
     return f"""<section class="sec est-sec{' dark topo' if dark else ''}" id="estimate"><div class="wrap est-grid">
 <div class="est-copy"><h2 class="h-lg">{esc(head)}</h2><p class="lede mt-s">{esc(text)}</p>
-<ol class="est-path"><li><b>Discovery call</b><span>Your land, your goal, your timeline.</span></li><li><b>Site walk</b><span>Density, tree size, terrain, access and soil.</span></li>
-<li><b>Estimate</b><span>By the acre or by the day.</span></li><li><b>The work</b><span>Not finished until we're proud of it.</span></li></ol>
+<ol class="est-path">{steps}</ol>
 <p class="est-call">Rather talk now? <a href="tel:{TEL}">{PHONE}</a></p></div>
-<div class="est-card">{form(slug)}</div></div></section>"""
+<div class="est-card">{form(slug, preset)}</div></div></section>"""
 
 # ---------------------------------------------------------------- page renderers
 TYPE_CRUMB = {"service": ("services", "Services"), "audience": (None, "Who we serve"), "city": ("service-areas", "Service areas"),
@@ -597,6 +605,61 @@ def render_standard(slug):
     if p.get("faqs"): extra.append(faq_schema(slug, p["faqs"]))
     sch = schema(slug, p["title_tag"], p["meta_description"], [(s if s is not None else slug, n) for s, n in ci], extra)
     return doc(slug, p["title_tag"], p["meta_description"], "\n".join(b for b in body if b), sch, hero_preload=img_src(hero_key(slug, p), 1600))
+
+def compare_block(c):
+    head = "".join(f'<th scope="col">{esc(x)}</th>' for x in c["cols"])
+    rows = "".join(f'<tr><th scope="row">{esc(r[0])}</th><td data-label="{esc(c["cols"][0])}">{esc(r[1])}</td><td data-label="{esc(c["cols"][1])}">{esc(r[2])}</td></tr>' for r in c["rows"])
+    return f"""<section class="sec alt topo" aria-labelledby="cmp-h"><div class="wrap"><h2 class="h-lg" id="cmp-h">{esc(c["h2"])}</h2>
+<div class="cmp-wrap"><table class="cmp"><thead><tr><td></td>{head}</tr></thead><tbody>{rows}</tbody></table></div>
+<p class="cmp-note">{esc(c["note"])}</p></div></section>"""
+
+def before_after(b, a, head, text, cap_b, cap_a):
+    arrow = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12h15M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.4"/></svg>'
+    return f"""<section class="sec ba-sec" aria-labelledby="ba-h"><div class="wrap"><div class="ba-head"><h2 class="h-lg" id="ba-h">{esc(head)}</h2><p class="lede">{esc(text)}</p></div>
+<div class="ba"><figure class="ba-item">{img(b, "(max-width: 760px) 92vw, 560px")}<figcaption><b>Before</b>{esc(cap_b)}</figcaption></figure>
+<span class="ba-arrow">{arrow}</span>
+<figure class="ba-item">{img(a, "(max-width: 760px) 92vw, 560px")}<figcaption><b>After</b>{esc(cap_a)}</figcaption></figure></div></div></section>"""
+
+def render_rock():
+    slug = "rock-crushing"; p = PAGES[slug]
+    ci = crumb_items(slug, p)
+    used = {hero_key(slug, p)}
+    blocks = sections(p, used)
+    check = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.2 4.2L19 7" fill="none" stroke="currentColor" stroke-width="2.6"/></svg>'
+    fit = p["fit"]
+    fit_li = "".join(f"<li>{check}<span>{esc(x)}</span></li>" for x in fit["items"])
+    towns = "".join(f'<a class="chip-link" href="{url("land-clearing-" + s)}">{I["pin"]}{esc(n)}</a>' for s, n, *_ in TOWNS) + f'<a class="chip-link" href="{url("land-clearing-comal-county")}">{I["pin"]}Comal County</a>'
+    body = [phero(slug, p, ci, hero_key(slug, p)), answer(p),
+            before_after("rock-before", "rock-after", "Loose rock in. Road base out.",
+                         "A real 9 Arrow job: the same ground before and after on-site rock crushing.",
+                         "Loose limestone across the surface", "Road base crushed from that rock"),
+            f'<section class="sec sec-tight"><div class="wrap stack">{blocks[0]}</div></section>',
+            compare_block(p["compare"]),
+            f'<section class="sec"><div class="wrap stack">{"".join(blocks[1:])}</div></section>',
+            process(p, "How rock crushing works"),
+            f"""<section class="sec" aria-labelledby="fit-h"><div class="wrap fit-grid"><div><h2 class="h-lg" id="fit-h">{esc(fit["h2"])}</h2>
+<p class="lede mt-s">If most of these sound like your property, crushing on site is worth a look.</p><ul class="fit">{fit_li}</ul></div>
+<aside class="fit-cta"><p class="kicker">Rock on your land?</p><h3>Find out if it can be your road.</h3>
+<p>Tell us where the property is and what you need to build. We'll set up a discovery call and look at the ground.</p>
+<a class="btn btn-gold" href="{est_url(slug)}" data-need="rock" data-drawer>Get a rock crushing estimate</a>
+<a class="fit-phone" href="tel:{TEL}">{I["phone"]} {PHONE}</a></aside></div></section>""",
+            f"""<section class="sec alt" aria-labelledby="where-h"><div class="wrap where-grid"><div class="copy stack" style="gap:16px">
+<h2 class="h-lg" id="where-h">Rock crushing across the Hill Country</h2>
+<p class="lede">We're based in Spring Branch and crush rock on properties across Central Texas and the Texas Hill Country. We come to your land.</p>
+<div class="chips">{towns}</div></div><div class="map">{map_svg(None, "Map of 9 Arrow rock crushing service areas around Spring Branch, Texas")}</div></div></section>""",
+            review_for(slug, p),
+            faq_block(p, slug, "Rock crushing questions"),
+            related(p, slug),
+            estimate_section(slug, "Tell us about your road.", "Four quick steps. Rock crushing is already checked. We'll call to set up a discovery call, look at the ground with you, and price the work by the day or by the acre.",
+                             path=[("Discovery call", "Your land, the road you need, your timeline."), ("Site visit", "The rock you have, the route, access and terrain."),
+                                   ("Estimate", "By the day or by the acre."), ("The work", "Clear, crush, grade. Not finished until we're proud of it.")],
+                             preset="rock")]
+    svc = service_node(slug, p)
+    svc.update({"name": "On-site rock crushing", "serviceType": "Rock crushing", "alternateName": ["Rock milling", "Rock grinding", "On-site rock crushing"],
+                "areaServed": [{"@type": "City", "name": n + ", TX", "geo": {"@type": "GeoCoordinates", "latitude": la, "longitude": lo}} for _, n, la, lo, *_ in TOWNS]
+                              + [{"@type": "AdministrativeArea", "name": "Comal County, TX"}, {"@type": "AdministrativeArea", "name": "Texas Hill Country"}]})
+    sch = schema(slug, p["title_tag"], p["meta_description"], [(s if s is not None else slug, n) for s, n in ci], [svc, faq_schema(slug, p["faqs"])])
+    return doc(slug, p["title_tag"], p["meta_description"], "\n".join(x for x in body if x), sch, hero_preload=img_src(hero_key(slug, p), 1600))
 
 def render_services_hub():
     slug = "services"; p = PAGES[slug]
@@ -797,7 +860,7 @@ def render_post(slug):
 <section class="sec" style="padding-top:clamp(28px,4vw,48px)"><div class="wrap post-grid"><div>
 <section class="answer" aria-labelledby="ans-h">{emblem()}<div><h2 id="ans-h">{esc(m['answer_q'])}</h2><p>{rich(m['answer_a'])}</p></div></section>
 <div class="prose mt-l">{md(m['body'])}</div></div>
-<aside class="post-aside"><div class="aside-card"><h3>Get a real number for your land</h3><p class="small">We price by the acre or by the day after a discovery call and a look at the property.</p><a class="btn btn-main" href="{est_url(rs[0] if rs else '')}">Get an estimate</a><a href="tel:{TEL}" class="small">{PHONE}</a></div>
+<aside class="post-aside"><div class="aside-card"><h3>Get a real number for your land</h3><p class="small">We price by the acre or by the day after a discovery call and a look at the property.</p><a class="btn btn-main" href="{est_url(rs[0] if rs else '')}" data-need="{need_for(rs[0] if rs else '')}" data-drawer>Get an estimate</a><a href="tel:{TEL}" class="small">{PHONE}</a></div>
 {f'<div class="aside-card"><h3>Related services</h3><ul class="bul">{svc_links}</ul></div>' if svc_links else ''}</aside></div></section>
 </article>
 {faq_html}
@@ -946,7 +1009,7 @@ def main():
     shutil.copy(os.path.join(ROOT, "src/static/site.js"), os.path.join(A, "js/site.js"))
     pages = {"index": render_home(), "services": render_services_hub(), "service-areas": render_areas_hub(), "about-us": render_about(),
              "faq": render_faq(), "get-an-estimate": render_estimate(), "contact": render_contact(), "our-work": render_our_work(),
-             "blog": render_blog_index(), "privacy-policy": legal("privacy-policy", "Privacy Policy"),
+             "blog": render_blog_index(), "rock-crushing": render_rock(), "privacy-policy": legal("privacy-policy", "Privacy Policy"),
              "terms-and-conditions": legal("terms-and-conditions", "Terms & Conditions"), "thanks": render_thanks(), "404": render_404()}
     for s in PAGES:
         if s not in pages: pages[s] = render_standard(s)
