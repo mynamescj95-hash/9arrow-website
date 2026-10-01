@@ -4,7 +4,7 @@ python3 src/build.py prod     -> dist/      (root-absolute clean URLs for Netlif
 python3 src/build.py preview  -> preview/   (relative .html links for the claude.ai preview)
 Content lives in content/pages/*.json and content/blog/*.md. Images come from build-assets/ (see images.py).
 """
-import glob, html, json, math, os, re, shutil, sys
+import glob, html, json, math, os, re, shutil, subprocess, sys
 import markdown, yaml
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -441,7 +441,7 @@ def footer():
     return f"""<footer class="ft"><div class="wrap">
 <div class="ft-top">
 <div class="ft-brand"><img src="assets/logo/lockup-light.svg" alt="9 Arrow Land Service" width="170" height="61" loading="lazy">
-<p>Family-owned land clearing, forestry mulching and rock crushing, based in Spring Branch and serving Central Texas and the Texas Hill Country.</p>
+<p>Family-owned land clearing, forestry mulching and rock crushing, based in Spring Branch and working across Texas from the Hill Country.</p>
 <p class="ft-nap"><strong>9 Arrow Land Service</strong><br>Spring Branch, TX<br><a href="tel:{TEL}">{PHONE}</a><br><a href="mailto:{EMAIL}">{EMAIL}</a></p></div>
 <nav aria-label="Services"><p class="ft-h">Services</p><ul>{svc}</ul></nav>
 <nav aria-label="Service areas"><p class="ft-h">Service areas</p><ul class="ft-areas">{areas}<li><a href="{url('forestry-mulching-texas-hill-country')}">Hill Country</a></li></ul>
@@ -486,14 +486,21 @@ ORG_ID = SITE + "/#business"
 ENTITY = ("9 Arrow Land Service is a family-owned land clearing company based in Spring Branch, Texas, founded by John and Camille "
           "Wheelock. We provide forestry mulching, rock crushing and road building, precision survey line clearing, right-of-way "
           "clearing, site work and grounds maintenance for land developers, energy and utility providers, solar developers and "
-          "ranchers across Central Texas and the Texas Hill Country.")
+          "ranchers across Texas, from a home base in the Texas Hill Country.")
 def org():
     return {"@type": "LocalBusiness", "@id": ORG_ID, "name": "9 Arrow Land Service", "alternateName": ["9 Arrow", "Nine Arrow Land Service"],
             "description": ENTITY, "slogan": "It does not get better.", "url": SITE + "/", "telephone": TEL, "email": EMAIL,
-            "logo": SITE + "/assets/logo/lockup-dark.svg", "image": SITE + "/" + img_src("r-hero", 1600),
+            "logo": {"@type": "ImageObject", "@id": SITE + "/#logo", "url": SITE + "/assets/logo/favicon-512.png", "contentUrl": SITE + "/assets/logo/favicon-512.png",
+                     "width": 512, "height": 512, "caption": "9 Arrow Land Service"},
+            "image": SITE + "/" + img_src("r-hero", 1600),
             "address": {"@type": "PostalAddress", "addressLocality": "Spring Branch", "addressRegion": "TX", "addressCountry": "US"},
-            "founder": [{"@type": "Person", "name": "John Wheelock"}, {"@type": "Person", "name": "Camille Wheelock"}],
-            "areaServed": [{"@type": "AdministrativeArea", "name": "Central Texas"}, {"@type": "AdministrativeArea", "name": "Texas Hill Country"},
+            "geo": {"@type": "GeoCoordinates", "latitude": 29.887, "longitude": -98.414},
+            "contactPoint": {"@type": "ContactPoint", "contactType": "sales", "telephone": TEL, "email": EMAIL, "areaServed": "US-TX", "availableLanguage": "English"},
+            "hasOfferCatalog": {"@type": "OfferCatalog", "name": "Land clearing and land services", "itemListElement": [
+                {"@type": "Offer", "itemOffered": {"@id": canon(sl) + "#service"}} for sl, *_ in SERVICES]},
+            "founder": [{"@type": "Person", "@id": SITE + "/about-us#john-wheelock", "name": "John Wheelock", "jobTitle": "Owner", "worksFor": {"@id": ORG_ID}},
+                        {"@type": "Person", "@id": SITE + "/about-us#camille-wheelock", "name": "Camille Wheelock", "jobTitle": "Owner", "worksFor": {"@id": ORG_ID}}],
+            "areaServed": [{"@type": "State", "name": "Texas"}, {"@type": "AdministrativeArea", "name": "Texas Hill Country"},
                            {"@type": "AdministrativeArea", "name": "Comal County, TX"}] + [{"@type": "City", "name": t[1] + ", TX"} for t in TOWNS],
             "knowsAbout": ["Forestry mulching", "Land clearing", "Cedar removal", "Rock crushing", "Road building", "Survey line clearing",
                            "Right-of-way clearing", "Site work", "Grounds maintenance"],
@@ -1182,6 +1189,62 @@ def render_home():
     return doc("", HOME_TITLE, HOME_DESC, body, schema("", HOME_TITLE, HOME_DESC, [("", "Home")], [faq_schema("", hf)]), og="assets/og/index.jpg")
 
 # ---------------------------------------------------------------- write everything
+# ---------------------------------------------------------------- schema post-pass
+REPO_SRC = os.environ.get("REPO_SRC", "/home/claude/9arrow-website/site-src")
+def lastmod(slug):
+    if slug in POSTS: return POSTS[slug].get("updated", POSTS[slug]["date"])
+    rel = {"index": None, "blog": "content/blog/_index.json"}.get(slug, f"content/pages/{slug}.json")
+    if rel and os.path.exists(os.path.join(REPO_SRC, rel)):
+        try:
+            d = subprocess.run(["git", "log", "-1", "--format=%cs", "--", rel], cwd=REPO_SRC, capture_output=True, text=True).stdout.strip()
+            if d: return d
+        except Exception: pass
+    return TODAY
+
+FAQ_RANK = {"service": 0, "city": 1, "industry": 2}
+def resolve_schema(pages):
+    """One owner per FAQ question (the most specific page), WebPage wiring, BlogPosting detail."""
+    rx = re.compile(r'<script type="application/ld\+json">(.*?)</script>', re.S)
+    graphs = {s: json.loads(rx.search(h).group(1).replace("<\\/", "</")) for s, h in pages.items() if rx.search(h)}
+    def rank(s):
+        if s in PAGES: return FAQ_RANK.get(PAGES[s]["type"], 3)
+        return {"faq": 5, "index": 6}.get(s, 4)       # posts 4, then the FAQ hub, then home
+    owner = {}
+    for s in sorted(graphs, key=lambda x: (rank(x), x)):
+        for nd in graphs[s]["@graph"]:
+            if nd["@type"] == "FAQPage":
+                for q in nd["mainEntity"]: owner.setdefault(q["name"].strip().lower(), s)
+    for s, g in graphs.items():
+        nodes = g["@graph"]; byt = {}
+        for nd in nodes: byt.setdefault(nd["@type"], nd)
+        for nd in [n for n in nodes if n["@type"] == "FAQPage"]:
+            nd["mainEntity"] = [q for q in nd["mainEntity"] if owner[q["name"].strip().lower()] == s]
+            if not nd["mainEntity"]: nodes.remove(nd)
+        wp, bc = byt.get("WebPage"), byt.get("BreadcrumbList")
+        if bc: bc["@id"] = canon(s) + "#breadcrumb"
+        if wp:
+            if bc: wp["breadcrumb"] = {"@id": bc["@id"]}
+            wp["dateModified"] = lastmod(s)
+            m = re.search(r'<link rel="preload" as="image" href="([^"]+)"', pages[s]) or re.search(r'<img src="(assets/img/[^"]+)"', pages[s])
+            if m:
+                src = m.group(1).lstrip("/")
+                wp["primaryImageOfPage"] = {"@type": "ImageObject", "url": SITE + "/" + src}
+            main = byt.get("Service") or byt.get("BlogPosting") or byt.get("Blog")
+            if main: wp["mainEntity"] = {"@id": main["@id"]}
+        bp = byt.get("BlogPosting")
+        if bp:
+            m = POSTS[s]
+            words = len(re.findall(r"\w+", re.sub(r"<[^>]+>", " ", re.search(r'<article.*?</article>', pages[s], re.S).group(0))))
+            bp.update({"inLanguage": "en-US", "isPartOf": {"@id": canon("blog") + "#blog"}, "wordCount": words,
+                       "articleSection": "Land clearing guides", "image": {"@type": "ImageObject", "url": bp["image"], "width": 1600},
+                       "about": [{"@id": canon(x) + "#service"} for x in (m.get("related_services") or [])[:2] if x in PAGES and PAGES[x]["type"] == "service"]})
+            if not bp["about"]: bp.pop("about")
+        sv = byt.get("Service")
+        if sv:
+            sv["category"] = "Land clearing"
+        new = '<script type="application/ld+json">' + json.dumps(g, ensure_ascii=False).replace("</", "<\\/") + "</script>"
+        pages[s] = rx.sub(lambda _: new, pages[s], count=1)
+
 def main():
     if os.path.exists(OUT): shutil.rmtree(OUT)
     os.makedirs(OUT)
@@ -1208,6 +1271,7 @@ def main():
         mm = re.match(r"^(.+)-(\d+)\.webp$", f)
         if mm and mm.group(1) in IMGS:
             os.rename(os.path.join(A, "img", f), os.path.join(A, "img", f"{fname(mm.group(1))}-{mm.group(2)}.webp"))
+    resolve_schema(pages)
     for s, h in pages.items():
         open(os.path.join(OUT, s + ".html"), "w").write(h)
     # ship only the image files a page or the stylesheet actually references
@@ -1223,7 +1287,7 @@ def main():
             if src in seen or not alt: continue
             seen.add(src); out.append(f"<image:image><image:loc>{SITE}/{src}</image:loc></image:image>")
         return "".join(out)
-    sm = "".join(f"<url><loc>{canon(s if s != 'index' else '')}</loc><lastmod>{TODAY}</lastmod>{imgs_of(s)}</url>" for s in sorted(urls, key=lambda x: (x != "index", x)))
+    sm = "".join(f"<url><loc>{canon(s if s != 'index' else '')}</loc><lastmod>{lastmod(s)}</lastmod>{imgs_of(s)}</url>" for s in sorted(urls, key=lambda x: (x != "index", x)))
     open(os.path.join(OUT, "sitemap.xml"), "w").write(f'<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">{sm}</urlset>\n')
     open(os.path.join(OUT, "robots.txt"), "w").write(
         "# Search engines and AI answer engines are welcome.\nUser-agent: *\nAllow: /\nDisallow: /thanks\nDisallow: /api/\n\n"
