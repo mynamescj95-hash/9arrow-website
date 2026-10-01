@@ -900,7 +900,7 @@ def render_contact():
     if p.get("faqs"): extra.append(faq_schema(slug, p["faqs"]))
     return doc(slug, p["title_tag"], p["meta_description"], "\n".join(b for b in body if b), schema(slug, p["title_tag"], p["meta_description"], [("", "Home"), (slug, "Contact")], extra), hero_preload=img_src("r-red-truck", 1600))
 
-def lens(pairs, static=False, head="It does not get better.", text="Real 9 Arrow jobs. As you scroll, the ring moves across the ground before we cleared it. Inside the ring is the same spot after we finished. Drag it to look around.", dark=True, kicker="The finished job"):
+def lens(pairs, static=False, head="It does not get better.", text="Forestry mulching and land clearing from 9 Arrow leave a fine mulch finish you can drive over, with no burn piles, no hauling and the soil left in place. On-site rock crushing turns loose surface limestone into a compactible road base. Both are real 9 Arrow jobs, before and after.", dark=True, kicker="Finished Quality"):
     b0 = pairs[0]
     btns = "".join(f'<button type="button" class="pair-btn" data-pair aria-pressed="{"true" if i == 0 else "false"}" data-before="{img_src(b, 1600)}" data-after="{img_src(a, 1600)}" '
                    f'data-before-alt="{esc(IMGS[b]["alt"])}" data-after-alt="{esc(IMGS[a]["alt"])}" data-cap-b="{esc(cb)}" data-cap-a="{esc(ca)}">{esc(label)}</button>'
@@ -924,7 +924,7 @@ def render_our_work():
     gal = ["r-hero", "r-yellow", "r-head", "r-trail-cat", "r-blue", "r-tire", "r-haze", "r-red-truck", "r-yellow-2", "r-trail", "r-mulch", "r-sharpen", "r-john-machine", "r-yellow-head", "r-operator", "r-oaks", "r-bw", "r-utv"]
     tiles = "".join(f'<figure class="g-item">{img(k, "(max-width: 600px) 100vw, (max-width: 1000px) 50vw, 33vw")}<figcaption>{esc(IMGS[k]["alt"])}</figcaption></figure>' for k in gal)
     blocks = sections(p, set(gal) | {"trail-after", "r-fleet"})
-    body = [phero(slug, p, ci, "r-fleet"), answer(p), lens(LENS_PAIRS, static=True, head="Every job, before and after.", text="Move the ring across the photo, or switch jobs. Inside the ring is the same ground after our crew finished.", dark=False, kicker=""),
+    body = [phero(slug, p, ci, "r-fleet"), answer(p), lens(LENS_PAIRS, static=True, head="Every job, before and after.", text="Real 9 Arrow land clearing, forestry mulching and rock crushing jobs: the same ground before we started and after our crew finished.", dark=False, kicker="Finished Quality"),
             f'<section class="sec alt"><div class="wrap"><div class="sec-head"><div><h2 class="h-lg">Photos from our job sites</h2><p class="lede">Every photo on this page is from a real 9 Arrow job in Central Texas.</p></div><a class="arrow-link" href="https://www.instagram.com/9.arrow/" rel="noopener">More on Instagram</a></div><div class="gallery">{tiles}</div></div></section>',
             f'<section class="sec"><div class="wrap stack">{"".join(blocks)}</div></section>' if blocks else "",
             faq_block(p, slug), cta_band(slug)]
