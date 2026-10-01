@@ -324,6 +324,46 @@
         .catch(function () {}).then(function () { location.href = dest; });
     });
   });
+  /* ---------- home: services explorer (pick a service, the panel updates) ---------- */
+  $$('[data-svx]').forEach(function (box) {
+    var tabs = $$('.svx-tab', box), panels = $$('.svx-panel', box), row = $('.svx-tabs', box);
+    function pick(i, focus) {
+      tabs.forEach(function (t, j) { var on = j === i; t.setAttribute('aria-selected', on ? 'true' : 'false'); t.tabIndex = on ? 0 : -1; });
+      panels.forEach(function (p, j) { p.hidden = j !== i; if (j === i) $$('img[loading=lazy]', p).forEach(function (im) { im.loading = 'eager'; }); });
+      if (row.scrollWidth > row.clientWidth + 4) { var t = tabs[i]; row.scrollTo({ left: t.offsetLeft - (row.clientWidth - t.offsetWidth) / 2, behavior: reduce ? 'auto' : 'smooth' }); }
+      if (focus) tabs[i].focus({ preventScroll: true });
+      if (innerWidth <= 960) { var pr = $('.svx-panels', box).getBoundingClientRect(); if (pr.top < 60 || pr.top > innerHeight * 0.7) scrollTo({ top: scrollY + pr.top - ((hdr && hdr.offsetHeight) || 60) - row.offsetHeight - 24, behavior: reduce ? 'auto' : 'smooth' }); }
+    }
+    tabs.forEach(function (t, i) {
+      t.addEventListener('click', function () { pick(i); });
+      t.addEventListener('keydown', function (e) {
+        var n = tabs.length, to = null;
+        if (e.key === 'ArrowDown' || e.key === 'ArrowRight') to = (i + 1) % n; else if (e.key === 'ArrowUp' || e.key === 'ArrowLeft') to = (i - 1 + n) % n; else if (e.key === 'Home') to = 0; else if (e.key === 'End') to = n - 1;
+        if (to !== null) { e.preventDefault(); pick(to, true); }
+      });
+    });
+  });
+
+  /* ---------- home: service areas (cards light up their pins, pins light up their cards) ---------- */
+  $$('.areas-sec').forEach(function (sec) {
+    var wrap = $('[data-txm]', sec), cards = $$('.area-card', sec), pins = $$('.txm-pin', sec);
+    function hot(list) {
+      pins.forEach(function (p) { p.classList.toggle('is-hot', list.indexOf(p.getAttribute('data-area')) > -1); });
+      cards.forEach(function (c) { var a = (c.getAttribute('data-areas') || '').split(' '); c.classList.toggle('is-hot', list.length === 1 && a.length === 1 && a[0] === list[0]); });
+      wrap.classList.toggle('has-hot', list.length > 0);
+    }
+    cards.forEach(function (c) {
+      var a = (c.getAttribute('data-areas') || '').split(' ').filter(Boolean);
+      ['mouseenter', 'focus'].forEach(function (ev) { c.addEventListener(ev, function () { hot(a); }); });
+      ['mouseleave', 'blur'].forEach(function (ev) { c.addEventListener(ev, function () { hot([]); }); });
+    });
+    pins.forEach(function (p) {
+      var a = [p.getAttribute('data-area')];
+      ['mouseenter', 'focus'].forEach(function (ev) { p.addEventListener(ev, function () { hot(a); }); });
+      ['mouseleave', 'blur'].forEach(function (ev) { p.addEventListener(ev, function () { hot([]); }); });
+    });
+  });
+
   /* ---------- numbers count up when they come into view ---------- */
   var counters = $$('[data-count]');
   if (counters.length && 'IntersectionObserver' in window && !reduce) {
