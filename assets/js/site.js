@@ -324,6 +324,111 @@
         .catch(function () {}).then(function () { location.href = dest; });
     });
   });
+  /* ---------- home: services explorer (pick a service, the panel updates) ---------- */
+  $$('[data-svx]').forEach(function (box) {
+    var tabs = $$('.svx-tab', box), panels = $$('.svx-panel', box), row = $('.svx-tabs', box);
+    function pick(i, focus) {
+      tabs.forEach(function (t, j) { var on = j === i; t.setAttribute('aria-selected', on ? 'true' : 'false'); t.tabIndex = on ? 0 : -1; });
+      panels.forEach(function (p, j) { p.hidden = j !== i; if (j === i) $$('img[loading=lazy]', p).forEach(function (im) { im.loading = 'eager'; }); });
+      if (row.scrollWidth > row.clientWidth + 4) { var t = tabs[i]; row.scrollTo({ left: t.offsetLeft - (row.clientWidth - t.offsetWidth) / 2, behavior: reduce ? 'auto' : 'smooth' }); }
+      if (focus) tabs[i].focus({ preventScroll: true });
+      if (innerWidth <= 960) { var pr = $('.svx-panels', box).getBoundingClientRect(); if (pr.top < 60 || pr.top > innerHeight * 0.7) scrollTo({ top: scrollY + pr.top - ((hdr && hdr.offsetHeight) || 60) - row.offsetHeight - 24, behavior: reduce ? 'auto' : 'smooth' }); }
+    }
+    tabs.forEach(function (t, i) {
+      t.addEventListener('click', function () { pick(i); });
+      t.addEventListener('keydown', function (e) {
+        var n = tabs.length, to = null;
+        if (e.key === 'ArrowDown' || e.key === 'ArrowRight') to = (i + 1) % n; else if (e.key === 'ArrowUp' || e.key === 'ArrowLeft') to = (i - 1 + n) % n; else if (e.key === 'Home') to = 0; else if (e.key === 'End') to = n - 1;
+        if (to !== null) { e.preventDefault(); pick(to, true); }
+      });
+    });
+  });
+
+  /* ---------- remember the last town page a visitor looked at (home page uses it to pick their area) ---------- */
+  var townPage = location.pathname.match(/(?:land-clearing|forestry-mulching|cedar-removal)-([a-z-]+-tx)(?:\.html)?$/);
+  if (townPage) { try { sessionStorage.setItem('9a_area', townPage[1]); } catch (e) {} }
+
+  /* ---------- home: service areas. Links light up their pins, and the spotlight card picks the visitor's area ---------- */
+  $$('.areas-sec').forEach(function (sec) {
+    var wrap = $('[data-txm]', sec), pins = $$('.txm-pin', sec), links = $$('.town-list [data-areas]', sec), spot = $('[data-spot]', sec);
+    var towns = []; try { towns = JSON.parse(sec.getAttribute('data-towns')) || []; } catch (e) {}
+    var HQ = towns.filter(function (t) { return t.s === 'spring-branch-tx'; })[0];
+    function hot(list) {
+      pins.forEach(function (p) { p.classList.toggle('is-hot', list.indexOf(p.getAttribute('data-area')) > -1); });
+      links.forEach(function (l) { var a = l.getAttribute('data-areas').split(' '); l.classList.toggle('is-hot', list.length === 1 && a.length === 1 && a[0] === list[0]); });
+      wrap.classList.toggle('has-hot', list.length > 0);
+    }
+    links.concat(pins).forEach(function (el) {
+      var a = (el.getAttribute('data-areas') || el.getAttribute('data-area') || '').split(' ').filter(Boolean);
+      ['mouseenter', 'focus'].forEach(function (ev) { el.addEventListener(ev, function () { hot(a); }); });
+      ['mouseleave', 'blur'].forEach(function (ev) { el.addEventListener(ev, function () { hot([]); }); });
+    });
+    if (!spot || !HQ) return;
+
+    function miles(a, b, c, d) {
+      var R = 3958.8, r = Math.PI / 180, x = Math.sin((c - a) * r / 2), y = Math.sin((d - b) * r / 2);
+      return 2 * R * Math.asin(Math.sqrt(x * x + Math.cos(a * r) * Math.cos(c * r) * y * y));
+    }
+    function about(m) { return m < 20 ? Math.max(1, Math.round(m)) : Math.round(m / 5) * 5; }
+    function el(tag, attrs, text) { var n = d.createElementNS('http://www.w3.org/2000/svg', tag); for (var k in attrs) n.setAttribute(k, attrs[k]); if (text) n.textContent = text; return n; }
+    function inTexas(g) { return g.region === 'TX' || (g.region == null && g.lat > 25.8 && g.lat < 36.5 && g.lng > -106.7 && g.lng < -93.5); }
+    function youPin(g) {
+      $$('.txm-you', sec).forEach(function (grp) {
+        var svg = grp.ownerSVGElement, s = +grp.getAttribute('data-scale') || 1;
+        var x = (g.lng - +svg.getAttribute('data-lng0')) * +svg.getAttribute('data-c') * +svg.getAttribute('data-k'), y = (+svg.getAttribute('data-lat1') - g.lat) * +svg.getAttribute('data-k');
+        var hx = +svg.getAttribute('data-hx'), hy = +svg.getAttribute('data-hy');
+        grp.textContent = '';
+        if (Math.hypot(x - hx, y - hy) > 12 * s) grp.appendChild(el('line', { x1: x, y1: y, x2: hx, y2: hy }));
+        grp.appendChild(el('circle', { 'class': 'you-pulse', cx: x, cy: y, r: 12 * s }));
+        grp.appendChild(el('circle', { 'class': 'you-dot', cx: x, cy: y, r: 6 * s }));
+        if (s === 1 && g.city) { var left = x > 380; grp.appendChild(el('text', { x: x + (left ? -12 : 12), y: y - 10, 'text-anchor': left ? 'end' : 'start' }, g.city)); }
+      });
+      var key = $('.k-you-li', sec); if (key) key.hidden = false;
+    }
+    function setSpot(k, h, sub, p, primary, matched) {
+      $('.spot-k', spot).textContent = k; $('.spot-h', spot).textContent = h; $('.spot-sub', spot).textContent = sub; $('.spot-p', spot).textContent = p;
+      var go = $('.spot-go', spot);
+      if (primary.href) { go.href = primary.href; go.removeAttribute('data-drawer'); } else { go.href = $('.spot-est', spot).getAttribute('href'); go.setAttribute('data-drawer', ''); }
+      go.textContent = primary.label; $('.spot-est', spot).hidden = !primary.href;
+      spot.classList.toggle('is-matched', !!matched); spot.classList.remove('is-swap'); void spot.offsetWidth; spot.classList.add('is-swap');
+    }
+    function showTown(t, kicker) {
+      var far = t.s === HQ.s ? 0 : about(miles(HQ.lat, HQ.lng, t.lat, t.lng));
+      setSpot(kicker, t.n + ', TX', t.c + (far ? ' · about ' + far + ' miles from our Spring Branch base' : ' · our home base'),
+        'We clear land in and around ' + t.n + ', from cedar and brush to roads and building sites. See local details, or tell us about your property.',
+        { href: t.u, label: 'Land clearing in ' + t.n }, true);
+      pins.forEach(function (p) { p.classList.toggle('is-near', p.getAttribute('data-area') === t.s); });
+      links.forEach(function (l) { l.classList.toggle('is-near', l.getAttribute('data-areas') === t.s); });
+      window.dataLayer = window.dataLayer || []; window.dataLayer.push({ event: 'service_area_match', area: t.s });
+    }
+    function showGeo(g) {
+      if (g == null || typeof g.lat !== 'number' || typeof g.lng !== 'number' || !inTexas(g)) return;
+      var best = null, bd = 1e9;
+      towns.forEach(function (t) { var m = miles(g.lat, g.lng, t.lat, t.lng); if (m < bd) { bd = m; best = t; } });
+      youPin(g);
+      if (best && bd <= 30) { showTown(best, 'Closest to you'); return; }
+      setSpot(g.city ? 'Near ' + g.city + '?' : 'Elsewhere in Texas?', "We'll come to you.",
+        'About ' + about(miles(HQ.lat, HQ.lng, g.lat, g.lng)) + ' miles from our Spring Branch base',
+        'We take right-of-way, utility, solar and large-acreage projects across Texas. Tell us where the land is and what it needs.',
+        { label: 'Tell us about your project' }, true);
+      sec.classList.add('is-far');
+      window.dataLayer = window.dataLayer || []; window.dataLayer.push({ event: 'service_area_match', area: 'texas' });
+    }
+    var byName = function (q) { q = q.toLowerCase().replace(/[^a-z]/g, ''); return towns.filter(function (t) { return t.n.toLowerCase().replace(/[^a-z]/g, '') === q || t.s.replace(/-tx$/, '').replace(/-/g, '') === q; })[0]; };
+    var near = new URLSearchParams(location.search).get('near'), seen = null;
+    try { seen = sessionStorage.getItem('9a_area'); } catch (e) {}
+    if (near) {   // for testing and demos: ?near=boerne or ?near=31.55,-97.15
+      var ll = near.split(','), nt = byName(near);
+      if (nt) showTown(nt, 'Your area'); else if (ll.length === 2) showGeo({ lat: +ll[0], lng: +ll[1], region: 'TX', city: '' });
+      return;
+    }
+    var seenTown = seen && towns.filter(function (t) { return t.s === seen; })[0];
+    if (seenTown) { showTown(seenTown, 'Your area'); return; }
+    if (!/(^|\.)9arrow\.com$|netlify\.app$/.test(location.hostname) || !window.fetch) return;
+    var ctl = window.AbortController ? new AbortController() : null; if (ctl) setTimeout(function () { ctl.abort(); }, 2500);
+    fetch('/api/geo', { signal: ctl ? ctl.signal : undefined, credentials: 'omit' }).then(function (r) { return r.ok ? r.json() : null; }).then(showGeo).catch(function () {});
+  });
+
   /* ---------- numbers count up when they come into view ---------- */
   var counters = $$('[data-count]');
   if (counters.length && 'IntersectionObserver' in window && !reduce) {
@@ -338,36 +443,59 @@
     counters.forEach(function (el) { cio.observe(el); });
   }
 
-  /* ---------- nine values: pick an arrow ---------- */
+  /* ---------- nine values: point at an arrow to read it, click to keep it ---------- */
   $$('[data-quiver]').forEach(function (sec) {
-    var tabs = $$('.q-tab', sec), panels = $$('.q-panel', sec), auto = null, touched = false;
-    tabs.forEach(function (t, i) { var ar = $('.q-arrow', t); if (ar) ar.style.setProperty('--d', (i * 0.07) + 's'); });
-    function pick(i, focus) {
-      tabs.forEach(function (t, j) { var on = j === i; t.setAttribute('aria-selected', on ? 'true' : 'false'); t.tabIndex = on ? 0 : -1; });
-      panels.forEach(function (p, j) { p.hidden = j !== i; });
-      if (focus) tabs[i].focus();
+    var rows = $$('.q-row', sec), stage = $('.q-stage', sec), panels = $$('.q-panel', stage), rack = $('.q-rack', sec), home = stage.parentNode;
+    var hoverable = matchMedia('(hover: hover) and (pointer: fine)').matches, locked = -1, shown = null;
+    sec.classList.toggle('can-hover', hoverable);
+    rows.forEach(function (r, i) { var ar = $('.q-arrow', r); if (ar) r.style.setProperty('--d', (i * 0.06) + 's'); });
+    function place() {
+      if (innerWidth <= 760 && locked > -1) { var li = rows[locked].parentNode; if (stage.parentNode !== li) li.appendChild(stage); }
+      else if (stage.parentNode !== home) home.appendChild(stage);
     }
-    function stop() { touched = true; if (auto) { clearInterval(auto); auto = null; } }
-    tabs.forEach(function (t, i) {
-      t.addEventListener('click', function () { stop(); pick(i); });
-      t.addEventListener('keydown', function (e) {
-        var cur = tabs.indexOf(t), n = tabs.length, to = null;
-        if (e.key === 'ArrowRight' || e.key === 'ArrowDown') to = (cur + 1) % n; else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') to = (cur - 1 + n) % n; else if (e.key === 'Home') to = 0; else if (e.key === 'End') to = n - 1;
-        if (to !== null) { e.preventDefault(); stop(); pick(to, true); }
-      });
+    function show(i) {
+      if (i === shown) return; shown = i;
+      panels.forEach(function (p) { var k = p.getAttribute('data-panel'); p.hidden = i < 0 ? k !== 'intro' : k !== String(i); });
+      rows.forEach(function (r, j) { r.classList.toggle('is-on', j === i); });
+      stage.classList.toggle('is-idle', i < 0);
+    }
+    function lock(i) {
+      locked = (!hoverable && locked === i) ? -1 : i;
+      rows.forEach(function (r, j) { r.setAttribute('aria-pressed', j === locked ? 'true' : 'false'); });
+      place(); shown = null; show(locked);
+    }
+    rows.forEach(function (r, i) {
+      r.addEventListener('mouseenter', function () { if (hoverable) show(i); });
+      r.addEventListener('focus', function () { if (hoverable) show(i); });
+      r.addEventListener('click', function () { lock(i); });
     });
-    sec.addEventListener('pointerenter', function () { if (auto) { clearInterval(auto); auto = null; } });
-    sec.addEventListener('focusin', function () { if (auto) { clearInterval(auto); auto = null; } });
+    rack.addEventListener('mouseleave', function () { if (hoverable) show(locked); });
+    rack.addEventListener('focusout', function (e) { if (hoverable && !rack.contains(e.relatedTarget)) show(locked); });
+    addEventListener('resize', place);
+    show(-1);
     if (!('IntersectionObserver' in window) || reduce) { sec.classList.add('is-in', 'is-set'); return; }
     var qio = new IntersectionObserver(function (es) {
-      es.forEach(function (e) {
-        if (e.isIntersecting) {
-          if (!sec.classList.contains('is-in')) { sec.classList.add('is-in'); setTimeout(function () { sec.classList.add('is-set'); }, 1400); }
-          if (!touched && !auto) auto = setInterval(function () { var cur = tabs.findIndex(function (t) { return t.getAttribute('aria-selected') === 'true'; }); pick((cur + 1) % tabs.length); }, 4200);
-        } else if (auto) { clearInterval(auto); auto = null; }
-      });
-    }, { threshold: 0.35 });
+      if (!es[0].isIntersecting) return; qio.disconnect();
+      sec.classList.add('is-in'); setTimeout(function () { sec.classList.add('is-set'); }, 1400);
+    }, { threshold: 0.25 });
     qio.observe(sec);
+  });
+
+  /* ---------- founders photos: wait until both are loaded, then bring them in together ---------- */
+  $$('.founders').forEach(function (sec) {
+    if (!('IntersectionObserver' in window) || reduce) { sec.classList.add('is-in'); return; }
+    var imgs = $$('img', sec);
+    var pre = new IntersectionObserver(function (es) {   // start loading a screen early
+      if (!es[0].isIntersecting) return; pre.disconnect(); imgs.forEach(function (im) { im.loading = 'eager'; });
+    }, { rootMargin: '600px 0px' });
+    pre.observe(sec);
+    var fio = new IntersectionObserver(function (es) {
+      if (!es[0].isIntersecting) return; fio.disconnect();
+      var done = false; function go() { if (!done) { done = true; sec.classList.add('is-in'); } }
+      Promise.all(imgs.map(function (im) { return im.decode ? im.decode().catch(function () {}) : Promise.resolve(); })).then(go);
+      setTimeout(go, 1200);
+    }, { threshold: 0.2 });
+    fio.observe(sec);
   });
 
   /* ---------- process steps fill in as you read down ---------- */

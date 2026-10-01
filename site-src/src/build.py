@@ -206,6 +206,110 @@ TOWNS = [  # slug suffix, name, lat, lng, label dx, dy, anchor
 ]
 AREA_PAGES = [("land-clearing-" + t[0], t[1]) for t in TOWNS] + [("land-clearing-comal-county", "Comal County")]
 
+TX = json.load(open(os.path.join(ROOT, "src/texas.json")))
+def tx_xy(lat, lng): return ((lng - TX["lng0"]) * TX["c"] * TX["k"], (TX["lat1"] - lat) * TX["k"])
+TX_R = 30.0                  # radius of the Hill Country ring on the state map, px
+COMAL = ["spring-branch-tx", "bulverde-tx", "canyon-lake-tx", "new-braunfels-tx"]
+
+HQ_LL = (29.887, -98.414)
+
+def lens_layout(r, k=0.8, p=0.55):
+    """Spring Branch at the centre; other towns keep their direction but distance is eased so the
+    close-in towns spread out and Kerrville still fits (a not-to-scale inset)."""
+    hx, hy = tx_xy(*HQ_LL); pts = []
+    for suf, name, lat, lng, *_ in TOWNS:
+        x, y = tx_xy(lat, lng); pts.append((suf, name, x - hx, y - hy))
+    dmax = max(math.hypot(dx, dy) for _, _, dx, dy in pts) or 1
+    out = []
+    for suf, name, dx, dy in pts:
+        d = math.hypot(dx, dy)
+        if d < 1e-6:
+            out.append((suf, name, 0.0, 0.0, 0.0, -24.0, "middle")); continue
+        D = r * k * (d / dmax) ** p; ux, uy = dx / d, dy / d; x, y = ux * D, uy * D
+        if ux > 0.35: lx, ly, anc = x + 14, y + 5, "start"
+        elif ux < -0.35: lx, ly, anc = x - 14, y + 5, "end"
+        elif uy < 0: lx, ly, anc = x, y - 16, "middle"
+        else: lx, ly, anc = x, y + 26, "middle"
+        out.append((suf, name, x, y, lx, ly, anc))
+    return out
+
+def lens_pins(c, r, fs):
+    pins, labels = [], []
+    for suf, name, x, y, lx, ly, anc in lens_layout(r):
+        hq = suf == "spring-branch-tx"; X, Y = c[0] + x, c[1] + y
+        pins.append(f'<a class="txm-pin{" hq" if hq else ""}" href="{url("land-clearing-" + suf)}" data-area="{suf}" aria-label="Land clearing in {esc(name)}">'
+                    f'<circle class="pr" cx="{X:.1f}" cy="{Y:.1f}" r="{15 if hq else 11}"/><circle class="pd" cx="{X:.1f}" cy="{Y:.1f}" r="{7 if hq else 5.5}"/>'
+                    f'<text x="{c[0] + lx:.1f}" y="{c[1] + ly:.1f}" text-anchor="{anc}" font-size="{fs + (1 if hq else 0)}">{esc(name)}</text></a>')
+    return "".join(pins)
+
+def tangents(c1, r1, c2, r2):
+    """Outer tangent segments between two circles (for the magnifier callout)."""
+    dx, dy = c2[0] - c1[0], c2[1] - c1[1]; d = math.hypot(dx, dy); a = math.atan2(dy, dx); b = math.acos((r1 - r2) / d)
+    out = []
+    for s in (1, -1):
+        t = a + s * b
+        out.append(((c1[0] + r1 * math.cos(t), c1[1] + r1 * math.sin(t)), (c2[0] + r2 * math.cos(t), c2[1] + r2 * math.sin(t))))
+    return out
+
+def texas_map():
+    """State outline with a ring on the Hill Country, enlarged in a lens that holds the clickable town pins."""
+    fx, fy = tx_xy(*HQ_LL)
+    LC, LR = (606.0, 466.0), 178.0
+    tl = "".join(f'<line x1="{a[0]:.1f}" y1="{a[1]:.1f}" x2="{b[0]:.1f}" y2="{b[1]:.1f}"/>' for a, b in tangents((fx, fy), TX_R, LC, LR))
+    cx, cy = LC
+    rings = "".join(f'<circle class="txm-ring" cx="{cx}" cy="{cy}" r="{LR * f:.0f}"/>' for f in (0.36, 0.62))
+    proj = f'data-lng0="{TX["lng0"]:.5f}" data-lat1="{TX["lat1"]:.5f}" data-c="{TX["c"]:.6f}" data-k="{TX["k"]}" data-hx="{fx:.1f}" data-hy="{fy:.1f}"'
+    full = f"""<svg class="txm txm-full" viewBox="-6 -6 806 690" role="img" aria-labelledby="txm-t" {proj}><title id="txm-t">Map of Texas with 9 Arrow's home base in Spring Branch and the Hill Country towns we serve</title>
+<defs><clipPath id="txm-clip"><circle cx="{cx}" cy="{cy}" r="{LR}"/></clipPath><clipPath id="txm-tx"><path d="{TX['path']}"/></clipPath></defs>
+<path class="txm-state" d="{TX['path']}"/><g clip-path="url(#txm-tx)"><image href="assets/img/topo.svg" x="-200" y="-100" width="1400" height="875" opacity=".7"/></g>
+<path class="txm-edge" d="{TX['path']}"/><text class="txm-word" x="196" y="262">TEXAS</text>
+<g class="txm-call">{tl}</g><circle class="txm-spot" cx="{fx:.1f}" cy="{fy:.1f}" r="{TX_R}"/><circle class="txm-hq" cx="{fx:.1f}" cy="{fy:.1f}" r="4"/>
+<g class="txm-you" data-scale="1"></g>
+<circle class="txm-lens-bg" cx="{cx}" cy="{cy}" r="{LR}"/><g clip-path="url(#txm-clip)"><image href="assets/img/topo.svg" x="{cx - 420}" y="{cy - 260}" width="1000" height="625" opacity=".9"/>{rings}</g>
+<circle class="txm-lens" cx="{cx}" cy="{cy}" r="{LR}"/>{lens_pins(LC, LR, 18)}
+<text class="txm-cap" x="{cx}" y="{cy + LR + 30}" text-anchor="middle">Hill Country towns around Spring Branch (not to scale)</text></svg>"""
+    lc, lr = (210.0, 204.0), 170.0
+    s = 0.2; ox, oy = 4, 6
+    mini = f'<g transform="translate({ox} {oy}) scale({s})"><path class="txm-state" d="{TX["path"]}"/><path class="txm-edge" d="{TX["path"]}" vector-effect="non-scaling-stroke"/><circle class="txm-spot" cx="{fx:.1f}" cy="{fy:.1f}" r="{TX_R * 1.6:.0f}" vector-effect="non-scaling-stroke"/><g class="txm-you" data-scale="{1 / s:.1f}"></g></g>'
+    mrings = "".join(f'<circle class="txm-ring" cx="{lc[0]}" cy="{lc[1]}" r="{lr * f:.0f}"/>' for f in (0.36, 0.62))
+    lens = f"""<svg class="txm txm-lens-only" viewBox="0 0 420 410" role="img" {proj} aria-label="Hill Country towns 9 Arrow serves around Spring Branch, not to scale">
+<defs><clipPath id="txm-clip-m"><circle cx="{lc[0]}" cy="{lc[1]}" r="{lr}"/></clipPath></defs>
+<circle class="txm-lens-bg" cx="{lc[0]}" cy="{lc[1]}" r="{lr}"/><g clip-path="url(#txm-clip-m)"><image href="assets/img/topo.svg" x="-300" y="-120" width="1000" height="625" opacity=".9"/>{mrings}</g>
+<circle class="txm-lens" cx="{lc[0]}" cy="{lc[1]}" r="{lr}"/>{lens_pins(lc, lr, 17)}{mini}</svg>"""
+    return full + lens
+
+def areas_side():
+    arrow = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.2"/></svg>'
+    links = []
+    for suf, name, *_ in TOWNS:
+        links.append(f'<li><a href="{url("land-clearing-" + suf)}" data-areas="{suf}">{esc(name)}{" <small>home base</small>" if suf == "spring-branch-tx" else ""}</a></li>')
+    links.append(f'<li><a href="{url("land-clearing-comal-county")}" data-areas="{" ".join(COMAL)}">Comal County</a></li>')
+    links.append(f'<li><a href="{url("forestry-mulching-texas-hill-country")}" data-areas="{" ".join(x[0] for x in TOWNS)}">The Hill Country</a></li>')
+    return f"""<div class="areas-side">
+<div class="spot" data-spot aria-live="polite"><p class="spot-k">Home base</p><h3 class="spot-h">Spring Branch, TX</h3>
+<p class="spot-sub">Comal County, in the middle of the Texas Hill Country</p>
+<p class="spot-p">Our crew and machines start here. We clear land across the Hill Country and take bigger projects anywhere in Texas.</p>
+<div class="spot-row"><a class="btn btn-main spot-go" href="{url('land-clearing-spring-branch-tx')}">Land clearing in Spring Branch</a><a class="arrow-link spot-est" href="{est_url('')}" data-drawer>Get an estimate</a></div></div>
+<div class="towns"><p class="towns-h">Towns we work in most</p><ul class="town-list">{"".join(links)}</ul></div>
+<p class="farther"><b>Farther out?</b> We take right-of-way, utility, solar and large-acreage projects across Texas. <a class="arrow-link" href="{est_url('')}" data-drawer>Tell us about your project</a></p>
+</div>"""
+
+def services_explorer(slugs, head="Everything the land needs before you build on it.", lede="Pick a service to see what it covers."):
+    tabs, panels = [], []
+    for i, s in enumerate(slugs):
+        p = PAGES[s]; nd = need_for(s); on = i == 0
+        tabs.append(f'<button class="svx-tab" type="button" role="tab" id="svt-{i}" aria-controls="svp-{i}" aria-selected="{"true" if on else "false"}" tabindex="{0 if on else -1}">'
+                    f'<svg viewBox="0 0 28 28" aria-hidden="true">{TILE_ICONS[nd]}</svg><span class="svx-t">{esc(SVC_NAME[s])}</span><span class="svx-b">{esc(SVC_BLURB[s])}</span></button>')
+        hl = "".join(f"<li>{esc(h)}</li>" for h in (p.get("highlights") or [])[:3])
+        panels.append(f'<div class="svx-panel" role="tabpanel" id="svp-{i}" aria-labelledby="svt-{i}"{"" if on else " hidden"}>'
+                      f'<figure class="svx-pic">{img(hero_key(s, p), "(max-width: 960px) 92vw, 640px", eager=on)}</figure>'
+                      f'<div class="svx-copy"><p class="svx-n">{i + 1:02d} / {len(slugs):02d}</p><h3>{esc(SVC_NAME[s])}</h3><p>{rich(p["lede"])}</p><ul class="bul">{hl}</ul>'
+                      f'<div class="btn-row"><a class="btn btn-main" href="{url(s)}">See {esc(SVC_NAME[s].lower())}</a>'
+                      f'<a class="btn btn-line" href="{est_url(s)}" data-need="{nd}" data-drawer>Get an estimate</a></div></div></div>')
+    return f"""<section class="sec alt svx-sec" id="services" aria-labelledby="svc-h"><div class="wrap">
+<div class="sec-head"><div><h2 class="h-lg" id="svc-h">{esc(head)}</h2><p class="lede mt-s">{esc(lede)}</p></div><a class="btn btn-line" href="{url('services')}">All services</a></div>
+<div class="svx" data-svx><div class="svx-tabs" role="tablist" aria-label="Services">{"".join(tabs)}</div><div class="svx-panels">{"".join(panels)}</div></div></div></section>"""
+
 def area_label(slug):
     p = PAGES[slug]; name = p.get("city", {}).get("name", p["nav_label"])
     for pre, lab in (("land-clearing", "Land clearing"), ("forestry-mulching", "Forestry mulching"), ("cedar-removal", "Cedar removal")):
@@ -364,7 +468,7 @@ def doc(slug, title, desc, body, sch, og=None, hero_preload=None, noindex=False)
     page = clean_hashes(page).replace(' data-need=""', '')
     if MODE == "preview" and slug in ("", "index"):
         head = head.replace(f"<title>{esc(title)}</title>", "<title>9 Arrow Website</title>", 1)
-        return '<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">\n' + head + "\n<script>(function(){function a(){document.body.classList.add('over-hero')}if(document.body)a();else document.addEventListener('DOMContentLoaded',a)})()</script>\n" + page  # the preview host wraps the main page itself
+        return '<meta charset="utf-8">\n<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">\n' + head + "\n<script>(function(){function a(){document.body.classList.add('over-hero')}if(document.body)a();else document.addEventListener('DOMContentLoaded',a)})()</script>\n" + page  # the preview host wraps the main page itself
     return f'<!doctype html>\n<html lang="en">\n<head>\n<meta charset="utf-8">\n<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">\n{head}\n</head>\n<body{over}>\n{page}\n</body>\n</html>\n'
 
 # ---------------------------------------------------------------- shared blocks
@@ -713,22 +817,29 @@ VALUES = [  # meaning in our words; references as listed on 9arrow.com/about-us
     ("Excellence", "We work for a finish we would put our family name on.", "Colossians 3:23-24"),
     ("Diligence", "Steady, careful work from the first pass to the final cleanup.", ""),
 ]
-ARROW = ('<svg class="q-arrow" viewBox="0 0 40 200" aria-hidden="true"><path class="q-head" d="M20 2 L34 30 L24 26 L16 26 L6 30 Z"/>'
-         '<rect class="q-shaft" x="17.5" y="24" width="5" height="138"/>'
-         '<path class="q-fl" d="M17.5 150 L5 168 L5 192 L17.5 176 Z M22.5 150 L35 168 L35 192 L22.5 176 Z"/></svg>')
+ARROW = ('<svg class="q-arrow" viewBox="0 0 220 28" aria-hidden="true" focusable="false">'
+         '<path class="q-fl" d="M4 2 L34 12.6 L22 12.6 L0 2 Z M4 26 L34 15.4 L22 15.4 L0 26 Z"/>'
+         '<rect class="q-shaft" x="16" y="12.6" width="184" height="2.8"/>'
+         '<path class="q-head" d="M220 14 L193 3 L199 14 L193 25 Z"/></svg>')
 
-def quiver(title="Nine children. Nine values.", lede=None, dark=False):
-    lede = lede or 'The name comes from Psalm 127:4: "As arrows are in the hand of a mighty man; so are children of the youth." Pick an arrow to see what each value means on the job.'
-    tabs = "".join(f'<button class="q-tab" type="button" role="tab" id="qt-{i}" aria-controls="qp-{i}" aria-selected="{"true" if i == 0 else "false"}" tabindex="{0 if i == 0 else -1}">{ARROW}<span>{esc(n)}</span></button>' for i, (n, _, _) in enumerate(VALUES))
+def quiver(title="Nine children. Nine values.", lede=None, dark=False, kicker=None):
+    lede = lede or 'The name comes from Psalm 127:4: "As arrows are in the hand of a mighty man; so are children of the youth." Each value is something you should see on your job.'
+    rows = "".join(f'<li><button class="q-row" type="button" data-i="{i}" aria-pressed="false" aria-controls="q-stage"><span class="q-num">{i + 1:02d}</span>{ARROW}<span class="q-word">{esc(n)}</span></button></li>'
+                   for i, (n, _, _) in enumerate(VALUES))
     def panel(i, n, t, r):
         ref = f'<p class="q-ref">{esc(r)}</p>' if r else ""
-        hid = "" if i == 0 else " hidden"
-        return f'<div class="q-panel" role="tabpanel" id="qp-{i}" aria-labelledby="qt-{i}"{hid}><p class="q-n">Value {i + 1} of 9</p><h3 class="q-name">{esc(n)}</h3><p class="q-line">{esc(t)}</p>{ref}</div>'
-    panels = "".join(panel(i, n, t, r) for i, (n, t, r) in enumerate(VALUES))
+        return f'<div class="q-panel" data-panel="{i}" hidden><p class="q-n">Value {i + 1:02d} of 09</p><h3 class="q-name">{esc(n)}</h3><p class="q-line">{esc(t)}</p>{ref}</div>'
+    intro = ('<div class="q-panel q-intro" data-panel="intro"><p class="q-n">Nine arrows</p><h3 class="q-name">One standard.</h3>'
+             '<p class="q-line">Every value on this list is something you should see on your job, from the first call to the final cleanup.</p>'
+             '<p class="q-hint"><span class="h-hover">Point at an arrow to read it. Click one to keep it open.</span><span class="h-touch">Tap an arrow to read it.</span></p></div>')
+    panels = intro + "".join(panel(i, n, t, r) for i, (n, t, r) in enumerate(VALUES))
     cls = " dark topo" if dark else " alt topo"
-    return f"""<section class="sec quiver-sec{cls}" data-quiver><div class="wrap q-grid">
-<div class="q-copy"><h2 class="h-lg">{esc(title)}</h2><p class="lede mt-s">{esc(lede)}</p><div class="q-panels">{panels}</div></div>
-<div class="q-rack" role="tablist" aria-label="Our nine core values">{tabs}</div></div></section>"""
+    k = f'<p class="kicker">{esc(kicker)}</p>' if kicker else ""
+    return f"""<section class="sec quiver-sec{cls}" data-quiver aria-labelledby="q-h"><div class="wrap">
+<div class="q-head">{k}<h2 class="h-lg" id="q-h">{esc(title)}</h2><p class="lede mt-s">{esc(lede)}</p></div>
+<p class="q-hint-m">Tap an arrow to read it.</p>
+<div class="q-grid"><ul class="q-rack" aria-label="Our nine core values">{rows}</ul>
+<div class="q-stage" id="q-stage" aria-live="polite">{panels}</div></div></div></section>"""
 
 def founders(text_html, cta=True):
     link = f'<p><a class="arrow-link" href="{url("about-us")}">Our story and values</a></p>' if cta else ""
@@ -796,19 +907,19 @@ def render_contact():
     if p.get("faqs"): extra.append(faq_schema(slug, p["faqs"]))
     return doc(slug, p["title_tag"], p["meta_description"], "\n".join(b for b in body if b), schema(slug, p["title_tag"], p["meta_description"], [("", "Home"), (slug, "Contact")], extra), hero_preload=img_src("r-red-truck", 1600))
 
-def lens(pairs, static=False, head="See what we leave behind.", text="Real 9 Arrow jobs. As you scroll, the ring moves across the ground before we cleared it. Inside the ring is the same spot after we finished. Drag it to look around.", dark=True):
+def lens(pairs, static=False, head="It does not get better.", text="Forestry mulching and land clearing from 9 Arrow leave a fine mulch finish you can drive over, with no burn piles, no hauling and the soil left in place. On-site rock crushing turns loose surface limestone into a compactible road base. Both are real 9 Arrow jobs, before and after.", dark=True, kicker="Finished Quality"):
     b0 = pairs[0]
     btns = "".join(f'<button type="button" class="pair-btn" data-pair aria-pressed="{"true" if i == 0 else "false"}" data-before="{img_src(b, 1600)}" data-after="{img_src(a, 1600)}" '
                    f'data-before-alt="{esc(IMGS[b]["alt"])}" data-after-alt="{esc(IMGS[a]["alt"])}" data-cap-b="{esc(cb)}" data-cap-a="{esc(ca)}">{esc(label)}</button>'
                    for i, (label, b, a, cb, ca) in enumerate(pairs))
     return f"""<section class="lens{' lens-static' if static else ''}{' dark' if dark else ''}" data-lens aria-labelledby="lens-h"><div class="lens-pin"><div class="wrap lens-in">
-<div class="lens-head"><div><h2 class="h-lg" id="lens-h">{esc(head)}</h2><p class="lede mt-s">{esc(text)}</p></div><div class="pair-btns" role="group" aria-label="Choose a job">{btns}</div></div>
+<div class="lens-copy"><div class="lens-head"><div>{f'<p class="kicker lens-k">{esc(kicker)}</p>' if kicker else ""}<h2 class="h-lg" id="lens-h">{esc(head)}</h2><p class="lede mt-s">{esc(text)}</p></div><div class="pair-btns" role="group" aria-label="Choose a job">{btns}</div></div>
+<p class="lens-foot"><span class="lens-cap" data-before="{esc(b0[3])}" data-after="{esc(b0[4])}">{esc(b0[3])}</span><span>Real 9 Arrow job photos</span></p></div>
 <div class="lens-stage" tabindex="0" role="img" aria-label="Before and after comparison of a real 9 Arrow job. Use arrow keys to move the ring.">
 <img class="lens-before" src="{img_src(b0[1], 1600)}" alt="{esc(IMGS[b0[1]]['alt'])}" loading="lazy">
 <img class="lens-after" src="{img_src(b0[2], 1600)}" alt="{esc(IMGS[b0[2]]['alt'])}" loading="lazy">
 <span class="lens-ring" aria-hidden="true"></span>
 <span class="lens-tag b">Before</span><span class="lens-tag a">After</span></div>
-<p class="lens-foot"><span class="lens-cap" data-before="{esc(b0[3])}" data-after="{esc(b0[4])}">{esc(b0[3])}</span><span>Real 9 Arrow job photos</span></p>
 </div></div></section>"""
 
 LENS_PAIRS = [("Brush to trail", "trail-before", "trail-after", "A brushy trail, before mulching", "The same trail after forestry mulching"),
@@ -820,7 +931,7 @@ def render_our_work():
     gal = ["r-hero", "r-yellow", "r-head", "r-trail-cat", "r-blue", "r-tire", "r-haze", "r-red-truck", "r-yellow-2", "r-trail", "r-mulch", "r-sharpen", "r-john-machine", "r-yellow-head", "r-operator", "r-oaks", "r-bw", "r-utv"]
     tiles = "".join(f'<figure class="g-item">{img(k, "(max-width: 600px) 100vw, (max-width: 1000px) 50vw, 33vw")}<figcaption>{esc(IMGS[k]["alt"])}</figcaption></figure>' for k in gal)
     blocks = sections(p, set(gal) | {"trail-after", "r-fleet"})
-    body = [phero(slug, p, ci, "r-fleet"), answer(p), lens(LENS_PAIRS, static=True, head="Every job, before and after.", text="Move the ring across the photo, or switch jobs. Inside the ring is the same ground after our crew finished.", dark=False),
+    body = [phero(slug, p, ci, "r-fleet"), answer(p), lens(LENS_PAIRS, static=True, head="Every job, before and after.", text="Real 9 Arrow land clearing, forestry mulching and rock crushing jobs: the same ground before we started and after our crew finished.", dark=False, kicker="Finished Quality"),
             f'<section class="sec alt"><div class="wrap"><div class="sec-head"><div><h2 class="h-lg">Photos from our job sites</h2><p class="lede">Every photo on this page is from a real 9 Arrow job in Central Texas.</p></div><a class="arrow-link" href="https://www.instagram.com/9.arrow/" rel="noopener">More on Instagram</a></div><div class="gallery">{tiles}</div></div></section>',
             f'<section class="sec"><div class="wrap stack">{"".join(blocks)}</div></section>' if blocks else "",
             faq_block(p, slug), cta_band(slug)]
@@ -923,7 +1034,7 @@ def start_form(fid, slug="", dest=None, cls="hero-start", btn="Get an estimate",
 <label class="vh" for="{fid}-email">Email</label>
 <div class="start-bar"><input id="{fid}-email" name="email" type="email" inputmode="email" autocomplete="email" placeholder="{placeholder}" required><button class="btn btn-gold" type="submit">{btn}</button></div>
 <p class="ferr" role="alert" hidden></p>
-<p class="start-note">Takes about two minutes. Next comes a quick discovery call about your land.</p></form>"""
+<p class="start-note">Free estimate. Takes about two minutes, then a quick discovery call about your land.</p></form>"""
 
 def render_home():
     slug = "index"
@@ -946,9 +1057,9 @@ def render_home():
 <svg class="em-mark" viewBox="-160 -160 320 320">{ring}<use href="#g9" x="-160" y="-160" width="320" height="320" fill="#E8EBE7"/></svg></div></div></div>
 <div class="hero-copy" id="hero-copy"><div class="wrap"><div class="hc-in">
 <p class="where"><span class="rule" aria-hidden="true"></span>Family-owned in Spring Branch, Texas</p>
-<h1 id="h1" class="display">Central Texas land clearing, done right</h1>
+<h1 id="h1" class="display">Texas land clearing, done right</h1>
 {hero_form}
-<p class="hero-sub"><b>Forestry mulching, rock crushing and road building.</b> One family crew for the whole job, across Central Texas and the Hill Country.</p>
+<p class="hero-sub"><b>A finished job that does not get better.</b> Forestry mulching, rock crushing and road building from one family crew, across the Hill Country and Texas.</p>
 </div></div></div>
 <a class="cue" href="#intro" aria-label="Scroll to learn more">Scroll</a>
 </section>"""
@@ -963,28 +1074,17 @@ def render_home():
 <li><b>No limit</b><span>on tree size. Bigger trees just take longer.</span></li>
 <li><b>0</b><span>burn piles. Brush and old dozer piles become mulch on site.</span></li></ul>
 </div></section>"""
-    cards = "".join(f'<a class="tcard" href="{url(s)}"><figure>{img(hero_key(s, PAGES[s]), cover_sizes(hero_key(s, PAGES[s])), xl=True)}</figure><div class="tcard-b"><h3>{esc(SVC_NAME[s])}</h3><p>{esc(SVC_BLURB[s])}.</p><span class="arrow-link">Learn more</span></div></a>' for s in HOME_TRACK)
-    track = f"""<section class="trk topo" id="services" aria-labelledby="svc-h"><div class="trk-sec" id="svc-track-sec"><div class="trk-in">
-<div class="wrap trk-head"><div><h2 class="h-lg" id="svc-h">Everything the land needs before you build on it.</h2><p class="lede mt-s">From the first cut to finished access, one family crew handles the whole scope.</p></div>
-<a class="btn btn-line" href="{url('services')}">All services</a></div>
-<div class="trk-view"><div class="trk-row" id="track">{cards}</div></div>
-<div class="wrap"><div class="trk-rail" aria-hidden="true"><i id="rail-done"></i><svg id="rail-arrow" viewBox="0 0 64 20"><path d="M0 4l8 6-8 6h5l8-6-8-6zM9 4l8 6-8 6h5l8-6-8-6z"/><rect x="20" y="8.5" width="32" height="3"/><path d="M50 2l14 8-14 8z"/></svg></div></div>
-</div></div></section>"""
-    rock = f"""<section class="sec"><div class="wrap grid-2">
-<div class="copy stack" style="gap:18px"><p class="kicker">Rock crushing</p><h2 class="h-lg">Your rock is your road base.</h2>
-<p class="lede">Hill Country ground is limestone. Instead of hauling it off and trucking base back in, we crush the surface rock already on your property into a fine, compactible road base, then grade the road with proper crown and drainage.</p>
-<ul class="bul"><li>No imported material to buy or haul</li><li>Lower overall project cost</li><li>Faster completion</li><li>A stronger road for trucks and heavy equipment</li></ul>
-<div class="btn-row"><a class="btn btn-main" href="{url('rock-crushing')}">How rock crushing works</a><a class="btn btn-line" href="{url('roads-and-access-preparation')}">Roads &amp; access</a></div></div>
-<figure class="iris" data-iris>{img("g10", "(max-width: 900px) 90vw, 560px")}<span class="iris-ring" aria-hidden="true"></span></figure>
-</div></section>"""
     aud_img = {"land-developers": "g15", "commercial-real-estate": "g21", "energy-utilities": "g17", "solar": "g16", "ranchers": "g05"}
     aud = "".join(f'<a class="atile" href="{url(s)}">{img(aud_img[s], "(max-width: 700px) 100vw, 33vw")}<span class="atile-b"><b>{esc(n)}</b><span class="arrow-link">See how we help</span></span></a>' for s, n in AUDIENCES)
     serve = f"""<section class="sec"><div class="wrap"><div class="sec-head"><div><h2 class="h-lg">Who we clear for</h2><p class="lede">Developers, utilities and solar crews need volume and precision. Ranchers and landowners need someone who treats the land like their own. We do both.</p></div></div>
 <div class="atiles">{aud}</div></div></section>"""
-    areas = f"""<section class="sec alt"><div class="wrap map-wrap"><div class="map">{map_svg()}</div>
-<div><h2 class="h-lg">Based in Spring Branch. Working across the Hill Country.</h2><p class="lede mt-s">We clear land from San Antonio to Kerrville, Blanco to New Braunfels. Pick your area for local details.</p>
-<ul class="area-list mt-m">{"".join(f'<li><a href="{url(s)}">{esc(n)}<span>{esc(PAGES[s].get("city", {}).get("county", ""))}</span></a></li>' for s, n in AREA_PAGES)}</ul>
-<p class="mt-m"><a class="arrow-link" href="{url('service-areas')}">All service areas</a></p></div></div></section>"""
+    town_data = html.escape(json.dumps([{"s": x[0], "n": x[1], "lat": x[2], "lng": x[3], "c": PAGES["land-clearing-" + x[0]].get("city", {}).get("county", ""), "u": url("land-clearing-" + x[0])} for x in TOWNS]), quote=True)
+    areas = f"""<section class="sec alt areas-sec" aria-labelledby="areas-h" data-towns="{town_data}"><div class="wrap">
+<div class="sec-head"><div><p class="kicker">Service areas</p><h2 class="h-lg" id="areas-h">Based in Spring Branch. Working across Texas.</h2>
+<p class="lede mt-s">Home base is Spring Branch, in the Texas Hill Country. We clear land all over the Hill Country and take right-of-way, utility, solar and large-acreage projects across the state.</p></div>
+<a class="btn btn-line" href="{url('service-areas')}">All service areas</a></div>
+<div class="areas-grid"><div class="txm-col"><div class="txm-wrap" data-txm>{texas_map()}</div>
+<ul class="txm-key"><li><i class="k-tx"></i>Projects across Texas</li><li><i class="k-hc"></i>Hill Country home base</li><li class="k-you-li" hidden><i class="k-you"></i>You (approximate)</li></ul></div>{areas_side()}</div></div></section>"""
     fam = founders(f"""<p class="kicker">The family behind the name</p><h2 class="h-lg">Nine children. Nine values. One name.</h2>
 <blockquote class="psalm">"As arrows are in the hand of a mighty man; so are children of the youth." <cite>Psalm 127:4</cite></blockquote>
 <p>John and Camille Wheelock started 9 Arrow from Texas ranch roots and years of building custom homes. In 2014 a project with a developer and a surveyor put a forestry mulcher in John's hands, and it became the heart of the business. We treat every property like our own, and a job isn't finished until we're proud of it.</p>""")
@@ -992,7 +1092,7 @@ def render_home():
             + "".join(f'<figure class="review">{STARS}<blockquote><q>{esc(REVIEWS[k][0])}</q></blockquote><figcaption class="by">{esc(REVIEWS[k][1])}</figcaption></figure>' for k in ("ashley", "travis", "zachp", "kenny")))
     reviews = f'<section class="sec alt"><div class="wrap"><div class="sec-head"><h2 class="h-lg">Five stars from the people we clear for.</h2></div><div class="reviews">{revs}</div></div></section>'
     faq = faq_block({"faqs": hf}, slug, "Straight answers", "What landowners and developers ask us most.")
-    body = "\n".join([hero, intro, track, rock, lens(LENS_PAIRS), serve, areas, fam, quiver("What we stand on", "Nine children, nine arrows, nine values. Pick one to see what it means on your land."), reviews, faq.replace('class="sec alt"', 'class="sec"'), estimate_section("index")])
+    body = "\n".join([hero, intro, services_explorer(HOME_TRACK), lens(LENS_PAIRS), serve, areas, fam, quiver("What we stand on.", "Nine children, nine arrows, nine values. They decide how we talk to you about price, how we treat your land and when we call a job finished."), reviews, faq.replace('class="sec alt"', 'class="sec"'), estimate_section("index")])
     return doc("", HOME_TITLE, HOME_DESC, body, schema("", HOME_TITLE, HOME_DESC, [("", "Home")], [faq_schema("", hf)]), og="assets/og/index.jpg")
 
 # ---------------------------------------------------------------- write everything
@@ -1025,7 +1125,7 @@ def main():
     sm = "".join(f"<url><loc>{canon(s if s != 'index' else '')}</loc><lastmod>{TODAY}</lastmod></url>" for s in sorted(urls, key=lambda x: (x != "index", x)))
     open(os.path.join(OUT, "sitemap.xml"), "w").write(f'<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">{sm}</urlset>\n')
     open(os.path.join(OUT, "robots.txt"), "w").write(
-        "# Search engines and AI answer engines are welcome.\nUser-agent: *\nAllow: /\nDisallow: /thanks\n\n"
+        "# Search engines and AI answer engines are welcome.\nUser-agent: *\nAllow: /\nDisallow: /thanks\nDisallow: /api/\n\n"
         "User-agent: OAI-SearchBot\nAllow: /\n\nUser-agent: ChatGPT-User\nAllow: /\n\nUser-agent: PerplexityBot\nAllow: /\n\n"
         "User-agent: Claude-SearchBot\nAllow: /\n\nUser-agent: Claude-User\nAllow: /\n\nSitemap: https://www.9arrow.com/sitemap.xml\n")
     llm = ["# 9 Arrow Land Service", "", "> " + ENTITY, "", f"Phone: {PHONE}. Email: {EMAIL}. Based in Spring Branch, TX.", "", "## Services"]
